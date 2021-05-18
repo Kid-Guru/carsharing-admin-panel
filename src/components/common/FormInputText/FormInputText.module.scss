@@ -1,0 +1,30 @@
+@import '../../../styles/variables.scss';
+
+.root {
+  color: $main-gray;
+  padding-bottom: 15px;
+}
+
+.title {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  line-height: 12px;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 11px 8px;
+  font-size: 11px;
+  height: 30px;
+  line-height: 30px;
+  color: $main-gray;
+  border: 1px solid $border;
+  border-radius: 3px;
+  outline: none;
+  &:focus {
+    border: 1px solid $black;
+  }
+  transition: all ease 0.2s;
+}
