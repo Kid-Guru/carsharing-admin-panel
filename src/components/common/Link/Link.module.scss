@@ -5,4 +5,7 @@
   line-height: 12px;
   color: $primary;
   text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 }

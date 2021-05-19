@@ -1,0 +1,44 @@
+@import '../../styles/variables.scss';
+
+.title {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: normal;
+  text-align: center;
+  color: $main-accent;
+  margin-bottom: 16px;
+  &::before {
+    content: '';
+    display: inline-block;
+    vertical-align: -50%;
+    margin-right: 12px;
+    width: 45px;
+    height: 45px;
+    background: url(../../assets/images/appIcon.svg) center/cover no-repeat;
+  }
+}
+
+.login {
+  &__wrapper {
+    margin-top: 160px;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 375px;
+  }
+  &__title {
+    margin: 0 0 20px 0;
+    padding: 0;
+    font-size: 17.5px;
+    line-height: 20px;
+    font-weight: normal;
+    text-align: center;
+    color: $main-accent;
+  }
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+}
