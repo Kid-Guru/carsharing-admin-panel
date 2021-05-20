@@ -13,5 +13,5 @@ export const login = (formData) => async (dispatch) => {
 
   cookieHelper.setAccessToken(response.data.access_token);
   cookieHelper.setRefreshToken(response.data.refresh_token);
-  dispatch(setAuthStatus({ isAuth: false }));
+  dispatch(setAuthStatus({ isAuth: true }));
 };
