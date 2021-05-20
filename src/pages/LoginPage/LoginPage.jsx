@@ -11,7 +11,11 @@ function LoginPage() {
     return <Redirect to={appRoutes.dashboard()} />;
   }
   return (
-    <Login onSubmitHandle={(payload) => dispatch(login(payload))} />
+    <Login
+      onSubmitHandle={(payload, { setErrors: setErrorsForm, setSubmitting }) => {
+        dispatch(login(payload, setErrorsForm, setSubmitting));
+      }}
+    />
   );
 }
 

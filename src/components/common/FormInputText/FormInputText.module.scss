@@ -2,7 +2,8 @@
 
 .root {
   color: $main-gray;
-  padding-bottom: 15px;
+  padding-bottom: 20px;
+  position: relative;
 }
 
 .title {
@@ -26,5 +27,21 @@
   &:focus {
     border: 1px solid $black;
   }
+  &_error {
+    border: 1px solid $alert;
+  }
   transition: all ease 0.2s;
+}
+
+.errorMessage {
+  position: absolute;
+  bottom: 5px;
+  font-size: 10px;
+  line-height: 11px;
+  color: $alert;
+  opacity: 0;
+  transition: all ease 0.2s;
+  &_active {
+    opacity: 1;
+  }
 }

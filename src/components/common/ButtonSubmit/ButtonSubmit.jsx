@@ -1,9 +1,9 @@
 import s from './ButtonSubmit.module.scss';
 
 function ButtonSubmit(props) {
-  const { text, onClickHandle } = props;
+  const { text, onClickHandle, disabled } = props;
   return (
-    <button className={s.button} onClick={onClickHandle} type="submit">{text}</button>
+    <button className={s.button} onClick={onClickHandle} type="submit" disabled={disabled}>{text}</button>
   );
 }
 
