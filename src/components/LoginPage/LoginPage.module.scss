@@ -18,12 +18,39 @@
   }
 }
 
+.transitionEnter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.transitionEnterActive {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+// .transitionExit {
+//   opacity: 1;
+// }
+// .transitionExitActive {
+//   opacity: 0;
+//   transform: scale(0.9);
+//   transition: opacity 300ms, transform 300ms;
+// }
+
 .login {
   &__wrapper {
     margin-top: 160px;
     margin-left: 20px;
     margin-right: 20px;
     width: 375px;
+    &__enter {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    &__enter_active {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 300ms, transform 300ms;
+    }
   }
   &__title {
     margin: 0 0 20px 0;
