@@ -11,7 +11,7 @@ function App() {
   const location = useLocation();
   return (
     <div className={s.app}>
-      <TransitionGroup>
+      <TransitionGroup component={null}>
         <CSSTransition
           key={location.pathname}
           classNames={{
