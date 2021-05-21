@@ -1,0 +1,24 @@
+@import '../../styles/variables.scss';
+
+.layout__container {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 68px 1fr 68px;
+  grid-template-columns: 285px 1fr;
+  grid-template-areas:
+  "asidee headerr"
+  "asidee article"
+  "asidee footer";
+  &__aside {
+    grid-area: aside;
+  }
+  &__header {
+    grid-area: headerr;
+  }
+  &__article {
+    grid-area: article;
+  }
+  &__footer {
+    grid-area: footer;
+  }
+}

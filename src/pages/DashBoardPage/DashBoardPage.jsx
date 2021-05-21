@@ -1,6 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import Box from '../../components/common/Box/Box';
+import DashBoardLayout from '../../components/DashBoardLayout/DashBoardLayout';
+import Header from '../../components/Header/Header';
 import appRoutes from '../../routes/appRoutes';
 
 function DashBoardPage() {
@@ -10,9 +11,7 @@ function DashBoardPage() {
     return <Redirect to={appRoutes.login()} />;
   }
   return (
-    <Box>
-      Ура мы залогинены
-    </Box>
+    <DashBoardLayout header={<Header />} />
   );
 }
 
