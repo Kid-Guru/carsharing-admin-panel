@@ -1,17 +1,39 @@
-import Select from 'react-select';
+import { useDispatch } from 'react-redux';
+import Select, { components } from 'react-select';
+import avatarStub from '../../assets/images/avatarStub.svg';
 import { ReactComponent as BellIcon } from '../../assets/images/bellIcon.svg';
 import { ReactComponent as Dropdown } from '../../assets/images/dropdown.svg';
+import signOutIcon from '../../assets/images/signOut.svg';
+import { logout } from '../../redux/auth/actions';
 import s from './Header.module.scss';
 
-const DropdownIndicator = () => <div className={s.dropdown}><Dropdown /></div>;
-const Placeholder = () => (
-  <div className={s.placeholder}>
-    <span className={s.placeholder__nickname}>Admin</span>
+const { DropdownIndicator } = components;
+
+const options = [{
+  label: 'ВЫХОД', callBack: logout, icon: signOutIcon, value: 'ВЫХОД',
+}];
+
+const CustomDropdownIndicator = ({ children, ...props }) => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <DropdownIndicator {...props}>
+    <Dropdown />
+  </DropdownIndicator>
+);
+
+const formatOptionLabel = ({ label, icon, large }) => (
+  <div className={s.formatOptionLabel}>
+    {icon && (
+      <span
+        className={`${s.formatOptionLabel__icon} ${large && s.formatOptionLabel__icon_lg}`}
+        style={{ backgroundImage: `url(${icon})` }}
+      />
+    )}
+    <span className={s.formatOptionLabel__label}>{label}</span>
   </div>
 );
 
 function Header() {
-  // const {  } = props;
+  const dispatch = useDispatch();
   return (
     <header className={s.header}>
       <div className={s.header__search}>
@@ -33,13 +55,13 @@ function Header() {
       <Select
         isSearchable={false}
         className={s.select}
-        components={{ Placeholder, DropdownIndicator }}
-      // classNamePrefix="locationField__input"
-      // inputId="orderPoint"
-      // placeholder="Начните вводить пункт"
-      // value={pointOrder.value === '' ? null : ({ value: pointOrder.value, label: pointOrder.value })}
-      // onChange={(input) => onChangePointHandle(input === null ? '' : input.value)}
-      // options={optionsPoints}
+        components={{ DropdownIndicator: CustomDropdownIndicator }}
+        formatOptionLabel={formatOptionLabel}
+        onChange={({ callBack }) => dispatch(callBack())}
+        options={options}
+        value={{
+          label: 'Admin', icon: avatarStub, value: 'Admin', large: true,
+        }}
       />
     </header>
   );

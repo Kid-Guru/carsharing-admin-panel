@@ -26,3 +26,9 @@ export const login = (formData, setErrorsForm, setSubmitting) => async (dispatch
     setSubmitting(false);
   }
 };
+
+export const logout = () => async (dispatch) => {
+  cookieHelper.removeAccessToken();
+  cookieHelper.removeRefreshToken();
+  dispatch(setAuthStatus({ isAuth: false }));
+};

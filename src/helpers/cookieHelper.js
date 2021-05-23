@@ -12,6 +12,9 @@ export default {
   getAccessToken() {
     return Cookies.get('accessToken');
   },
+  removeAccessToken() {
+    Cookies.remove('accessToken');
+  },
   setRefreshToken(token) {
     Cookies.set('refreshToken', token, {
       secure: true,
@@ -22,6 +25,9 @@ export default {
   },
   getRefreshToken() {
     return Cookies.get('refreshToken');
+  },
+  removeRefreshToken() {
+    Cookies.remove('refreshToken');
   },
   // setRefreshToken(token: string) {
   //   await localStorage.setItem(LocalStorageKey.refreshToken, token)
