@@ -1,0 +1,22 @@
+@import '../../styles/variables.scss';
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 28px;
+  background-color: $white;
+  &__left > a {
+    margin-right: 10px;
+  }
+}
+
+.copyright {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: $gray;
+}
