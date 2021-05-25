@@ -1,6 +1,6 @@
 @import './variables.scss';
 
-@mixin buttonAction ($bg-color:$primary) {
+@mixin buttonAction($bg-color: $primary) {
   min-width: 110px;
   height: 30px;
   margin: 0;
@@ -14,7 +14,7 @@
 
   background-color: $bg-color;
 
-  transition: all ease 0.2s ;
+  transition: all ease 0.2s;
   &:visited {
     background-color: darken($bg-color, 10%);
   }
@@ -27,5 +27,12 @@
   &:disabled {
     background: $gray;
     cursor: default;
+  }
+}
+
+@mixin menuElementHover() {
+  &:hover {
+    background-color: rgba($gray, 0.2);
+    transition: all ease 0.2s;
   }
 }
