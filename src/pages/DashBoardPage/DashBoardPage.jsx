@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import DashBoardLayout from '../../components/DashBoardLayout/DashBoardLayout';
 import Header from '../../components/Header/Header';
+import Aside from '../../components/Aside/Aside';
 import appRoutes from '../../routes/appRoutes';
 
 function DashBoardPage() {
@@ -11,7 +12,7 @@ function DashBoardPage() {
     return <Redirect to={appRoutes.login()} />;
   }
   return (
-    <DashBoardLayout header={<Header />} />
+    <DashBoardLayout header={<Header />} aside={<Aside />} />
   );
 }
 
