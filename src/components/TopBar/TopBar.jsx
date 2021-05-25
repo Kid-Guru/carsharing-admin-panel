@@ -5,7 +5,7 @@ import { ReactComponent as BellIcon } from '../../assets/images/bellIcon.svg';
 import { ReactComponent as Dropdown } from '../../assets/images/dropdown.svg';
 import signOutIcon from '../../assets/images/signOut.svg';
 import { logout } from '../../redux/auth/actions';
-import s from './Header.module.scss';
+import s from './TopBar.module.scss';
 
 const { DropdownIndicator } = components;
 
@@ -32,11 +32,11 @@ const formatOptionLabel = ({ label, icon, large }) => (
   </div>
 );
 
-function Header() {
+function TopBar() {
   const dispatch = useDispatch();
   return (
-    <header className={s.header}>
-      <div className={s.header__search}>
+    <div className={s.topBar}>
+      <div className={s.topBar__search}>
         <label className={s.search__label} htmlFor="search">
           <span className={s.search__icon} />
           <input
@@ -63,8 +63,8 @@ function Header() {
           label: 'Admin', icon: avatarStub, value: 'Admin', large: true,
         }}
       />
-    </header>
+    </div>
   );
 }
 
-export default Header;
+export default TopBar;

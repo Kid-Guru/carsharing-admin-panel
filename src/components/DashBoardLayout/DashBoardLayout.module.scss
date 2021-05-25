@@ -7,7 +7,7 @@
     grid-template-rows: 68px 1fr 68px;
     grid-template-columns: 285px 1fr;
     grid-template-areas:
-    "aside header"
+    "aside topbar"
     "aside article"
     "aside footer";
   }
@@ -15,7 +15,7 @@
     grid-area: aside;
   }
   &__header {
-    grid-area: header;
+    grid-area: topbar;
   }
   &__article {
     grid-area: article;
