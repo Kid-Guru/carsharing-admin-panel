@@ -1,11 +1,15 @@
 @import '../../../styles/variables.scss';
 
 .link {
-  font-size: 10.5px;
-  line-height: 12px;
+  font-size: 14px;
+  line-height: 16px;
   color: $primary;
   text-decoration: none;
   &:hover {
     text-decoration: underline;
+  }
+  &_sm {
+    font-size: 10.5px;
+    line-height: 12px;
   }
 }

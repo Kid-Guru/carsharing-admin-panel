@@ -32,7 +32,7 @@ function Login(props) {
                 <FormInputText label="Почта" placeholder="Введите почту" type="text" name="login" isError={touched.login && errors.login} errorText={errors.login} />
                 <FormInputText label="Пароль" placeholder="Введите пароль" type="password" name="password" isError={touched.password && errors.password} errorText={errors.password} />
                 <p className={s.login__footer}>
-                  <Link text="Запросить доступ" href="https://gist.github.com/internship-simbirsoft/3d634f32072b1e8514fc9fb19f88acdd" />
+                  <Link text="Запросить доступ" href="https://gist.github.com/internship-simbirsoft/3d634f32072b1e8514fc9fb19f88acdd" sizeSmall />
                   <ButtonSubmit text="Войти" disabled={isSubmitting} />
                 </p>
               </Form>
