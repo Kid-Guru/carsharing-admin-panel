@@ -11,12 +11,10 @@
 }
 
 .header {
-  &__wrapper {
-    height: 68px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  height: 68px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &__title {
     display: block;
     margin: 0;

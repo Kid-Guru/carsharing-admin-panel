@@ -7,9 +7,9 @@ function Aside() {
   // const dispatch = useDispatch();
   return (
     <aside className={s.aside}>
-      <div className={s.header__wrapper}>
+      <header className={s.header}>
         <h1 className={s.header__title}>Need for drive</h1>
-      </div>
+      </header>
       <nav className={s.navigation}>
         <ul className={s.navigation__list}>
           <li className={s.navigation__listItem}>
