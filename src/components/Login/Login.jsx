@@ -1,7 +1,7 @@
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 import Box from '../common/Box/Box';
-import ButtonSubmit from '../common/ButtonSubmit/ButtonSubmit';
+import ButtonSubmit from '../common/Buttons/ButtonSubmit/ButtonSubmit';
 import FormInputText from '../common/FormInputText/FormInputText';
 import Link from '../common/Link/Link';
 import s from './Login.module.scss';

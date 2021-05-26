@@ -1,6 +1,0 @@
-@import '../../../styles/variables.scss';
-@import '../../../styles/_mixins.scss';
-
-.button {
-  @include buttonAction($primary);
-}
