@@ -50,8 +50,8 @@
   align-items: center;
   background-color: transparent;
   border: none;
-  border-right: 1px solid $border;
-  border-left: 1px solid $border;
+  border-right: $borderDelimetr;
+  border-left: $borderDelimetr;
   transition: all ease 0.2s;
   @include menuElementHover;
   &:active {
