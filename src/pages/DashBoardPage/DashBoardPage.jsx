@@ -5,7 +5,8 @@ import TopBar from '../../components/TopBar/TopBar';
 import Aside from '../../components/Aside/Aside';
 import Footer from '../../components/Footer/Footer';
 import appRoutes from '../../routes/appRoutes';
-import ListContentLayout from '../../components/common/ListContentLayout/ListContentLayout';
+// import Orders from '../../components/Orders/Orders';
+import DashBoardRouter from '../../components/DashBoardRouter/DashBoardRouter';
 
 function DashBoardPage() {
   // const dispatch = useDispatch();
@@ -16,7 +17,8 @@ function DashBoardPage() {
   return (
     <DashBoardLayout
       topbar={<TopBar />}
-      content={<ListContentLayout />}
+      // content={<Orders />}
+      content={<DashBoardRouter />}
       aside={<Aside />}
       footer={<Footer />}
     />
