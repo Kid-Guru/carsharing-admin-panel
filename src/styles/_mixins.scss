@@ -33,6 +33,14 @@
 @mixin menuElementHover() {
   &:hover {
     background-color: rgba($gray, 0.2);
-    transition: all ease 0.2s;
+    // transition: all ease 0.2s;
   }
+}
+
+@mixin whiteBox() {
+  background-color: $white;
+  // padding: 20px 17px;
+  border-radius: 9px;
+  box-shadow: 0px 1px 0px rgba(90, 97, 105, 0.11), 0px 2px 4px rgba(90, 97, 105, 0.12),
+    0px 5px 5px rgba(90, 97, 105, 0.06), 0px 3.5px 35px rgba(90, 97, 105, 0.1);
 }

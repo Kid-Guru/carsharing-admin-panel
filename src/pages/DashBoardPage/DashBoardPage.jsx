@@ -5,6 +5,7 @@ import TopBar from '../../components/TopBar/TopBar';
 import Aside from '../../components/Aside/Aside';
 import Footer from '../../components/Footer/Footer';
 import appRoutes from '../../routes/appRoutes';
+import ListContentLayout from '../../components/common/ListContentLayout/ListContentLayout';
 
 function DashBoardPage() {
   // const dispatch = useDispatch();
@@ -13,7 +14,12 @@ function DashBoardPage() {
     return <Redirect to={appRoutes.login()} />;
   }
   return (
-    <DashBoardLayout topbar={<TopBar />} aside={<Aside />} footer={<Footer />} />
+    <DashBoardLayout
+      topbar={<TopBar />}
+      content={<ListContentLayout />}
+      aside={<Aside />}
+      footer={<Footer />}
+    />
   );
 }
 

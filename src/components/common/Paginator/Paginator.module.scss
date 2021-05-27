@@ -1,0 +1,33 @@
+@import '../../../styles/variables.scss';
+
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.pagination {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  color: $primary;
+}
+
+.item {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all ease 0.2s;
+  &:hover {
+    border: 1px solid $primary;
+  }
+  &__active {
+    color: #fff;
+    background-color: $primary;
+  }
+}

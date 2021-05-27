@@ -1,0 +1,45 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/_mixins.scss';
+
+.listContentLayout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 28px;
+
+  &__title {
+    margin: 0;
+    margin-bottom: 28px;
+    font-weight: normal;
+    font-size: 29px;
+    line-height: 33px;
+    color:$main-accent;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    @include whiteBox;
+    // min-height: 50%;
+  }
+
+  &__filters {
+    padding: 20px 15px;
+    border-bottom: $borderDelimetr;
+  }
+  &__content {
+    padding: 20px 15px;
+    border-bottom: $borderDelimetr;
+    flex-grow: 1;
+  }
+  &__footer {
+    padding: 20px 15px;
+  }
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+}
