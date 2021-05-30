@@ -10,24 +10,29 @@
   margin: 0;
   padding: 0;
   color: $primary;
+  font-size: 16px;
+  line-height: 20px;
 }
 
 .item {
   list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 20px;
-  height: 20px;
   border-radius: 50%;
+  overflow: hidden;
   border: 1px solid transparent;
   cursor: pointer;
   transition: all ease 0.2s;
-  &:hover {
-    border: 1px solid $primary;
+  &:hover { border: 1px solid $primary; }
+  &__link, &__side, &__break {
+    padding: 0px 3px;
+    display: inline-block;
+    text-align: center;
+    min-width: 20px;
+    height: 20px;
   }
   &__active {
     color: #fff;
+  }
+  &__active &__link {
     background-color: $primary;
   }
 }
