@@ -1,44 +1,48 @@
 import s from './OrdersList.module.scss';
 
-function MainInfo() {
+function MainInfo(props) {
+  const {
+    carModel, carColor, cityName, adress, dateFrom, dateTo, picture,
+  } = props;
   return (
-    <div className={s.mainInfo} style={{ backgroundImage: 'url(https://api-factory.simbirsoft1.com/files/601c54bead015e0bb6997f4d_5f21d9459d3a610b850fcd57_5ea9e5f3099b810b946c7234_97cfab8f5d3e6e963d8183e5ad70e734.png)' }}>
+    <div className={s.mainInfo} style={{ backgroundImage: `url(${picture})` }}>
       <span className={s.mainInfo__line}>
-        <span className={s.mainInfo_accent}>ELANTRA</span>
+        <span className={s.mainInfo_accent}>{`${carModel} `}</span>
         в
-        <span className={s.mainInfo_accent}>Ульяновск, </span>
-        Нариманова 42
+        <span className={s.mainInfo_accent}>{` ${cityName} `}</span>
+        {adress}
       </span>
       <span className={s.mainInfo__line}>
-        12.06.2019 12:00 — 13.06.2019 12:00
+        {`${dateFrom} — ${dateTo}`}
       </span>
       <span className={s.mainInfo__line}>
         Цвет:
-        <span className={s.mainInfo_accent}>Голубой</span>
+        <span className={s.mainInfo_accent}>{` ${carColor}`}</span>
       </span>
     </div>
   );
 }
 
-function Options() {
+function Options(props) {
+  const { isFullTank, isNeedChildChair, isRightWheel } = props;
   return (
     <div className={s.option_wrapper}>
-      <span className={`${s.option} ${s.option_active}`}>
+      <span className={`${s.option} ${isFullTank && s.option_active}`}>
         Полный бак
       </span>
-      <span className={s.option}>
+      <span className={`${s.option} ${isNeedChildChair && s.option_active}`}>
         Детское кресло
       </span>
-      <span className={s.option}>
+      <span className={`${s.option} ${isRightWheel && s.option_active}`}>
         Правый руль
       </span>
     </div>
   );
 }
 
-function Price() {
+function Price({ price }) {
   return (
-    <div className={s.price}><span>34234</span></div>
+    <div className={s.price}><span>{price}</span></div>
   );
 }
 
@@ -58,37 +62,27 @@ function ButtonsAction() {
   );
 }
 
-function OrdersList() {
+function OrdersList({ ordersList }) {
   return (
     <ul className={s.orders__list}>
-      <li className={`${s.orders__item} ${s.order}`}>
-        <div className={s.order__col}>
-          <MainInfo />
-        </div>
-        <div className={s.order__col}>
-          <Options />
-        </div>
-        <div className={s.order__col}>
-          <Price />
-        </div>
-        <div className={s.order__col}>
-          <ButtonsAction />
-        </div>
-      </li>
-      <li className={`${s.orders__item} ${s.order}`}>
-        <div className={s.order__col}>
-          <MainInfo />
-        </div>
-        <div className={s.order__col}>
-          <Options />
-        </div>
-        <div className={s.order__col}>
-          <Price />
-        </div>
-        <div className={s.order__col}>
-          <ButtonsAction />
-        </div>
-      </li>
+    <>
+      {ordersList.map(({ id, mainInfo, options, price }) => (
+        <li key={id} className={`${s.orders__item} ${s.order}`}>
+          <div className={`${s.order__col} ${s.order__col_mainInfo}`}>
+            <MainInfo {...mainInfo} />
+          </div>
+          <div className={s.order__col}>
+            <Options {...options} />
+          </div>
+          <div className={`${s.order__col} ${s.order__col_price}`}>
+            <Price price={price} />
+          </div>
+          <div className={s.order__col}>
+            <ButtonsAction />
+          </div>
+        </li>
+      ))}
+    </>
     </ul>
   );
 }

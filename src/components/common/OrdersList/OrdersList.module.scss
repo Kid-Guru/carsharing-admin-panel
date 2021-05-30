@@ -21,6 +21,8 @@
   &__col {
     display: flex;
     align-items: center;
+    &_mainInfo { flex-basis: 420px; }
+    &_price { flex-basis: 120px; }
   }
 }
 
@@ -28,7 +30,7 @@
   padding-left: 140px;
   background-position: left;
   background-repeat: no-repeat;
-  background-size: 140px auto;
+  background-size: 130px auto;
   &__line {
     display: block;
     margin-bottom: 6px;
@@ -42,6 +44,7 @@
     margin-bottom: 0px;
   }
   &_accent {
+    text-transform: capitalize;
     color: $black;
   }
 }
@@ -95,6 +98,7 @@
 .price {
   display: flex;
   align-items: center;
+  margin: 0 auto;
   font-size: 24px;
   line-height: 28px;
   color: $black;
