@@ -19,6 +19,7 @@
   }
   &__article {
     grid-area: article;
+    min-height: 0;
   }
   &__footer {
     grid-area: footer;

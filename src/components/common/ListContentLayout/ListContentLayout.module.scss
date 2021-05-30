@@ -21,7 +21,7 @@
     flex-direction: column;
     flex-grow: 1;
     @include whiteBox;
-    // min-height: 50%;
+    min-height: 360px;
   }
 
   &__filters {
@@ -29,9 +29,10 @@
     border-bottom: $borderDelimetr;
   }
   &__content {
+    flex-grow: 1;
     padding: 20px 15px;
     border-bottom: $borderDelimetr;
-    flex-grow: 1;
+    overflow-y: auto;
   }
   &__footer {
     padding: 20px 15px;
