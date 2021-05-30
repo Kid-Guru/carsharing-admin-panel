@@ -61,6 +61,7 @@
   }
   & a.active {
     border-left: 6px solid $primary;
+    background-color: #FBFBFB;
   }
   & a.active &__linkText,
   & a.active &__icon {

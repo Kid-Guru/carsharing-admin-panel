@@ -5,7 +5,6 @@ import appRoutes from '../../routes/appRoutes';
 import s from './Aside.module.scss';
 
 function Aside() {
-  // const dispatch = useDispatch();
   return (
     <aside className={s.aside}>
       <header className={s.header}>
