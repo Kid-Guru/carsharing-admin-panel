@@ -9,11 +9,12 @@ import appRoutes from './routes/appRoutes';
 
 function App() {
   const location = useLocation();
+  const firstPathRoute = location.pathname.split('/')[1];
   return (
     <div className={s.app}>
       <TransitionGroup component={null}>
         <CSSTransition
-          key={location.pathname}
+          key={firstPathRoute}
           classNames={{
             enter: s.routeEnter,
             enterActive: s.routeEnterActive,
