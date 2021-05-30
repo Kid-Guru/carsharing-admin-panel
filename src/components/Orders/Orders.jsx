@@ -27,7 +27,6 @@ function Orders() {
 
   const onPageChange = ({ selected }) => dispatch(setPageOrders(selected + 1));
   const onSubmitHandle = (e) => console.log(e);
-  console.log(total)
   const Filters = () => (
     <Formik
       initialValues={{

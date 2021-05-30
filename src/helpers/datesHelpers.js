@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 const prettyDate = (timeStamp) => {
   const options = {
     day: '2-digit',

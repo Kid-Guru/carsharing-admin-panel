@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 import s from './OrdersList.module.scss';
 
 function MainInfo(props) {
@@ -65,7 +66,6 @@ function ButtonsAction() {
 function OrdersList({ ordersList }) {
   return (
     <ul className={s.orders__list}>
-    <>
       {ordersList.map(({ id, mainInfo, options, price }) => (
         <li key={id} className={`${s.orders__item} ${s.order}`}>
           <div className={`${s.order__col} ${s.order__col_mainInfo}`}>
@@ -82,7 +82,6 @@ function OrdersList({ ordersList }) {
           </div>
         </li>
       ))}
-    </>
     </ul>
   );
 }

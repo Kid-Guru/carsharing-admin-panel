@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { URL } from '../api/api';
 
 const getImageURL = (path) => {
