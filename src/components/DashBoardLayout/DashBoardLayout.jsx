@@ -1,7 +1,9 @@
 import s from './DashBoardLayout.module.scss';
 
 function DashBoardLayout(props) {
-  const { topbar, aside, footer, content } = props;
+  const {
+    topbar, aside, footer, content,
+  } = props;
   return (
     <div className={s.layout__container}>
       <div className={s.layout__aside}>{aside}</div>
