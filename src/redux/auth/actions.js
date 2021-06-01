@@ -7,7 +7,7 @@ export const setAuthStatus = createAction('SET_AUTH_STATUS');
 // export const setAuthErrors = createAction('SET_AUTH_ERRORS');
 
 export const checkTokens = () => (dispatch) => {
-  if (cookieHelper.getAccessToken() || cookieHelper.getRefreshToken()) {
+  if (cookieHelper.getAccessToken()) {
     dispatch(setAuthStatus({ status: 'authorized' }));
   } else {
     dispatch(setAuthStatus({ status: 'notAuthorized' }));
