@@ -45,6 +45,8 @@ function TopBar() {
             id="search"
             placeholder="Поиск ..."
             type="text"
+            autoCorrect="off"
+            autoComplete="off"
           />
         </label>
       </div>

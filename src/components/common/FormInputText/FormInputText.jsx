@@ -20,6 +20,8 @@ function FormInputText(props) {
           id={label}
           placeholder={placeholder}
           type={type}
+          autoCorrect="off"
+          autoComplete="off"
         />
       </label>
       <span className={`${s.errorMessage} ${isError && s.errorMessage_active}`}>{errorText}</span>
