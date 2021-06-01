@@ -3,13 +3,14 @@ import * as actions from './actions';
 
 const defaultState = {
   isAuth: false,
-  // status: 'fetching',
+  status: 'checking',
   errors: [],
 };
 
 const handlers = {
-  [actions.setAuthStatus]: (state, { payload: { isAuth } }) => ({ ...state, isAuth }),
-  [actions.setAuthErrors]: (state, { payload: { errors } }) => ({ ...state, errors }),
+  [actions.setAuthFlag]: (state, { payload: { isAuth } }) => ({ ...state, isAuth }),
+  [actions.setAuthStatus]: (state, { payload: { status } }) => ({ ...state, status }),
+  // [actions.setAuthErrors]: (state, { payload: { errors } }) => ({ ...state, errors }),
 };
 
 const authReducer = handleActions(handlers, defaultState);

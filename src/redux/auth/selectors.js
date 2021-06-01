@@ -1,1 +1,1 @@
-export const isAuthErrorSelector = (state) => state.auth.errors.includes('ошибка');
+export const isAuthSelector = (state) => state.auth.status === 'authorized';
