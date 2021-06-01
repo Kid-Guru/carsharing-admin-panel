@@ -1,11 +1,11 @@
 /* eslint-disable import/prefer-default-export */
-import { URL } from '../api/api';
+import { HOST_URL } from '../routes/apiRoutes';
 
 const getImageURL = (path) => {
   if (path.includes('base64')) {
     return path;
   }
-  return `${URL}${path}`;
+  return `${HOST_URL}${path}`;
 };
 
 export { getImageURL };

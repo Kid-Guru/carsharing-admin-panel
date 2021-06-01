@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Redirect, Route, Switch, useLocation,
 } from 'react-router-dom';
@@ -5,11 +7,15 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import s from './App.module.scss';
 import DashBoardPage from './pages/DashBoardPage/DashBoardPage';
 import LoginPage from './pages/LoginPage/LoginPage';
+import { checkTokens } from './redux/auth/actions';
 import appRoutes from './routes/appRoutes';
 
 function App() {
   const location = useLocation();
+  const dispatch = useDispatch();
+
   const firstPathRoute = location.pathname.split('/')[1];
+  useEffect(() => dispatch(checkTokens()), []);
   return (
     <div className={s.app}>
       <TransitionGroup component={null}>

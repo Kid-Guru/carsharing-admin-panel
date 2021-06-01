@@ -1,12 +1,16 @@
 import Cookies from 'js-cookie';
 
 export default {
-  setAccessToken(token) {
+  setAccessRefreshTokens(accessToken, refreshToken, expiresIn) {
+    const expires = new Date(Date.now() + ((expiresIn - 600) * 1000));
+    this.setAccessToken(accessToken, expires);
+    this.setRefreshToken(refreshToken, expires);
+  },
+  setAccessToken(token, expires) {
     Cookies.set('accessToken', token, {
       secure: true,
       samesite: 'strict',
-      // path: '/',
-      // domain: '.simbirsoft1.com',
+      expires,
     });
   },
   getAccessToken() {
@@ -19,8 +23,7 @@ export default {
     Cookies.set('refreshToken', token, {
       secure: true,
       samesite: 'strict',
-      // path: '/',
-      // domain: '.simbirsoft1.com',
+
     });
   },
   getRefreshToken() {
@@ -29,11 +32,4 @@ export default {
   removeRefreshToken() {
     Cookies.remove('refreshToken');
   },
-  // setRefreshToken(token: string) {
-  //   await localStorage.setItem(LocalStorageKey.refreshToken, token)
-  // },
-  // getRefreshToken() {
-  //   const token: string | null = await localStorage.getItem(LocalStorageKey.refreshToken)
-  //   return token
-  // },
 };

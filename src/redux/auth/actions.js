@@ -1,9 +1,18 @@
 import { createAction } from 'redux-actions';
-import { authLogin } from '../../api/api';
+import { authService } from '../../api/service';
 import cookieHelper from '../../helpers/cookieHelper';
 
+export const setAuthFlag = createAction('SET_AUTH_FLAG');
 export const setAuthStatus = createAction('SET_AUTH_STATUS');
-export const setAuthErrors = createAction('SET_AUTH_ERRORS');
+// export const setAuthErrors = createAction('SET_AUTH_ERRORS');
+
+export const checkTokens = () => (dispatch) => {
+  if (cookieHelper.getAccessToken() || cookieHelper.getRefreshToken()) {
+    dispatch(setAuthStatus({ status: 'authorized' }));
+  } else {
+    dispatch(setAuthStatus({ status: 'notAuthorized' }));
+  }
+};
 
 export const login = (formData, setErrorsForm, setSubmitting) => async (dispatch) => {
   const formErrors = {
@@ -16,12 +25,13 @@ export const login = (formData, setErrorsForm, setSubmitting) => async (dispatch
   };
   let response;
   try {
-    response = await authLogin(authData);
-
-    cookieHelper.setAccessToken(response.data.access_token);
-    cookieHelper.setRefreshToken(response.data.refresh_token);
-    dispatch(setAuthStatus({ isAuth: true }));
+    response = await authService.login(authData);
+    // eslint-disable-next-line camelcase
+    const { access_token, refresh_token, expires_in } = response.data;
+    cookieHelper.setAccessRefreshTokens(access_token, refresh_token, expires_in);
+    dispatch(setAuthStatus({ status: 'authorized' }));
   } catch (e) {
+    console.error(e);
     setErrorsForm(formErrors);
     setSubmitting(false);
   }
@@ -30,5 +40,5 @@ export const login = (formData, setErrorsForm, setSubmitting) => async (dispatch
 export const logout = () => async (dispatch) => {
   cookieHelper.removeAccessToken();
   cookieHelper.removeRefreshToken();
-  dispatch(setAuthStatus({ isAuth: false }));
+  dispatch(setAuthStatus({ status: 'notAuthorized' }));
 };
