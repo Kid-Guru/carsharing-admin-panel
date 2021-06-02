@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { HOST_URL } from '../routes/apiRoutes';
 
 const getImageURL = (path) => {

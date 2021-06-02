@@ -61,7 +61,8 @@
       "react/react-in-jsx-scope": "off",
       "react/prop-types": [
         0
-      ]
+      ],
+      "import/prefer-default-export": "off"
     }
   },
   "browserslist": {

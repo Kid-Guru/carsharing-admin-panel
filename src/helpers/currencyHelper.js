@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 const prettyCurrency = (price) => {
   const options = {
     style: 'currency',
