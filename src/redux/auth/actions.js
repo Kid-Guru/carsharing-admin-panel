@@ -7,7 +7,7 @@ export const setAuthStatus = createAction('SET_AUTH_STATUS');
 // export const setAuthErrors = createAction('SET_AUTH_ERRORS');
 
 export const checkTokens = () => (dispatch) => {
-  if (cookieHelper.getAccessToken()) {
+  if (cookieHelper.getAccessToken() || cookieHelper.getRefreshToken()) {
     dispatch(setAuthStatus({ status: 'authorized' }));
   } else {
     dispatch(setAuthStatus({ status: 'notAuthorized' }));
@@ -23,17 +23,19 @@ export const login = (formData, setErrorsForm, setSubmitting) => async (dispatch
     username: formData.login,
     password: formData.password,
   };
-  let response;
   try {
-    response = await authService.login(authData);
+    const response = await authService.login(authData);
     // eslint-disable-next-line camelcase
     const { access_token, refresh_token, expires_in } = response.data;
     cookieHelper.setAccessRefreshTokens(access_token, refresh_token, expires_in);
     dispatch(setAuthStatus({ status: 'authorized' }));
   } catch (e) {
-    console.error(e);
-    setErrorsForm(formErrors);
-    setSubmitting(false);
+    if (e.response.status === 401) {
+      setErrorsForm(formErrors);
+      setSubmitting(false);
+    } else {
+      throw e;
+    }
   }
 };
 

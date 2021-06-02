@@ -1,10 +1,13 @@
 import Cookies from 'js-cookie';
 
+const ONE_WEEK = 604800;
+
 export default {
   setAccessRefreshTokens(accessToken, refreshToken, expiresIn) {
-    const expires = new Date(Date.now() + ((expiresIn - 600) * 1000));
-    this.setAccessToken(accessToken, expires);
-    this.setRefreshToken(refreshToken, expires);
+    const expiresAccessToken = new Date(Date.now() + ((expiresIn - 600) * 1000));
+    const expiresRefreshToken = new Date(Date.now() + ONE_WEEK * 1000);
+    this.setAccessToken(accessToken, expiresAccessToken);
+    this.setRefreshToken(refreshToken, expiresRefreshToken);
   },
   setAccessToken(token, expires) {
     Cookies.set('accessToken', token, {
@@ -19,11 +22,11 @@ export default {
   removeAccessToken() {
     Cookies.remove('accessToken');
   },
-  setRefreshToken(token) {
+  setRefreshToken(token, expires) {
     Cookies.set('refreshToken', token, {
       secure: true,
       samesite: 'strict',
-
+      expires,
     });
   },
   getRefreshToken() {
