@@ -40,4 +40,26 @@ const totalOrdersSelector = (state) => {
   return Math.ceil(total / limit);
 };
 
-export { ordersSelector, totalOrdersSelector };
+const modelFilterSelector = (state) => {
+  const { car } = state.orders.dataFilters;
+  const options = car.map((c) => ({ label: c.name, value: c.id }));
+  return [{ label: 'Все', value: null }, ...options];
+};
+const cityFilterSelector = (state) => {
+  const { city } = state.orders.dataFilters;
+  const options = city.map((c) => ({ label: c.name, value: c.id }));
+  return [{ label: 'Все', value: null }, ...options];
+};
+const statusFilterSelector = (state) => {
+  const { status } = state.orders.dataFilters;
+  const options = status.map((s) => ({ label: s.name, value: s.id }));
+  return [{ label: 'Все', value: null }, ...options];
+};
+
+export {
+  ordersSelector,
+  totalOrdersSelector,
+  modelFilterSelector,
+  cityFilterSelector,
+  statusFilterSelector,
+};
