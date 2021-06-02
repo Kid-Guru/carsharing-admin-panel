@@ -4,6 +4,9 @@ const routes = {
   LOGIN: '/auth/login',
   REFRESH: '/auth/refresh',
   ORDER: 'db/order',
+  CITY: 'db/city',
+  CAR: 'db/car',
+  STATUS: 'db/orderStatus',
 };
 
 export { HOST_URL, API_URL, routes };
