@@ -59,7 +59,7 @@ function Orders() {
           onPageChange={onPageChange}
           pageCount={total}
           marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={3}
         />
       )}
     />

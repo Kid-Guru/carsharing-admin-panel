@@ -18,11 +18,24 @@
 .order {
   display: flex;
   justify-content: space-between;
+  margin-left: -5px;
+  margin-right: -5px;
   &__col {
     display: flex;
     align-items: center;
+    margin: 0 5px;
     &_mainInfo { flex-basis: 420px; }
-    &_price { flex-basis: 120px; }
+    &_price {
+      flex-basis: 100px;
+      @media (max-width: $mobile - 187px) {
+        display: none;
+      }
+    }
+    &_options {
+      @media (max-width: $tablet) {
+        display: none;
+      }
+    }
   }
 }
 
@@ -46,6 +59,11 @@
   &_accent {
     text-transform: capitalize;
     color: $black;
+  }
+
+  @media (max-width: $mobile - 187px) {
+    padding-left: 0;
+    background-size: 0;
   }
 }
 
@@ -94,7 +112,6 @@
   }
 }
 
-
 .price {
   display: flex;
   align-items: center;
@@ -102,6 +119,9 @@
   font-size: 24px;
   line-height: 28px;
   color: $black;
+  @media (max-width: $desktop-min) {
+    font-size: 20px;
+  }
 }
 
 .buttons {
@@ -165,6 +185,31 @@
     span {
       &:before {
         background-image: url(../../../assets/images/btnActionChange.svg);
+      }
+    }
+  }
+}
+
+
+@media (max-width: $desktop-min) {
+  .buttons {
+    &__wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    &__btn {
+      border-left: 1px solid $border;
+      border-bottom: 1px solid transparent;
+      &:first-child {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border-bottom-left-radius: 0;
+      }
+      &:last-child {
+        border-bottom: 1px solid $border;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
       }
     }
   }

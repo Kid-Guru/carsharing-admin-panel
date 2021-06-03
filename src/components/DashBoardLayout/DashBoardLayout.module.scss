@@ -7,9 +7,9 @@
     grid-template-rows: 68px 1fr 68px;
     grid-template-columns: 285px 1fr;
     grid-template-areas:
-    "aside topbar"
-    "aside article"
-    "aside footer";
+      'aside topbar'
+      'aside article'
+      'aside footer';
   }
   &__aside {
     grid-area: aside;
@@ -23,5 +23,28 @@
   }
   &__footer {
     grid-area: footer;
+  }
+}
+
+@media (max-width: $tablet) {
+  .layout {
+    &__container {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        'topbar'
+        'article'
+        'footer';
+    }
+    &__aside {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .layout {
+    &__container {
+      grid-template-rows: 51px 1fr 51px;
+    }
   }
 }

@@ -71,7 +71,7 @@ function OrdersList({ ordersList }) {
           <div className={`${s.order__col} ${s.order__col_mainInfo}`}>
             <MainInfo {...mainInfo} />
           </div>
-          <div className={s.order__col}>
+          <div className={`${s.order__col} ${s.order__col_options}`}>
             <Options {...options} />
           </div>
           <div className={`${s.order__col} ${s.order__col_price}`}>

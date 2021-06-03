@@ -36,6 +36,13 @@ function TopBar() {
   const dispatch = useDispatch();
   return (
     <div className={s.topBar}>
+      <button className={s.showSideMenu} type="button">
+        <div className={s.showSideMenu__wrap}>
+          <span className={s.showSideMenu__line} />
+          <span className={s.showSideMenu__line} />
+          <span className={s.showSideMenu__line} />
+        </div>
+      </button>
       <div className={s.topBar__search}>
         <label className={s.search__label} htmlFor="search">
           <span className={s.search__icon} />
