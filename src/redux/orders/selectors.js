@@ -13,7 +13,7 @@ const ordersSelector = (state) => {
   const { data, status } = state.orders;
   if (status === 'fetching') return [];
   return data.map((order) => {
-    const carData = order.carId === null ? carStub : order.carId;
+    const carData = order.carId || carStub;
     return {
       mainInfo: {
         carModel: carData.name,
@@ -56,10 +56,15 @@ const statusFilterSelector = (state) => {
   return [{ label: 'Все', value: null }, ...options];
 };
 
+const optionsFiltersSelector = (state) => {
+  const modelOption = modelFilterSelector(state);
+  const cityOption = cityFilterSelector(state);
+  const statusOption = statusFilterSelector(state);
+  return { modelOption, cityOption, statusOption };
+};
+
 export {
   ordersSelector,
   totalOrdersSelector,
-  modelFilterSelector,
-  cityFilterSelector,
-  statusFilterSelector,
+  optionsFiltersSelector,
 };

@@ -3,11 +3,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { initialOrdersRequest, setFilterOrders, setPageOrders } from '../../redux/orders/actions';
 import {
-  cityFilterSelector,
-  modelFilterSelector,
   ordersSelector,
-  statusFilterSelector,
   totalOrdersSelector,
+  optionsFiltersSelector,
 } from '../../redux/orders/selectors';
 import ButtonSubmit from '../common/Buttons/ButtonSubmit/ButtonSubmit';
 import ListContentLayout from '../common/ListContentLayout/ListContentLayout';
@@ -16,21 +14,12 @@ import Paginator from '../common/Paginator/Paginator';
 import SelectFilter from '../common/SelectFilterField/SelectFilterField';
 import s from './Orders.module.scss';
 
-function Orders() {
+const Filters = () => {
   const dispatch = useDispatch();
-
-  useEffect(() => dispatch(initialOrdersRequest()), []);
-  // const isFetching = useSelector((state) => state.orders.statuts === 'fetching');
-  const ordersList = useSelector(ordersSelector);
-  const total = useSelector(totalOrdersSelector);
-
-  const modelOption = useSelector(modelFilterSelector);
-  const cityOption = useSelector(cityFilterSelector);
-  const statusOption = useSelector(statusFilterSelector);
-
-  const onPageChange = ({ selected }) => dispatch(setPageOrders(selected + 1));
   const onSubmitHandle = (data) => dispatch(setFilterOrders(data));
-  const Filters = () => (
+  const { modelOption, cityOption, statusOption } = useSelector(optionsFiltersSelector);
+
+  return (
     <Formik
       initialValues={{
         model: null,
@@ -51,6 +40,14 @@ function Orders() {
       </Form>
     </Formik>
   );
+};
+
+function Orders() {
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(initialOrdersRequest()), []);
+  const onPageChange = ({ selected }) => dispatch(setPageOrders(selected));
+  const ordersList = useSelector(ordersSelector);
+  const total = useSelector(totalOrdersSelector);
 
   return (
     <ListContentLayout
