@@ -1,7 +1,8 @@
+import React from 'react';
 import Select, { components } from 'react-select';
 import { ReactComponent as Dropdown } from '../../../assets/images/dropdownSearchField.svg';
 
-const { DropdownIndicator } = components;
+const { DropdownIndicator, ValueContainer } = components;
 
 const customStyles = {
   container: (provided) => ({
@@ -10,11 +11,6 @@ const customStyles = {
     height: '30px',
     width: '110px',
     marginRight: '10px',
-  }),
-  valueContainer: (provided) => ({
-    ...provided,
-    height: '30px',
-    padding: '0px 8px',
   }),
   control: (provided) => ({
     ...provided,
@@ -61,6 +57,11 @@ const customStyles = {
     lineHeight: '13px',
     color: '#5A6169',
   }),
+  valueContainer: (provided) => ({
+    ...provided,
+    height: '30px',
+    padding: '0px 8px',
+  }),
 };
 
 const CustomDropdownIndicator = ({ children, ...props }) => (
@@ -70,18 +71,34 @@ const CustomDropdownIndicator = ({ children, ...props }) => (
   </DropdownIndicator>
 );
 
+const CustomValueContainer = (props) => {
+  const { getValue, clearValue, children } = props;
+  if (getValue()?.[0]?.value === null) {
+    clearValue();
+  }
+  return (
+    <ValueContainer {...props}>
+      {children}
+    </ValueContainer>
+  );
+};
+
 function SelectFilter(props) {
   const {
     options, form, field, placeholder,
   } = props;
   return (
     <Select
+      classNamePrefix="react-select"
       isSearchable={false}
       styles={customStyles}
-      components={{ DropdownIndicator: CustomDropdownIndicator }}
+      components={{
+        DropdownIndicator: CustomDropdownIndicator,
+        ValueContainer: CustomValueContainer,
+      }}
       placeholder={placeholder}
       options={options}
-      onChange={(option) => form.setFieldValue(field.name, option.value)}
+      onChange={(option) => form.setFieldValue(field.name, option && option.value)}
     />
   );
 }
