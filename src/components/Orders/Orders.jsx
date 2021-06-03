@@ -51,6 +51,7 @@ function Orders() {
 
   return (
     <ListContentLayout
+      title="Заказы"
       header={<Filters />}
       content={<OrdersList ordersList={ordersList} />}
       footer={(

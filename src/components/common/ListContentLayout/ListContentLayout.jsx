@@ -2,11 +2,12 @@
 import s from './ListContentLayout.module.scss';
 
 function ListContentLayout(props) {
-  const { content, header, footer } = props;
-
+  const {
+    title, content, header, footer,
+  } = props;
   return (
     <article className={s.listContentLayout}>
-      <h2 className={s.listContentLayout__title}>Заголовок</h2>
+      <h2 className={s.listContentLayout__title}>{title}</h2>
       <div className={s.listContentLayout__wrapper}>
         <div className={s.listContentLayout__filters}>
           {header}
