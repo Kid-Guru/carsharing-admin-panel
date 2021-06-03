@@ -13,7 +13,7 @@ const defaultState = {
     city: [],
     status: [],
   },
-  page: 1,
+  page: 0,
   limit: 10,
   total: null,
   status: 'fetching',
