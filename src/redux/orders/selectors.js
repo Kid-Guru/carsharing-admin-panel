@@ -63,8 +63,14 @@ const optionsFiltersSelector = (state) => {
   return { modelOption, cityOption, statusOption };
 };
 
+const currentFiltersSelector = (state) => {
+  const { car, city, status } = state.orders.filters;
+  return { model: car, city, status };
+};
+
 export {
   ordersSelector,
   totalOrdersSelector,
   optionsFiltersSelector,
+  currentFiltersSelector,
 };

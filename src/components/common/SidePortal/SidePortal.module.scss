@@ -1,0 +1,20 @@
+
+.portal {
+  &__overlay {
+    position: fixed;
+    z-index: 500;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.3;
+  }
+  &__content {
+    position: fixed;
+    z-index: 500;
+    top: 0;
+    left: 0;
+    bottom: 0;
+  }
+}

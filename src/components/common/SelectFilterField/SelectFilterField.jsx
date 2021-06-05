@@ -2,14 +2,14 @@ import React from 'react';
 import Select, { components } from 'react-select';
 import { ReactComponent as Dropdown } from '../../../assets/images/dropdownSearchField.svg';
 
-const { DropdownIndicator, ValueContainer } = components;
+const { DropdownIndicator } = components;
 
 const customStyles = {
   container: (provided) => ({
     ...provided,
     display: 'inline-block',
     height: '30px',
-    width: '110px',
+    width: '180px',
     marginRight: '10px',
   }),
   control: (provided) => ({
@@ -71,18 +71,6 @@ const CustomDropdownIndicator = ({ children, ...props }) => (
   </DropdownIndicator>
 );
 
-const CustomValueContainer = (props) => {
-  const { getValue, clearValue, children } = props;
-  if (getValue()?.[0]?.value === null) {
-    clearValue();
-  }
-  return (
-    <ValueContainer {...props}>
-      {children}
-    </ValueContainer>
-  );
-};
-
 function SelectFilter(props) {
   const {
     options, form, field, placeholder,
@@ -94,10 +82,10 @@ function SelectFilter(props) {
       styles={customStyles}
       components={{
         DropdownIndicator: CustomDropdownIndicator,
-        ValueContainer: CustomValueContainer,
       }}
       placeholder={placeholder}
       options={options}
+      value={options.find((option) => option.value === field.value && field.value !== null) || null}
       onChange={(option) => form.setFieldValue(field.name, option && option.value)}
     />
   );
