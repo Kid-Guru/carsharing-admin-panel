@@ -2,15 +2,15 @@ import { Field, Form, Formik } from 'formik';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useWindowSize } from 'react-use';
-import { initialOrdersRequest, setFilterOrders, setPageOrders } from '../../redux/orders/actions';
 import {
-  ordersSelector,
+  cleanupOrders, initialOrdersRequest, setFilterOrders, setPageOrders,
+} from '../../redux/orders/actions';
+import {
+  currentFiltersSelector, optionsFiltersSelector, ordersSelector,
   totalOrdersSelector,
-  optionsFiltersSelector,
-  currentFiltersSelector,
 } from '../../redux/orders/selectors';
-import ButtonSubmit from '../common/Buttons/ButtonSubmit';
 import Button from '../common/Buttons/Button';
+import ButtonSubmit from '../common/Buttons/ButtonSubmit';
 import ListContentLayout from '../common/ListContentLayout/ListContentLayout';
 import OrdersList from '../common/OrdersList/OrdersList';
 import Paginator from '../common/Paginator/Paginator';
@@ -78,8 +78,14 @@ const FiltersWithPortal = () => {
 
 function Orders() {
   const dispatch = useDispatch();
-  useEffect(() => dispatch(initialOrdersRequest()), []);
-  const onPageChange = ({ page }) => dispatch(setPageOrders(page));
+  useEffect(() => {
+    dispatch(initialOrdersRequest());
+    return () => {
+      dispatch(cleanupOrders());
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const onPageChange = ({ selected }) => dispatch(setPageOrders(selected));
   const ordersList = useSelector(ordersSelector);
   const total = useSelector(totalOrdersSelector);
 

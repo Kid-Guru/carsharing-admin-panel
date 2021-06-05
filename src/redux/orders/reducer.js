@@ -30,6 +30,14 @@ const handlers = {
   [actions.setStatus]: (state, { payload: { status } }) => ({ ...state, status }),
   [actions.setPage]: (state, { payload: { page } }) => ({ ...state, page }),
   [actions.setFilter]: (state, { payload: { filters } }) => ({ ...state, filters }),
+  [actions.cleanupOrders]: (state) => ({
+    ...state,
+    filters: {
+      car: null,
+      city: null,
+      status: null,
+    },
+  }),
 };
 
 const ordersReducer = handleActions(handlers, defaultState);

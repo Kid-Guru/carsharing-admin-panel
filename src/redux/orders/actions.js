@@ -6,6 +6,7 @@ export const setOrders = createAction('SET_ORDERS');
 export const setDataFilters = createAction('SET_DATA_FILTERS');
 export const setPage = createAction('SET_PAGE');
 export const setFilter = createAction('SET_FILTER');
+export const cleanupOrders = createAction('CLEANUP_ORDERS');
 
 // Запрос заказов
 // Добавить обработку ошибки
