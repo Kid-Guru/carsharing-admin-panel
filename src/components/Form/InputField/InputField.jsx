@@ -1,7 +1,7 @@
 import { Field } from 'formik';
-import s from './FormInputText.module.scss';
+import s from './InputField.module.scss';
 
-function FormInputText(props) {
+function InputField(props) {
   const {
     label = 'label',
     placeholder,
@@ -29,4 +29,4 @@ function FormInputText(props) {
   );
 }
 
-export default FormInputText;
+export default InputField;
