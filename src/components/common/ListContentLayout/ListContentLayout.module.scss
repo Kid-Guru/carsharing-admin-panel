@@ -31,11 +31,11 @@
   &__content {
     flex-grow: 1;
     padding: 20px 15px;
-    border-bottom: $borderDelimetr;
     overflow-y: auto;
   }
   &__footer {
     padding: 20px 15px;
+    border-top: $borderDelimetr;
   }
 }
 

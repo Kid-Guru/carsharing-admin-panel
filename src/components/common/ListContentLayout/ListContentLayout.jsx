@@ -9,15 +9,19 @@ function ListContentLayout(props) {
     <article className={s.listContentLayout}>
       <h2 className={s.listContentLayout__title}>{title}</h2>
       <div className={s.listContentLayout__wrapper}>
+        {header && (
         <div className={s.listContentLayout__filters}>
           {header}
         </div>
+        )}
         <div className={s.listContentLayout__content}>
           {content}
         </div>
-        <div className={s.listContentLayout__footer}>
-          {footer}
-        </div>
+        {footer && (
+          <div className={s.listContentLayout__footer}>
+            {footer}
+          </div>
+        )}
       </div>
     </article>
   );
