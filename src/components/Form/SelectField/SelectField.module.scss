@@ -1,0 +1,47 @@
+@import '../../../styles/variables.scss';
+
+.root {
+  color: $main-gray;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.title {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  line-height: 12px;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 11px 8px;
+  font-size: 11px;
+  height: 30px;
+  line-height: 30px;
+  color: $main-gray;
+  border: 1px solid $border;
+  border-radius: 3px;
+  outline: none;
+  &:focus {
+    border: 1px solid $black;
+  }
+  &_error {
+    border: 1px solid $alert;
+  }
+  transition: all ease 0.2s;
+}
+
+.errorMessage {
+  position: absolute;
+  bottom: 5px;
+  font-size: 10px;
+  line-height: 11px;
+  color: $alert;
+  opacity: 0;
+  transition: all ease 0.2s;
+  &_active {
+    opacity: 1;
+  }
+}
