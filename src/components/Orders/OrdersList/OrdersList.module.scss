@@ -126,12 +126,17 @@
 
 .buttons {
   &__btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
     min-width: 70px;
     height: 21px;
     padding: 0 6px;
     font-size: 11px;
     line-height: 13px;
     color: $main-gray;
+    text-decoration: none;
     border: 1px solid $border;
     border-left: none;
     background-color: transparent;

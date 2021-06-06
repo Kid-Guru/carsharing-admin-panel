@@ -12,7 +12,7 @@ import {
 import Button from '../common/Buttons/Button';
 import ButtonSubmit from '../common/Buttons/ButtonSubmit';
 import ListContentLayout from '../common/ListContentLayout/ListContentLayout';
-import OrdersList from '../common/OrdersList/OrdersList';
+import OrdersList from './OrdersList/OrdersList';
 import Paginator from '../common/Paginator/Paginator';
 import SelectFilter from '../common/SelectFilterField/SelectFilterField';
 import SidePortal from '../common/SidePortal/SidePortal';
@@ -71,6 +71,7 @@ const FiltersWithPortal = () => {
       </>
     );
   }
+  if (isSideFiltersOpen) toggleSideFilters(false);
   return (
     <Filters onSubmitHandle={onSubmitHandle} />
   );

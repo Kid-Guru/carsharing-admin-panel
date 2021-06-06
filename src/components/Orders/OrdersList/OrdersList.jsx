@@ -1,4 +1,6 @@
 /* eslint-disable object-curly-newline */
+import { Link } from 'react-router-dom';
+import appRoutes from '../../../routes/appRoutes';
 import s from './OrdersList.module.scss';
 
 function MainInfo(props) {
@@ -47,7 +49,7 @@ function Price({ price }) {
   );
 }
 
-function ButtonsAction() {
+function ButtonsAction({ id }) {
   return (
     <div className={s.buttons__wrap}>
       <button className={`${s.buttons__btn} ${s.buttons__btn_confirm}`} type="button">
@@ -56,9 +58,12 @@ function ButtonsAction() {
       <button className={`${s.buttons__btn} ${s.buttons__btn_cancel}`} type="button">
         <span>Отмена</span>
       </button>
-      <button className={`${s.buttons__btn} ${s.buttons__btn_change}`} type="button">
+      <Link
+        to={appRoutes.dashboardOrder(id)}
+        className={`${s.buttons__btn} ${s.buttons__btn_change}`}
+      >
         <span>Изменить</span>
-      </button>
+      </Link>
     </div>
   );
 }
@@ -78,7 +83,7 @@ function OrdersList({ ordersList }) {
             <Price price={price} />
           </div>
           <div className={s.order__col}>
-            <ButtonsAction />
+            <ButtonsAction id={id} />
           </div>
         </li>
       ))}
