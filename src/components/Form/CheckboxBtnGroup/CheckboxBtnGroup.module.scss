@@ -1,0 +1,63 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/_mixins.scss';
+
+.checkbox {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px;
+  border: none;
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+  &__title, &__text {
+    font-size: 12px;
+    line-height: 13px;
+    color: $main-gray;
+  }
+  &__title, &__label {
+    margin-bottom: 5px;
+  }
+  &__label {
+    position: relative;
+  }
+  &__icon {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    height: 14px;
+    width: 14px;
+    border-radius: 3px;
+    border: 1px solid  $main-gray;
+    background-color: white;
+    transition: all ease 0.2s;
+  }
+  &__label:hover &__icon {
+    background-color: rgba($primary, 0.2);
+  }
+  &__input:checked + &__icon {
+    border: 1px solid  transparent;
+    background-color: $primary;
+  }
+  &__input:disabled + &__icon {
+    background-color: $border;
+  }
+  &__input:focus-visible + &__icon {
+    box-shadow: 0 0 0 1px black;
+  }
+  &__input:checked + &__icon::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 4px;
+    height: 8px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+  }
+  &__input {
+    @include visually-hidden;
+  }
+}
