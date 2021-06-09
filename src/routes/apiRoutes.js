@@ -5,6 +5,8 @@ const routes = {
   REFRESH: '/auth/refresh',
   ORDER: 'db/order',
   CITY: 'db/city',
+  POINT: 'db/point',
+  RATE: 'db/rate',
   CAR: 'db/car',
   STATUS: 'db/orderStatus',
 };

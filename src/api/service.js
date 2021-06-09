@@ -20,12 +20,19 @@ const apiService = {
       cityId: filters.city,
       orderStatusId: filters.status,
       carId: filters.car,
+      id: filters.id,
     };
     const stringified = queryString.stringify(params, stringifyConfig);
     return mainInstance.get(`${routes.ORDER}?${stringified}`);
   },
   getCities() {
     return mainInstance.get(`${routes.CITY}`);
+  },
+  getPoints() {
+    return mainInstance.get(`${routes.POINT}`);
+  },
+  getRates() {
+    return mainInstance.get(`${routes.RATE}`);
   },
   getCars() {
     return mainInstance.get(`${routes.CAR}`);
