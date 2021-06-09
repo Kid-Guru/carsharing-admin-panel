@@ -9,7 +9,7 @@ function LoginPage() {
   const dispatch = useDispatch();
   const isAuth = useSelector(isAuthSelector);
   if (isAuth) {
-    return <Redirect to={appRoutes.dashboard()} />;
+    return <Redirect to={appRoutes.dashboardOrders()} />;
   }
   return (
     <Login
