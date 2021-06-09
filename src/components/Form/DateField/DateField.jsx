@@ -6,7 +6,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './DataPickerStyles.scss';
 
 function DateField(props) {
-  const { label, placeholder } = props;
+  const {
+    label, placeholder, minDate, maxDate,
+  } = props;
   const { setFieldValue } = useFormikContext();
   const [field] = useField(props);
   return (
@@ -16,14 +18,15 @@ function DateField(props) {
         <DatePicker
           {...field}
           selected={(field.value && new Date(field.value)) || null}
-          onChange={(val) => setFieldValue(field.name, val.getTime())}
+          onChange={(val) => setFieldValue(field.name, val && val.getTime())}
           id={label}
-          className="dpStyles"
+          wrapperClassName="dpStyles__wrapper"
+          className="dpStyles__input"
           clearButtonClassName="dpStyles__clear"
           placeholderText={placeholder}
           // locale="ru"
-          // minDate={new Date()}
-          // maxDate={dateTo}
+          minDate={minDate}
+          maxDate={maxDate}
           // filterTime={filterTimeFrom}
           showTimeSelect
           isClearable
