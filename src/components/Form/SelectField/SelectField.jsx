@@ -10,7 +10,7 @@ const customStyles = {
     ...provided,
     display: 'inline-block',
     height: '30px',
-    width: '180px',
+    width: '100%',
     marginRight: '10px',
   }),
   control: (provided) => ({

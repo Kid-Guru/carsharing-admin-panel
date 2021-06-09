@@ -1,9 +1,9 @@
 @import '../../../styles/variables.scss';
 
 .root {
-  color: $main-gray;
-  padding-bottom: 20px;
   position: relative;
+  padding-bottom: 20px;
+  color: $main-gray;
 }
 
 .title {
