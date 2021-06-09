@@ -1,0 +1,8 @@
+.form {
+  display: flex;
+  margin: 0 -10px;
+  &__col {
+    flex: 0 1 33.3%;
+    margin: 0 10px;
+  }
+}
