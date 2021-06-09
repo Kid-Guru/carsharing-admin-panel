@@ -129,9 +129,11 @@ const fieldsOptionsSelector = (state) => {
 };
 
 const isFetchingSelector = (state) => state.order.status === 'fetching';
+const isTrasferSeccuessSelector = (state) => state.order.status === 'transferSeccuess';
 
 export {
   fieldsOptionsSelector,
   initValuesSelector,
   isFetchingSelector,
+  isTrasferSeccuessSelector,
 };

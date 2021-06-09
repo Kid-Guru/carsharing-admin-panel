@@ -1,9 +1,11 @@
 import { Form, Formik } from 'formik';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
-import { cleanupOrder, orderRequest } from '../../redux/orderEdit/actions';
-import { fieldsOptionsSelector, initValuesSelector, isFetchingSelector } from '../../redux/orderEdit/selectors';
+import { useParams, useHistory, Redirect } from 'react-router-dom';
+import { cleanupOrder, orderRequest, orderUpdate } from '../../redux/orderEdit/actions';
+import {
+  fieldsOptionsSelector, initValuesSelector, isFetchingSelector, isTrasferSeccuessSelector,
+} from '../../redux/orderEdit/selectors';
 import ListContentLayout from '../common/ListContentLayout/ListContentLayout';
 import CheckboxBtnGroup from '../Form/CheckboxBtnGroup/CheckboxBtnGroup';
 import RadioBtnGroup from '../Form/RadioBtnGroup/RadioBtnGroup';
@@ -11,6 +13,7 @@ import SelectField from '../Form/SelectField/SelectField';
 import DateField from '../Form/DateField/DateField';
 import Button from '../common/Buttons/Button';
 import s from './OrderEdit.module.scss';
+import appRoutes from '../../routes/appRoutes';
 
 const extraOptions = [
   { text: 'Полный бак', name: 'isFullTank' },
@@ -18,7 +21,7 @@ const extraOptions = [
   { text: 'Правый руль', name: 'isRightWheel' },
 ];
 
-function OrderEditContent({ formRef }) {
+function OrderEditContent({ formRef, handleSubmit }) {
   const {
     initCity,
     initPoint,
@@ -36,8 +39,6 @@ function OrderEditContent({ formRef }) {
     cityOptions, pointOptions, statusOptions, rateOptions, carOptions, colorOptions,
   } = useSelector(fieldsOptionsSelector);
 
-  // eslint-disable-next-line no-console
-  const onSubmitHandle = (data) => console.log(data);
   return (
     <div className={s.edit__wrapper}>
       <Formik
@@ -55,7 +56,7 @@ function OrderEditContent({ formRef }) {
           isNeedChildChair: initIsNeedChildChair,
           isRightWheel: initIsRightWheel,
         }}
-        onSubmit={onSubmitHandle}
+        onSubmit={handleSubmit}
       >
         <Form>
           <SelectField label="Город" placeholder="Выберете город" name="city" options={cityOptions} />
@@ -94,22 +95,26 @@ function OrderEdit() {
     return () => {
       dispatch(cleanupOrder());
     };
-  }, [id]);
+  }, [id, dispatch]);
   const formRef = useRef();
   const history = useHistory();
   const isFetching = useSelector(isFetchingSelector);
+  const isTrasferSeccuess = useSelector(isTrasferSeccuessSelector);
 
   if (isFetching) return null;
-  const handleBack = () => history.goBack();
-  const handleSubmit = () => {
+  if (isTrasferSeccuess) return <Redirect to={appRoutes.dashboardOrders()} />;
+
+  const handleBack = () => history.push(appRoutes.dashboardOrders());
+  const submitRef = () => {
     if (formRef.current) formRef.current.handleSubmit();
   };
+  const handleSubmit = (data) => dispatch(orderUpdate(data));
   return (
     <ListContentLayout
       title="Редактирование"
       header={`Заказ ${id}`}
-      content={<OrderEditContent formRef={formRef} />}
-      footer={<Footer handleSave={handleSubmit} handleBack={handleBack} />}
+      content={<OrderEditContent formRef={formRef} handleSubmit={handleSubmit} />}
+      footer={<Footer handleSave={submitRef} handleBack={handleBack} />}
     />
   );
 }

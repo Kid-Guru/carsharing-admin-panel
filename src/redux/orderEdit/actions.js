@@ -4,9 +4,6 @@ import { apiService } from '../../api/service';
 export const setStatus = createAction('SET_ORDER_STATUS');
 export const setOrder = createAction('SET_ORDER');
 export const setExtraData = createAction('SET_EXTRA_DATA');
-// export const setPage = createAction('SET_PAGE');
-// export const setFilter = createAction('SET_FILTER');
-// export const cleanupOrders = createAction('CLEANUP_ORDERS');
 export const cleanupOrder = createAction('CLEANUP_ORDER');
 
 // Запрос одного заказа
@@ -20,7 +17,11 @@ const getOrder = (id) => async (dispatch) => {
 
 const getExtraData = () => async (dispatch) => {
   const extraData = {
-    cars: [], cities: [], points: [], rates: [], statuses: [],
+    cars: [],
+    cities: [],
+    points: [],
+    rates: [],
+    statuses: [],
   };
   const responseMap = ['cars', 'cities', 'points', 'rates', 'statuses'];
   const requests = [
@@ -47,29 +48,35 @@ export const orderRequest = (id) => async (dispatch) => {
     .catch((e) => console.log(e));
 };
 
-// const getOrdersRequest = () => async (dispatch, getState) => {
-//   const { limit, page, filters: { city, status, car } } = getState().orders;
-//   const params = {
-//     limit, page, city, status, car,
-//   };
-//   dispatch(setStatus({ status: 'updating' }));
-//   const responseOrders = await apiService.getOrders(params);
-//   const orders = responseOrders.data.data;
-//   dispatch(setOrders({ data: orders, total: responseOrders.data.count }));
-//   dispatch(setStatus({ status: 'received' }));
-// };
-
-// export const setPageOrders = (pageNumber) => async (dispatch) => {
-//   dispatch(setPage({ page: pageNumber }));
-//   dispatch(getOrdersRequest());
-// };
-
-// export const setFilterOrders = (newFilter) => async (dispatch) => {
-//   const filters = {
-//     car: newFilter.model,
-//     city: newFilter.city,
-//     status: newFilter.status,
-//   };
-//   dispatch(setFilter({ filters }));
-//   dispatch(getOrdersRequest());
-// };
+export const orderUpdate = (orderData) => async (dispatch, getState) => {
+  dispatch(setStatus({ status: 'transfering' }));
+  const { price, id } = getState().order.data;
+  const {
+    cars, cities, points, rates, statuses,
+  } = getState().order.extraData;
+  const requestBody = {
+    carId: cars.find((c) => c.id === orderData.car),
+    cityId: cities.find((c) => c.id === orderData.city),
+    pointId: points.find((p) => p.id === orderData.point),
+    rateId: rates.find((r) => r.id === orderData.rate),
+    orderStatusId: statuses.find((s) => s.id === orderData.status),
+    color: orderData.color,
+    dateFrom: orderData.dateFrom,
+    dateTo: orderData.dateTo,
+    isFullTank: orderData.isFullTank,
+    isNeedChildChair: orderData.isNeedChildChair,
+    isRightWheel: orderData.isRightWheel,
+    price,
+    id,
+  };
+  try {
+    await apiService.putOrders(id, requestBody);
+    dispatch(setStatus({ status: 'transferSeccuess' }));
+  } catch (e) {
+    if (e.response.status.toString().slice(0, 1) !== 2) {
+      dispatch(setStatus({ status: 'transferError' }));
+    } else {
+      throw e;
+    }
+  }
+};

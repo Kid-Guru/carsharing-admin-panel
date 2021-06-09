@@ -25,6 +25,11 @@ const apiService = {
     const stringified = queryString.stringify(params, stringifyConfig);
     return mainInstance.get(`${routes.ORDER}?${stringified}`);
   },
+  putOrders(id, body) {
+    const params = {};
+    const stringified = queryString.stringify(params, stringifyConfig);
+    return mainInstance.put(`${routes.ORDER}/${id}?${stringified}`, body);
+  },
   getCities() {
     return mainInstance.get(`${routes.CITY}`);
   },
