@@ -1,0 +1,15 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/_mixins.scss';
+
+.root {
+  color: $main-gray;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.title {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  line-height: 12px;
+}

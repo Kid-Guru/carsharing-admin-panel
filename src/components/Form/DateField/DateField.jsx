@@ -1,29 +1,27 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useField, useFormikContext } from 'formik';
 import DatePicker from 'react-datepicker';
+import s from './DateField.module.scss';
 import 'react-datepicker/dist/react-datepicker.css';
+import './DataPickerStyles.scss';
 
 function DateField(props) {
   const { label, placeholder } = props;
   const { setFieldValue } = useFormikContext();
   const [field] = useField(props);
   return (
-    <div className="dateField">
-      <label className="dateField__label" htmlFor={label}>
-        <span className="dateField__label-text">{label}</span>
+    <div className={s.root}>
+      <label className={s.label} htmlFor={label}>
+        <span className={s.title}>{label}</span>
         <DatePicker
           {...field}
           selected={(field.value && new Date(field.value)) || null}
-          onChange={(val) => {
-            setFieldValue(field.name, val);
-          }}
+          onChange={(val) => setFieldValue(field.name, val.getTime())}
           id={label}
-          className="dateField__input"
-          clearButtonClassName="dateField__clear"
+          className="dpStyles"
+          clearButtonClassName="dpStyles__clear"
           placeholderText={placeholder}
           // locale="ru"
-          // selected={dateFrom}
-          // onChange={(date) => selectDateFrom(date)}
           // minDate={new Date()}
           // maxDate={dateTo}
           // filterTime={filterTimeFrom}
