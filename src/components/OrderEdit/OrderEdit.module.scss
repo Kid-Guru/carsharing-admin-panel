@@ -1,0 +1,9 @@
+.footer {
+  &__btn {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  &__btn:last-child {
+    margin-right: 0;
+  }
+}
