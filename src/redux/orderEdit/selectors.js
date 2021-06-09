@@ -95,7 +95,10 @@ const cityOptionsSelector = (state) => {
 };
 const pointOptionsSelector = (state) => {
   const { points } = state.order.extraData;
-  return points.map((p) => ({ label: p.name, value: p.id }));
+  const selectedCity = initCitySelector(state);
+  return points
+    .filter((p) => p.cityId.id === selectedCity)
+    .map((p) => ({ label: p.name, value: p.id }));
 };
 const statusOptionsSelector = (state) => {
   const { statuses } = state.order.extraData;
