@@ -22,7 +22,7 @@ const getDataFilters = () => async (dispatch) => {
   const dataFilters = { car: null, city: [], status: [] };
   const responseMap = ['car', 'city', 'status'];
   const requests = [apiService.getCars(), apiService.getCities(), apiService.getStatuses()];
-  Promise.all(requests).then((responses) => {
+  return Promise.all(requests).then((responses) => {
     responses.forEach((r, i) => {
       dataFilters[responseMap[i]] = r.data.data;
     });

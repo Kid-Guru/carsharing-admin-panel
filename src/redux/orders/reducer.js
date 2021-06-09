@@ -37,6 +37,7 @@ const handlers = {
       city: null,
       status: null,
     },
+    status: 'fetching',
   }),
 };
 
