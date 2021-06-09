@@ -1,17 +1,18 @@
+import { Field } from 'formik';
 import s from './RadioBtnGroup.module.scss';
 
 function RadioBtnGroup(props) {
-  const { title, items } = props;
+  const { title, items, name } = props;
   return (
     <fieldset className={s.radio}>
       <legend className={s.radio__title}>{title}</legend>
       <div className={s.radio__container}>
 
         {items.map((elem) => (
-          <label key={elem.id} className={s.radio__label} htmlFor={elem.text}>
-            <input className={s.radio__input} name={title} id={elem.text} type="radio" />
+          <label key={elem} className={s.radio__label} htmlFor={elem}>
+            <Field name={name} className={s.radio__input} id={elem} type="radio" value={elem} />
             <span className={s.radio__icon} role="presentation" />
-            <span className={s.radio__text}>{elem.text}</span>
+            <span className={s.radio__text}>{elem}</span>
           </label>
         ))}
 
