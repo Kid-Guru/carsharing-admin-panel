@@ -2,20 +2,21 @@ import { handleActions } from 'redux-actions';
 import * as actions from './actions';
 
 const defaultState = {
-  data: {},
+  data: [],
   status: 'fetching',
   errors: [],
 };
 
 const handlers = {
-  [actions.setOrder]: (state, { payload: { data } }) => ({ ...state, data }),
+  [actions.setStatuses]: (state, { payload: { data } }) => ({ ...state, data }),
   [actions.setStatus]: (state, { payload: { status } }) => ({ ...state, status }),
-  [actions.cleanupOrder]: (state) => ({
+  [actions.cleanupStatuses]: (state) => ({
     ...state,
+    data: [],
     status: 'fetching',
   }),
 };
 
-const orderReducer = handleActions(handlers, defaultState);
+const statusesReducer = handleActions(handlers, defaultState);
 
-export default orderReducer;
+export default statusesReducer;

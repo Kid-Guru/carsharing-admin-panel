@@ -8,11 +8,6 @@ const defaultState = {
     city: null,
     status: null,
   },
-  dataFilters: {
-    car: [],
-    city: [],
-    status: [],
-  },
   page: 0,
   limit: 10,
   total: null,
@@ -26,7 +21,6 @@ const handlers = {
     data,
     total,
   }),
-  [actions.setDataFilters]: (state, { payload: { dataFilters } }) => ({ ...state, dataFilters }),
   [actions.setStatus]: (state, { payload: { status } }) => ({ ...state, status }),
   [actions.setPage]: (state, { payload: { page } }) => ({ ...state, page }),
   [actions.setFilter]: (state, { payload: { filters } }) => ({ ...state, filters }),
@@ -37,6 +31,8 @@ const handlers = {
       city: null,
       status: null,
     },
+    page: 0,
+    total: null,
     status: 'fetching',
   }),
 };

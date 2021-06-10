@@ -15,7 +15,7 @@ function App() {
   const dispatch = useDispatch();
 
   const firstPathRoute = location.pathname.split('/')[1];
-  useEffect(() => dispatch(checkTokens()), []);
+  useEffect(() => dispatch(checkTokens()), [dispatch]);
   return (
     <div className={s.app}>
       <TransitionGroup component={null}>

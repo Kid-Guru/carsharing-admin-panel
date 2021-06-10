@@ -1,6 +1,9 @@
 import { prettyCurrency } from '../../helpers/currencyHelper';
 import { prettyDate } from '../../helpers/datesHelpers';
 import { getImageURL } from '../../helpers/imageHelpers';
+import { carsOptionsFilterSelector } from '../cars/selectors';
+import { cityOptionsFilterSelector } from '../cities/selectors';
+import { statusesOptionsFilterSelector } from '../statuses/selectors';
 
 // Костыль для невылидных данных с сервера
 const carStub = {
@@ -17,9 +20,9 @@ const ordersSelector = (state) => {
     return {
       mainInfo: {
         carModel: carData.name,
-        carColor: carData.colors[0],
+        carColor: order.color,
         cityName: order.cityId.name,
-        adress: order.cityId.name,
+        adress: order.pointId?.name,
         dateFrom: prettyDate(order.dateFrom),
         dateTo: prettyDate(order.dateTo),
         picture: getImageURL(carData.thumbnail.path),
@@ -40,26 +43,12 @@ const totalOrdersSelector = (state) => {
   return Math.ceil(total / limit);
 };
 
-const modelFilterSelector = (state) => {
-  const { car } = state.orders.dataFilters;
-  const options = car.map((c) => ({ label: c.name, value: c.id }));
-  return [{ label: 'Все', value: null }, ...options];
-};
-const cityFilterSelector = (state) => {
-  const { city } = state.orders.dataFilters;
-  const options = city.map((c) => ({ label: c.name, value: c.id }));
-  return [{ label: 'Все', value: null }, ...options];
-};
-const statusFilterSelector = (state) => {
-  const { status } = state.orders.dataFilters;
-  const options = status.map((s) => ({ label: s.name, value: s.id }));
-  return [{ label: 'Все', value: null }, ...options];
-};
+const initialPageSelector = (state) => state.orders.page;
 
 const optionsFiltersSelector = (state) => {
-  const modelOption = modelFilterSelector(state);
-  const cityOption = cityFilterSelector(state);
-  const statusOption = statusFilterSelector(state);
+  const modelOption = carsOptionsFilterSelector(state);
+  const cityOption = cityOptionsFilterSelector(state);
+  const statusOption = statusesOptionsFilterSelector(state);
   return { modelOption, cityOption, statusOption };
 };
 
@@ -68,9 +57,13 @@ const currentFiltersSelector = (state) => {
   return { model: car, city, status };
 };
 
+const isFetchingSelector = (state) => state.orders.status === 'fetching';
+
 export {
   ordersSelector,
   totalOrdersSelector,
+  initialPageSelector,
   optionsFiltersSelector,
   currentFiltersSelector,
+  isFetchingSelector,
 };

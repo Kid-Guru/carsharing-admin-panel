@@ -6,7 +6,11 @@ import {
   cleanupOrders, initialOrdersRequest, setFilterOrders, setPageOrders,
 } from '../../redux/orders/actions';
 import {
-  currentFiltersSelector, optionsFiltersSelector, ordersSelector,
+  currentFiltersSelector,
+  initialPageSelector,
+  isFetchingSelector,
+  optionsFiltersSelector,
+  ordersSelector,
   totalOrdersSelector,
 } from '../../redux/orders/selectors';
 import Button from '../common/Buttons/Button';
@@ -16,6 +20,7 @@ import OrdersList from './OrdersList/OrdersList';
 import Paginator from '../common/Paginator/Paginator';
 import SelectFilter from '../common/SelectFilterField/SelectFilterField';
 import SidePortal from '../common/SidePortal/SidePortal';
+import Loader from '../common/Loader/Loader';
 import s from './Orders.module.scss';
 
 const Filters = (props) => {
@@ -81,14 +86,15 @@ function Orders() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(initialOrdersRequest());
-    return () => {
-      dispatch(cleanupOrders());
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    return () => dispatch(cleanupOrders());
+  }, [dispatch]);
   const onPageChange = ({ selected }) => dispatch(setPageOrders(selected));
   const ordersList = useSelector(ordersSelector);
-  const total = useSelector(totalOrdersSelector);
+  const totalPages = useSelector(totalOrdersSelector);
+  const initialPage = useSelector(initialPageSelector);
+  const isFetching = useSelector(isFetchingSelector);
+
+  if (isFetching) return <Loader />;
 
   return (
     <ListContentLayout
@@ -98,7 +104,8 @@ function Orders() {
       footer={(
         <Paginator
           onPageChange={onPageChange}
-          pageCount={total}
+          pageCount={totalPages}
+          initialPage={initialPage}
           marginPagesDisplayed={2}
           pageRangeDisplayed={3}
         />

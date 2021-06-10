@@ -1,12 +1,15 @@
 import { createAction } from 'redux-actions';
 import { apiService } from '../../api/service';
+import { getAllCars } from '../cars/actions';
+import { getAllCities } from '../cities/actions';
+import { getAllPoints } from '../points/actions';
+import { getAllRates } from '../rates/actions';
+import { getAllStatuses } from '../statuses/actions';
 
 export const setStatus = createAction('SET_ORDER_STATUS');
 export const setOrder = createAction('SET_ORDER');
-export const setExtraData = createAction('SET_EXTRA_DATA');
 export const cleanupOrder = createAction('CLEANUP_ORDER');
 
-// Запрос одного заказа
 // Добавить обработку ошибки
 const getOrder = (id) => async (dispatch) => {
   const params = { id };
@@ -15,37 +18,23 @@ const getOrder = (id) => async (dispatch) => {
   dispatch(setOrder({ data: order }));
 };
 
-const getExtraData = () => async (dispatch) => {
-  const extraData = {
-    cars: [],
-    cities: [],
-    points: [],
-    rates: [],
-    statuses: [],
-  };
-  const responseMap = ['cars', 'cities', 'points', 'rates', 'statuses'];
-  const requests = [
-    apiService.getCars(),
-    apiService.getCities(),
-    apiService.getPoints(),
-    apiService.getRates(),
-    apiService.getStatuses(),
-  ];
-  return Promise.all(requests).then((responses) => {
-    responses.forEach((r, i) => {
-      extraData[responseMap[i]] = r.data.data;
-    });
-    dispatch(setExtraData({ extraData }));
-  });
-};
-
 export const orderRequest = (id) => async (dispatch) => {
   dispatch(setStatus({ status: 'fetching' }));
-  const responses = [dispatch(getOrder(id)), dispatch(getExtraData())];
+  const responses = [
+    dispatch(getOrder(id)),
+    dispatch(getAllCars()),
+    dispatch(getAllCities()),
+    dispatch(getAllStatuses()),
+    dispatch(getAllPoints()),
+    dispatch(getAllRates()),
+  ];
 
   Promise.all(responses)
     .then(() => dispatch(setStatus({ status: 'received' })))
-    .catch((e) => console.log(e));
+    .catch((e) => {
+      console.log(e);
+      dispatch(setStatus({ status: 'error' }));
+    });
 };
 
 export const orderUpdate = (orderData) => async (dispatch, getState) => {
@@ -73,7 +62,7 @@ export const orderUpdate = (orderData) => async (dispatch, getState) => {
     await apiService.putOrders(id, requestBody);
     dispatch(setStatus({ status: 'transferSeccuess' }));
   } catch (e) {
-    if (e.response.status.toString().slice(0, 1) !== 2) {
+    if (e.response.status >= 200) {
       dispatch(setStatus({ status: 'transferError' }));
     } else {
       throw e;

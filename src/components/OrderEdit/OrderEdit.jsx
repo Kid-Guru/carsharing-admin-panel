@@ -6,6 +6,7 @@ import { isFetchingSelector, isTrasferSeccuessSelector } from '../../redux/order
 import appRoutes from '../../routes/appRoutes';
 import Button from '../common/Buttons/Button';
 import ListContentLayout from '../common/ListContentLayout/ListContentLayout';
+import Loader from '../common/Loader/Loader';
 import s from './OrderEdit.module.scss';
 import OrderEditForm from './OrderEditForm/OrderEditForm';
 
@@ -36,7 +37,7 @@ function OrderEdit() {
   const isFetching = useSelector(isFetchingSelector);
   const isTrasferSeccuess = useSelector(isTrasferSeccuessSelector);
 
-  if (isFetching) return null;
+  if (isFetching) return <Loader />;
   if (isTrasferSeccuess) return <Redirect to={appRoutes.dashboardOrders()} />;
 
   const handleBack = () => history.push(appRoutes.dashboardOrders());
