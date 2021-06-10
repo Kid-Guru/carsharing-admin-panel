@@ -1,3 +1,5 @@
+const pointByIdSelector = (state, id) => state.points.data.find((p) => p.id === id);
+
 const pointOptionsSelector = (state) => {
   const { data } = state.points;
   const { id: selectedCity } = state.order.data?.cityId;
@@ -9,6 +11,7 @@ const pointOptionsSelector = (state) => {
 const isFetchingSelector = (state) => state.points.status === 'fetching';
 
 export {
+  pointByIdSelector,
   pointOptionsSelector,
   isFetchingSelector,
 };

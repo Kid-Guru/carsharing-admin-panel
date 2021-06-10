@@ -1,10 +1,15 @@
 import { createAction } from 'redux-actions';
 import { apiService } from '../../api/service';
 import { getAllCars } from '../cars/actions';
+import { carByIdSelector } from '../cars/selectors';
 import { getAllCities } from '../cities/actions';
+import { cityByIdSelector } from '../cities/selectors';
 import { getAllPoints } from '../points/actions';
+import { pointByIdSelector } from '../points/selectors';
 import { getAllRates } from '../rates/actions';
+import { rateByIdSelector } from '../rates/selectors';
 import { getAllStatuses } from '../statuses/actions';
+import { statusByIdSelector } from '../statuses/selectors';
 
 export const setStatus = createAction('SET_ORDER_STATUS');
 export const setOrder = createAction('SET_ORDER');
@@ -40,15 +45,12 @@ export const orderRequest = (id) => async (dispatch) => {
 export const orderUpdate = (orderData) => async (dispatch, getState) => {
   dispatch(setStatus({ status: 'transfering' }));
   const { price, id } = getState().order.data;
-  const {
-    cars, cities, points, rates, statuses,
-  } = getState().order.extraData;
   const requestBody = {
-    carId: cars.find((c) => c.id === orderData.car),
-    cityId: cities.find((c) => c.id === orderData.city),
-    pointId: points.find((p) => p.id === orderData.point),
-    rateId: rates.find((r) => r.id === orderData.rate),
-    orderStatusId: statuses.find((s) => s.id === orderData.status),
+    carId: carByIdSelector(getState(), orderData.car),
+    cityId: cityByIdSelector(getState(), orderData.city),
+    pointId: pointByIdSelector(getState(), orderData.point),
+    rateId: rateByIdSelector(getState(), orderData.rate),
+    orderStatusId: statusByIdSelector(getState(), orderData.status),
     color: orderData.color,
     dateFrom: orderData.dateFrom,
     dateTo: orderData.dateTo,

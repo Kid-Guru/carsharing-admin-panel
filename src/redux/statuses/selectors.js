@@ -6,6 +6,8 @@ const localeMap = {
 };
 const getLocaleName = (name) => (name in localeMap ? localeMap[name] : name);
 
+const statusByIdSelector = (state, id) => state.statuses.data.find((s) => s.id === id);
+
 const statusesOptionsFilterSelector = (state) => {
   const { data } = state.statuses;
   const options = data
@@ -21,6 +23,7 @@ const statusOptionsSelector = (state) => {
 const isFetchingSelector = (state) => state.cars.status === 'fetching';
 
 export {
+  statusByIdSelector,
   statusesOptionsFilterSelector,
   statusOptionsSelector,
   isFetchingSelector,
