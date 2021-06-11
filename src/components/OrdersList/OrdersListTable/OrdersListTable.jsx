@@ -1,7 +1,7 @@
 /* eslint-disable object-curly-newline */
 import { Link } from 'react-router-dom';
 import appRoutes from '../../../routes/appRoutes';
-import s from './OrdersList.module.scss';
+import s from './OrdersListTable.module.scss';
 
 function MainInfo(props) {
   const {
@@ -68,7 +68,7 @@ function ButtonsAction({ id }) {
   );
 }
 
-function OrdersList({ ordersList }) {
+function OrdersListTable({ ordersList }) {
   return (
     <ul className={s.orders__list}>
       {ordersList.map(({ id, mainInfo, options, price }) => (
@@ -91,4 +91,4 @@ function OrdersList({ ordersList }) {
   );
 }
 
-export default OrdersList;
+export default OrdersListTable;

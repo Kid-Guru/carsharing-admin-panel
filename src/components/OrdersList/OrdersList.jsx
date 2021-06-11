@@ -16,12 +16,12 @@ import {
 import Button from '../common/Buttons/Button';
 import ButtonSubmit from '../common/Buttons/ButtonSubmit';
 import ListContentLayout from '../common/ListContentLayout/ListContentLayout';
-import OrdersList from './OrdersList/OrdersList';
+import OrdersListTable from './OrdersListTable/OrdersListTable';
 import Paginator from '../common/Paginator/Paginator';
 import SelectFilter from '../common/SelectFilterField/SelectFilterField';
 import SidePortal from '../common/SidePortal/SidePortal';
 import Loader from '../common/Loader/Loader';
-import s from './Orders.module.scss';
+import s from './OrdersList.module.scss';
 
 const Filters = (props) => {
   const { onSubmitHandle } = props;
@@ -82,7 +82,7 @@ const FiltersWithPortal = () => {
   );
 };
 
-function Orders() {
+function OrdersList() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(initialOrdersRequest());
@@ -100,7 +100,7 @@ function Orders() {
     <ListContentLayout
       title="Заказы"
       header={<FiltersWithPortal />}
-      content={<OrdersList ordersList={ordersList} />}
+      content={<OrdersListTable ordersList={ordersList} />}
       footer={(
         <Paginator
           onPageChange={onPageChange}
@@ -114,4 +114,4 @@ function Orders() {
   );
 }
 
-export default Orders;
+export default OrdersList;
