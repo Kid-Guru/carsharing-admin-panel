@@ -30,7 +30,7 @@ function Aside(props) {
               onClick={closePortalCallback}
             >
               <span className={s.navigation__icon}><ListAuto /></span>
-              <span className={s.navigation__linkText}>Список авто</span>
+              <span className={s.navigation__linkText}>Машины</span>
             </NavLink>
           </li>
           <li className={s.navigation__listItem}>
@@ -40,7 +40,7 @@ function Aside(props) {
               onClick={closePortalCallback}
             >
               <span className={s.navigation__icon}><ListAuto /></span>
-              <span className={s.navigation__linkText}>Text bla bla</span>
+              <span className={s.navigation__linkText}>Города</span>
             </NavLink>
           </li>
 
