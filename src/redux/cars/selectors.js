@@ -1,3 +1,15 @@
+import { getImageURL } from '../../helpers/imageHelpers';
+
+const carsTableSelector = (state) => state.cars.data.map((c) => ({
+  model: c.name,
+  pic: getImageURL(c.thumbnail.path),
+  minPrice: c.priceMin,
+  maxPrice: c.priceMax,
+  number: c.number,
+  description: c.description,
+  category: c.categoryId?.name || '',
+}));
+
 const carByIdSelector = (state, id) => state.cars.data.find((c) => c.id === id);
 
 const carsOptionsFilterSelector = (state) => {
@@ -19,6 +31,7 @@ const colorOptionsSelectorCarry = (state) => (carId) => {
 const isFetchingSelector = (state) => state.cars.status === 'fetching';
 
 export {
+  carsTableSelector,
   carByIdSelector,
   carsOptionsFilterSelector,
   carsOptionsSelector,
