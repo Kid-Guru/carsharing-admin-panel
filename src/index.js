@@ -8,7 +8,15 @@ import App from './App';
 import './index.scss';
 import rootReducer from './redux/rootReducer';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const actionSanitizer = (action) => (
+  action.type === 'SET_CARS' && action.data
+    ? { ...action, data: '<<LONG_BLOB>>' } : action
+);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+  actionSanitizer,
+  stateSanitizer: (state) => (state.data ? { ...state, data: '<<LONG_BLOB>>' } : state),
+}) || compose;
+
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 ReactDOM.render(
