@@ -1,6 +1,5 @@
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
-import Box from '../common/Box/Box';
 import ButtonSubmit from '../common/Buttons/ButtonSubmit';
 import FormInputText from '../Form/InputField/InputField';
 import Link from '../common/Link/Link';
@@ -17,7 +16,7 @@ function Login(props) {
     <div className={s.login__outer}>
       <div className={s.login__wrapper}>
         <h1 className={s.title}>Need for drive</h1>
-        <Box>
+        <div className={s.login__card}>
           <Formik
             initialValues={{
               login: '',
@@ -38,7 +37,7 @@ function Login(props) {
               </Form>
             )}
           </Formik>
-        </Box>
+        </div>
       </div>
     </div>
   );
