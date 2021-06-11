@@ -46,5 +46,8 @@
     &__container {
       grid-template-rows: 51px 1fr 51px;
     }
+    &__article {
+      min-height: auto;
+    }
   }
 }

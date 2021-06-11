@@ -48,3 +48,11 @@
     }
   }
 }
+
+@media (max-height: 600px) {
+  .listContentLayout {
+    &__content {
+      overflow-y: visible;
+    }
+  }
+}
