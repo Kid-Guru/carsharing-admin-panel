@@ -1,4 +1,3 @@
-// import Box from '../Box/Box';
 import s from './ListContentLayout.module.scss';
 
 function ListContentLayout(props) {
