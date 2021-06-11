@@ -1,10 +1,12 @@
 import { Form, Formik } from 'formik';
 import { useSelector } from 'react-redux';
+import { colorOptionsSelectorCarry } from '../../../redux/cars/selectors';
 import { fieldsOptionsSelector, initValuesSelector } from '../../../redux/orderEdit/selectors';
+import { pointOptionsSelectorCarry } from '../../../redux/points/selectors';
 import CheckboxBtnGroup from '../../Form/CheckboxBtnGroup/CheckboxBtnGroup';
+import DateField from '../../Form/DateField/DateField';
 import RadioBtnGroup from '../../Form/RadioBtnGroup/RadioBtnGroup';
 import SelectField from '../../Form/SelectField/SelectField';
-import DateField from '../../Form/DateField/DateField';
 import s from './OrderEditForm.module.scss';
 
 const extraOptions = [
@@ -28,8 +30,10 @@ function OrderEditForm({ formRef, handleSubmit }) {
     initIsRightWheel,
   } = useSelector(initValuesSelector);
   const {
-    cityOptions, pointOptions, statusOptions, rateOptions, carOptions, colorOptions,
+    cityOptions, statusOptions, rateOptions, carOptions,
   } = useSelector(fieldsOptionsSelector);
+  const pointOptionsSelector = useSelector(pointOptionsSelectorCarry);
+  const colorOptionsSelector = useSelector(colorOptionsSelectorCarry);
   return (
     <div className={s.edit__wrapper}>
       <Formik
@@ -50,7 +54,8 @@ function OrderEditForm({ formRef, handleSubmit }) {
         onSubmit={handleSubmit}
       >
         {(prop) => {
-          const { values: { dateFrom, dateTo } } = prop;
+          // eslint-disable-next-line object-curly-newline
+          const { values: { dateFrom, dateTo, city, car } } = prop;
           const maxDateFrom = dateTo && new Date(dateTo);
           const minDateFrom = new Date();
           const maxDateTo = null;
@@ -59,7 +64,7 @@ function OrderEditForm({ formRef, handleSubmit }) {
             <Form className={s.form}>
               <div className={s.form__col}>
                 <SelectField label="Город" placeholder="Выберете город" name="city" options={cityOptions} />
-                <SelectField label="Пункт выдачи" placeholder="Выберете пункт выдачи" name="point" options={pointOptions} />
+                <SelectField label="Пункт выдачи" placeholder="Выберете пункт выдачи" name="point" options={pointOptionsSelector(city)} />
                 <SelectField label="Статус" placeholder="Статус заказа" name="status" options={statusOptions} />
               </div>
               <div className={s.form__col}>
@@ -69,7 +74,7 @@ function OrderEditForm({ formRef, handleSubmit }) {
               </div>
               <div className={s.form__col}>
                 <SelectField label="Машина" placeholder="Выберете машину" name="car" options={carOptions} />
-                <RadioBtnGroup name="color" title="Цвет машины" items={colorOptions} />
+                <RadioBtnGroup name="color" title="Цвет машины" items={colorOptionsSelector(car)} />
                 <CheckboxBtnGroup title="Дополнительно" items={extraOptions} />
               </div>
             </Form>

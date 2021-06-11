@@ -1,7 +1,6 @@
 import { carsOptionsSelector } from '../cars/selectors';
 import { cityOptionsSelector } from '../cities/selectors';
 import { statusOptionsSelector } from '../statuses/selectors';
-import { pointOptionsSelector } from '../points/selectors';
 import { rateOptionsSelector } from '../rates/selectors';
 
 const initCitySelector = (state) => {
@@ -58,22 +57,13 @@ const initValuesSelector = (state) => {
   };
 };
 
-const colorOptionsSelector = (state) => {
-  const selectedCarId = initCarSelector(state);
-  const { data } = state.cars;
-  const findedCar = data.find((c) => c.id === selectedCarId);
-  return findedCar ? findedCar.colors.map((c) => c.toLowerCase()) : [];
-};
-
 const fieldsOptionsSelector = (state) => {
   const cityOptions = cityOptionsSelector(state);
-  const pointOptions = pointOptionsSelector(state);
   const statusOptions = statusOptionsSelector(state);
   const rateOptions = rateOptionsSelector(state);
   const carOptions = carsOptionsSelector(state);
-  const colorOptions = colorOptionsSelector(state);
   return {
-    cityOptions, pointOptions, statusOptions, rateOptions, carOptions, colorOptions,
+    cityOptions, statusOptions, rateOptions, carOptions,
   };
 };
 

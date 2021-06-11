@@ -8,10 +8,18 @@ const pointOptionsSelector = (state) => {
     .map((p) => ({ label: p.name, value: p.id }));
 };
 
+const pointOptionsSelectorCarry = (state) => (cityId) => {
+  const { data } = state.points;
+  return data
+    .filter((p) => p.cityId.id === cityId)
+    .map((p) => ({ label: p.name, value: p.id }));
+};
+
 const isFetchingSelector = (state) => state.points.status === 'fetching';
 
 export {
   pointByIdSelector,
+  pointOptionsSelectorCarry,
   pointOptionsSelector,
   isFetchingSelector,
 };
