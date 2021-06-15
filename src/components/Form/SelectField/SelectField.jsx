@@ -87,7 +87,10 @@ function SelectComponent(props) {
       placeholder={placeholder}
       options={options}
       value={options.find((option) => option.value === field.value && field.value !== null) || null}
-      onChange={(option) => form.setFieldValue(field.name, option && option.value)}
+      onChange={(option) => {
+        form.setFieldTouched(field.name, true);
+        form.setFieldValue(field.name, option && option.value);
+      }}
     />
   );
 }

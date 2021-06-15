@@ -20,6 +20,7 @@
   &__article {
     grid-area: article;
     min-height: 0;
+    min-width: 0;
   }
   &__footer {
     grid-area: footer;
@@ -46,9 +47,9 @@
     &__container {
       grid-template-rows: 51px 1fr 51px;
     }
-    &__article {
-      min-height: auto;
-    }
+    // &__article {
+    //   min-height: auto;
+    // }
   }
 }
 

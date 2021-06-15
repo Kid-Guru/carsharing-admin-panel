@@ -5,7 +5,7 @@ export const setCars = createAction('SET_CARS');
 export const setStatus = createAction('SET_CARS_STATUS');
 // export const cleanupCars = createAction('CLEANUP_CARS');
 
-// Добавить обработку ошибки
+// Добавить обработку ошибки!!!
 export const getAllCars = () => async (dispatch, getState) => {
   const statusCars = getState().cars.status;
   if (statusCars === 'received') return;

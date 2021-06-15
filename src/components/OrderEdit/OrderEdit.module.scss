@@ -1,9 +1,14 @@
 .footer {
+  display: flex;
+  justify-content: space-between;
   &__btn {
     display: inline-block;
     margin-right: 10px;
   }
   &__btn:last-child {
     margin-right: 0;
+  }
+  &__price {
+    vertical-align: middle;
   }
 }

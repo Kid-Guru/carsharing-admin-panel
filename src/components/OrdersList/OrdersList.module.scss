@@ -6,8 +6,12 @@
   justify-content: space-between;
   align-items: top;
   &__col {
+    width: 150px;
+    margin-right: 10px;
     &:last-child {
+      width: auto;
       margin-left: auto;
+      margin-right: 0;
     }
   }
 }

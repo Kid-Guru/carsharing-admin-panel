@@ -23,7 +23,7 @@ const initCarSelector = (state) => {
   const { carId } = state.order.data;
   return carId && carId.id;
 };
-const initColorSelector = (state) => state.order.data.color.toLowerCase();
+const initColorSelector = (state) => state.order.data?.color?.toLowerCase();
 const initDateSelector = (state) => {
   const { dateFrom, dateTo } = state.order.data;
   return [dateFrom, dateTo];
@@ -32,6 +32,7 @@ const initExtraOptionsSelector = (state) => {
   const { isFullTank, isNeedChildChair, isRightWheel } = state.order.data;
   return [isFullTank, isNeedChildChair, isRightWheel];
 };
+const initPriceSelector = (state) => state.order.data?.price;
 
 const initValuesSelector = (state) => {
   const initCity = initCitySelector(state);
@@ -42,6 +43,7 @@ const initValuesSelector = (state) => {
   const [initDateFrom, initDateTo] = initDateSelector(state);
   const initColor = initColorSelector(state);
   const [initIsFullTank, initIsNeedChildChair, initIsRightWheel] = initExtraOptionsSelector(state);
+  const initPrice = initPriceSelector(state);
   return {
     initCity,
     initPoint,
@@ -54,6 +56,7 @@ const initValuesSelector = (state) => {
     initIsFullTank,
     initIsNeedChildChair,
     initIsRightWheel,
+    initPrice,
   };
 };
 
@@ -67,6 +70,8 @@ const fieldsOptionsSelector = (state) => {
   };
 };
 
+const orderPriceSelector = (state) => state.order.data.price;
+
 const isFetchingSelector = (state) => state.order.status === 'fetching';
 const isTrasferSeccuessSelector = (state) => state.order.status === 'transferSeccuess';
 
@@ -75,4 +80,5 @@ export {
   initValuesSelector,
   isFetchingSelector,
   isTrasferSeccuessSelector,
+  orderPriceSelector,
 };

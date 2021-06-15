@@ -1,24 +1,35 @@
-import { useEffect, useRef } from 'react';
+import { Formik, useFormikContext } from 'formik';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory, useParams } from 'react-router-dom';
+import calculateRentPrice from '../../helpers/priceHelper';
 import { cleanupOrder, orderRequest, orderUpdate } from '../../redux/orderEdit/actions';
-import { isFetchingSelector, isTrasferSeccuessSelector } from '../../redux/orderEdit/selectors';
+import {
+  initValuesSelector, isFetchingSelector, isTrasferSeccuessSelector,
+} from '../../redux/orderEdit/selectors';
+import { ratesUnitsSelectorCarry } from '../../redux/rates/selectors';
 import appRoutes from '../../routes/appRoutes';
 import Button from '../common/Buttons/Button';
+import ButtonSubmit from '../common/Buttons/ButtonSubmit';
 import ListContentLayout from '../common/ListContentLayout/ListContentLayout';
 import Loader from '../common/Loader/Loader';
 import s from './OrderEdit.module.scss';
 import OrderEditForm from './OrderEditForm/OrderEditForm';
 
-function Footer({ handleSave, handleBack }) {
+function Footer() {
+  const { submitForm } = useFormikContext();
+  const history = useHistory();
+  const handleBack = () => history.push(appRoutes.dashboardOrders());
   return (
     <div className={s.footer}>
-      <span className={s.footer__btn}>
-        <Button onClick={handleSave} text="Сохранить" color="primary" />
-      </span>
-      <span className={s.footer__btn}>
-        <Button onClick={handleBack} text="Назад" color="secondary" />
-      </span>
+      <div className={s.footer__col}>
+        <span className={s.footer__btn}>
+          <ButtonSubmit onClick={submitForm} text="Сохранить" />
+        </span>
+        <span className={s.footer__btn}>
+          <Button onClick={handleBack} text="Назад" color="secondary" />
+        </span>
+      </div>
     </div>
   );
 }
@@ -28,30 +39,85 @@ function OrderEdit() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(orderRequest(id));
-    return () => {
-      dispatch(cleanupOrder());
-    };
+    return () => dispatch(cleanupOrder());
   }, [id, dispatch]);
-  const formRef = useRef();
-  const history = useHistory();
   const isFetching = useSelector(isFetchingSelector);
   const isTrasferSeccuess = useSelector(isTrasferSeccuessSelector);
+  const {
+    initCity,
+    initPoint,
+    initStatus,
+    initRate,
+    initCar,
+    initColor,
+    initDateFrom,
+    initDateTo,
+    initIsFullTank,
+    initIsNeedChildChair,
+    initIsRightWheel,
+    initPrice,
+  } = useSelector(initValuesSelector);
+  const getRateUnits = useSelector(ratesUnitsSelectorCarry);
 
   if (isFetching) return <Loader />;
   if (isTrasferSeccuess) return <Redirect to={appRoutes.dashboardOrders()} />;
 
-  const handleBack = () => history.push(appRoutes.dashboardOrders());
-  const submitRef = () => {
-    if (formRef.current) formRef.current.handleSubmit();
-  };
-  const handleSubmit = (data) => dispatch(orderUpdate(data));
+  const onSubmitHandle = (data) => dispatch(orderUpdate(data));
   return (
-    <ListContentLayout
-      title="Редактирование"
-      header={`Заказ ${id}`}
-      content={<OrderEditForm formRef={formRef} handleSubmit={handleSubmit} />}
-      footer={<Footer handleSave={submitRef} handleBack={handleBack} />}
-    />
+    <Formik
+      initialValues={{
+        city: initCity,
+        point: initPoint,
+        status: initStatus,
+        rate: initRate,
+        car: initCar,
+        color: initColor,
+        dateFrom: initDateFrom,
+        dateTo: initDateTo,
+        isFullTank: initIsFullTank,
+        isNeedChildChair: initIsNeedChildChair,
+        isRightWheel: initIsRightWheel,
+        price: initPrice,
+      }}
+      onSubmit={onSubmitHandle}
+    >
+      {({ touched, values }) => {
+        const {
+          dateFrom, dateTo, city, car, price, isFullTank, isNeedChildChair, isRightWheel, rate,
+        } = values;
+        let orderPrice = price;
+        const isNeedCountPrice = touched.car || touched.rate
+          || touched.dateFrom || touched.dateTo || touched.isFullTank
+          || touched.isNeedChildChair || touched.isRightWheel;
+        if (isNeedCountPrice) {
+          const calculateParams = {
+            rate: getRateUnits(rate),
+            dateFrom,
+            dateTo,
+            isFullTank,
+            isNeedChildChair,
+            isRightWheel,
+          };
+          orderPrice = calculateRentPrice(calculateParams);
+        }
+        return (
+          <ListContentLayout
+            title="Редактирование"
+            header={`Заказ ${id}`}
+            content={(
+              <OrderEditForm
+                dateFrom={dateFrom}
+                dateTo={dateTo}
+                city={city}
+                car={car}
+                price={orderPrice}
+              />
+            )}
+            footer={<Footer />}
+          />
+        );
+      }}
+    </Formik>
   );
 }
 
