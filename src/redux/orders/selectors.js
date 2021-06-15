@@ -1,5 +1,4 @@
-import { prettyCurrency } from '../../helpers/currencyHelper';
-import { prettyDate } from '../../helpers/datesHelpers';
+import beautify from '../../helpers/beautify';
 import { getImageURL } from '../../helpers/imageHelpers';
 import { carsOptionsFilterSelector } from '../cars/selectors';
 import { cityOptionsFilterSelector } from '../cities/selectors';
@@ -23,8 +22,8 @@ const ordersSelector = (state) => {
         carColor: order.color,
         cityName: order.cityId.name,
         adress: order.pointId?.name,
-        dateFrom: prettyDate(order.dateFrom),
-        dateTo: prettyDate(order.dateTo),
+        dateFrom: beautify.date(order.dateFrom),
+        dateTo: beautify.date(order.dateTo),
         picture: getImageURL(carData.thumbnail.path),
       },
       options: {
@@ -33,7 +32,7 @@ const ordersSelector = (state) => {
         isRightWheel: order.isRightWheel,
       },
       id: order.id,
-      price: prettyCurrency(order.price),
+      price: beautify.currency(order.price),
     };
   });
 };

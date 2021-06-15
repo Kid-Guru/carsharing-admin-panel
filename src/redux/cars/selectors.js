@@ -1,11 +1,13 @@
+import beautify from '../../helpers/beautify';
 import { getImageURL } from '../../helpers/imageHelpers';
 
 const carsTableSelector = (state) => state.cars.data.map((c) => ({
+  id: c.id,
   model: c.name,
   pic: getImageURL(c.thumbnail.path),
-  minPrice: c.priceMin,
-  maxPrice: c.priceMax,
-  number: c.number,
+  minPrice: beautify.currency(c.priceMin),
+  maxPrice: beautify.currency(c.priceMax),
+  number: beautify.carNumber(c.number),
   description: c.description,
   category: c.categoryId?.name || '',
 }));
