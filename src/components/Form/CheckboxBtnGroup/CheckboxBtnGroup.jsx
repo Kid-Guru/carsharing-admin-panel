@@ -15,6 +15,7 @@ function Checkbox({ elem }) {
         name={elem.name}
         className={s.checkbox__input}
         id={elem.text}
+        type="checkbox"
       />
       <span className={s.checkbox__icon} role="presentation" />
       <span className={s.checkbox__text}>{elem.text}</span>
