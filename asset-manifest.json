@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/carsharing-admin-panel/static/css/main.758224ab.chunk.css",
-    "main.js": "/carsharing-admin-panel/static/js/main.a09692a2.chunk.js",
-    "main.js.map": "/carsharing-admin-panel/static/js/main.a09692a2.chunk.js.map",
+    "main.css": "/carsharing-admin-panel/static/css/main.17afee41.chunk.css",
+    "main.js": "/carsharing-admin-panel/static/js/main.3eb5f8af.chunk.js",
+    "main.js.map": "/carsharing-admin-panel/static/js/main.3eb5f8af.chunk.js.map",
     "runtime-main.js": "/carsharing-admin-panel/static/js/runtime-main.6cac3fc9.js",
     "runtime-main.js.map": "/carsharing-admin-panel/static/js/runtime-main.6cac3fc9.js.map",
     "static/css/2.4bd8e119.chunk.css": "/carsharing-admin-panel/static/css/2.4bd8e119.chunk.css",
-    "static/js/2.3e5d8477.chunk.js": "/carsharing-admin-panel/static/js/2.3e5d8477.chunk.js",
-    "static/js/2.3e5d8477.chunk.js.map": "/carsharing-admin-panel/static/js/2.3e5d8477.chunk.js.map",
+    "static/js/2.59564696.chunk.js": "/carsharing-admin-panel/static/js/2.59564696.chunk.js",
+    "static/js/2.59564696.chunk.js.map": "/carsharing-admin-panel/static/js/2.59564696.chunk.js.map",
     "index.html": "/carsharing-admin-panel/index.html",
     "static/css/2.4bd8e119.chunk.css.map": "/carsharing-admin-panel/static/css/2.4bd8e119.chunk.css.map",
-    "static/css/main.758224ab.chunk.css.map": "/carsharing-admin-panel/static/css/main.758224ab.chunk.css.map",
-    "static/js/2.3e5d8477.chunk.js.LICENSE.txt": "/carsharing-admin-panel/static/js/2.3e5d8477.chunk.js.LICENSE.txt",
+    "static/css/main.17afee41.chunk.css.map": "/carsharing-admin-panel/static/css/main.17afee41.chunk.css.map",
+    "static/js/2.59564696.chunk.js.LICENSE.txt": "/carsharing-admin-panel/static/js/2.59564696.chunk.js.LICENSE.txt",
     "static/media/index.scss": "/carsharing-admin-panel/static/media/Roboto-Regular.cdc859fd.woff",
     "static/media/Login.module.scss": "/carsharing-admin-panel/static/media/appIcon.bc4f3ee8.svg",
     "static/media/avatarStub.6525a5ef.svg": "/carsharing-admin-panel/static/media/avatarStub.6525a5ef.svg",
@@ -27,8 +27,8 @@
   "entrypoints": [
     "static/js/runtime-main.6cac3fc9.js",
     "static/css/2.4bd8e119.chunk.css",
-    "static/js/2.3e5d8477.chunk.js",
-    "static/css/main.758224ab.chunk.css",
-    "static/js/main.a09692a2.chunk.js"
+    "static/js/2.59564696.chunk.js",
+    "static/css/main.17afee41.chunk.css",
+    "static/js/main.3eb5f8af.chunk.js"
   ]
 }
