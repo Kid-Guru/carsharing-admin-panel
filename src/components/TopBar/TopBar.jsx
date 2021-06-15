@@ -35,6 +35,48 @@ const formatOptionLabel = ({ label, icon, large }) => (
   </div>
 );
 
+const customSelectStyles = {
+  container: (provided) => ({
+    ...provided,
+    width: '220px',
+    '@media (max-width: 768px)': {
+      ...provided['@media (max-width: 768px)'],
+      width: '120px',
+    },
+  }),
+  control: (provided) => ({
+    ...provided,
+    width: '100%',
+    height: '100%',
+    padding: '0 20px',
+    border: 'none',
+    boxShadow: 'none',
+    cursor: 'pointer',
+    transition: 'all ease 0.2s',
+    '&:hover': {
+      backgroundColor: 'rgba(134,142,150, 0.2)',
+    },
+    '@media (max-width: 768px)': {
+      ...provided['@media (max-width: 768px)'],
+      padding: '0',
+    },
+  }),
+  indicatorSeparator: (provided) => ({
+    ...provided,
+    display: 'none',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    width: '220px',
+    marginTop: '0',
+    borderRadius: '0',
+  }),
+  valueContainer: (provided) => ({
+    ...provided,
+    height: '100%',
+  }),
+};
+
 function TopBar() {
   const dispatch = useDispatch();
   const [isSideMenuOpen, toggleSideMenu] = useState(false);
@@ -72,6 +114,7 @@ function TopBar() {
         <Select
           isSearchable={false}
           className={s.select}
+          styles={customSelectStyles}
           components={{ DropdownIndicator: CustomDropdownIndicator }}
           formatOptionLabel={formatOptionLabel}
           onChange={({ callBack }) => dispatch(callBack())}
@@ -79,6 +122,7 @@ function TopBar() {
           value={{
             label: 'Admin', icon: avatarStub, value: 'Admin', large: true,
           }}
+          classNamePrefix="select"
         />
       </div>
     </>
