@@ -1,8 +1,8 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
 import appRoutes from '../../routes/appRoutes';
-import Loader from '../common/Loader/Loader';
+import CarsList from '../CarsList/CarsList';
 import OrderEdit from '../OrderEdit/OrderEdit';
-import Orders from '../Orders/Orders';
+import OrdersList from '../OrdersList/OrdersList';
 
 function DashBoardRouter() {
   return (
@@ -12,9 +12,9 @@ function DashBoardRouter() {
         exact
         render={() => <Redirect to={appRoutes.dashboardOrders()} />}
       />
-      <Route path={appRoutes.dashboardOrders()} render={() => <Orders />} />
+      <Route path={appRoutes.dashboardOrders()} render={() => <OrdersList />} />
       <Route path={appRoutes.dashboardOrder(':id')} render={() => <OrderEdit />} />
-      <Route path={appRoutes.dashboardCars()} render={() => <Loader />} />
+      <Route path={appRoutes.dashboardCars()} render={() => <CarsList />} />
       <Route path={`${appRoutes.dashboard()}/*`} render={() => <Redirect to={appRoutes.dashboardOrders()} />} />
     </Switch>
   );

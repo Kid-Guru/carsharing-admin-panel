@@ -1,0 +1,72 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/_mixins.scss';
+
+.carTable {
+  &__wrapper {
+    // overflow: auto;
+  }
+  &__pic {
+    padding-top: #{"max(40%, 50px)"};
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  &__root {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    thead {
+      border-bottom: $borderDelimetr;
+      tr {
+      }
+      th:nth-child(1) {
+        width: 160px;
+        // width: 20%;
+      }
+      th:nth-child(2) {
+        width: 120px;
+        max-width: 160px;
+        // width: 15%;
+      }
+      th:nth-child(3),
+      th:nth-child(4) {
+        width: 90px;
+        // width: 7%;
+      }
+      th:nth-child(5) {
+        width: 100px;
+        // width: 13%;
+      }
+      th:nth-child(6) {
+        width: 220px;
+        // width: 20%;
+      }
+      th:nth-child(7) {
+        width: 120px;
+        // width: 19%;
+      }
+
+      th {
+        padding: 5px;
+        // border: 1px solid green;
+      }
+    }
+
+    tbody {
+      // border: 1px solid blueviolet;
+      tr {
+        // border: 1px solid yellow;
+        height: 60px;
+        @include menuElementHover;
+        transition: all ease 0.1s;
+      }
+      td {
+        font-size: 15px;
+        padding: 3px;
+        text-align: center;
+        // border: 1px solid red;
+      }
+    }
+  }
+
+}
