@@ -32,6 +32,9 @@
     flex-grow: 1;
     padding: 20px 15px;
     overflow-y: auto;
+    &_noIndent {
+      padding: 0;
+    }
   }
   &__footer {
     padding: 20px 15px;

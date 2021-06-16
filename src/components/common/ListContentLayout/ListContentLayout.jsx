@@ -2,7 +2,7 @@ import s from './ListContentLayout.module.scss';
 
 function ListContentLayout(props) {
   const {
-    title, content, header, footer,
+    title, content, header, footer, noIndentContent = false,
   } = props;
   return (
     <article className={s.listContentLayout}>
@@ -13,7 +13,7 @@ function ListContentLayout(props) {
           {header}
         </div>
         )}
-        <div className={s.listContentLayout__content}>
+        <div className={`${s.listContentLayout__content} ${noIndentContent && s.listContentLayout__content_noIndent}`}>
           {content}
         </div>
         {footer && (
