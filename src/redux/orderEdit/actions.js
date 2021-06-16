@@ -44,7 +44,7 @@ export const orderRequest = (id) => async (dispatch) => {
 
 export const orderUpdate = (orderData) => async (dispatch, getState) => {
   dispatch(setStatus({ status: 'transfering' }));
-  const { price, id } = getState().order.data;
+  const { id } = getState().order.data;
   const requestBody = {
     carId: carByIdSelector(getState(), orderData.car),
     cityId: cityByIdSelector(getState(), orderData.city),
@@ -57,7 +57,7 @@ export const orderUpdate = (orderData) => async (dispatch, getState) => {
     isFullTank: orderData.isFullTank,
     isNeedChildChair: orderData.isNeedChildChair,
     isRightWheel: orderData.isRightWheel,
-    price,
+    price: orderData.price,
     id,
   };
   try {

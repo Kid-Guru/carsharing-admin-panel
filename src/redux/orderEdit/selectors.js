@@ -2,7 +2,6 @@ import { carsOptionsSelector } from '../cars/selectors';
 import { cityOptionsSelector } from '../cities/selectors';
 import { statusOptionsSelector } from '../statuses/selectors';
 import { rateOptionsSelector } from '../rates/selectors';
-import beautify from '../../helpers/beautify';
 
 const initCitySelector = (state) => {
   const { cityId } = state.order.data;
@@ -71,9 +70,6 @@ const fieldsOptionsSelector = (state) => {
   };
 };
 
-const orderPriceSelector = (state) => state.order.data.price
-  && beautify.currency(Math.floor(state.order.data.price));
-
 const isFetchingSelector = (state) => state.order.status === 'fetching';
 const isTrasferSeccuessSelector = (state) => state.order.status === 'transferSeccuess';
 
@@ -82,5 +78,4 @@ export {
   initValuesSelector,
   isFetchingSelector,
   isTrasferSeccuessSelector,
-  orderPriceSelector,
 };
