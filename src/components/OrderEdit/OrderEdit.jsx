@@ -2,12 +2,10 @@ import { Formik, useFormikContext } from 'formik';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory, useParams } from 'react-router-dom';
-import calculateRentPrice from '../../helpers/priceHelper';
 import { cleanupOrder, orderRequest, orderUpdate } from '../../redux/orderEdit/actions';
 import {
   initValuesSelector, isFetchingSelector, isTrasferSeccuessSelector,
 } from '../../redux/orderEdit/selectors';
-import { ratesUnitsSelectorCarry } from '../../redux/rates/selectors';
 import appRoutes from '../../routes/appRoutes';
 import Button from '../common/Buttons/Button';
 import ButtonSubmit from '../common/Buttons/ButtonSubmit';
@@ -57,12 +55,11 @@ function OrderEdit() {
     initIsRightWheel,
     initPrice,
   } = useSelector(initValuesSelector);
-  const getRateUnits = useSelector(ratesUnitsSelectorCarry);
 
   if (isFetching) return <Loader />;
   if (isTrasferSeccuess) return <Redirect to={appRoutes.dashboardOrders()} />;
 
-  const onSubmitHandle = (data) => dispatch(orderUpdate(data));
+  const onSubmitHandle = (data) => dispatch(orderUpdate({ ...data }));
   return (
     <Formik
       initialValues={{
@@ -81,25 +78,10 @@ function OrderEdit() {
       }}
       onSubmit={onSubmitHandle}
     >
-      {({ touched, values }) => {
+      {({ values }) => {
         const {
-          dateFrom, dateTo, city, car, price, isFullTank, isNeedChildChair, isRightWheel, rate,
+          dateFrom, dateTo, city, car,
         } = values;
-        let orderPrice = price;
-        const isNeedCountPrice = touched.car || touched.rate
-          || touched.dateFrom || touched.dateTo || touched.isFullTank
-          || touched.isNeedChildChair || touched.isRightWheel;
-        if (isNeedCountPrice) {
-          const calculateParams = {
-            rate: getRateUnits(rate),
-            dateFrom,
-            dateTo,
-            isFullTank,
-            isNeedChildChair,
-            isRightWheel,
-          };
-          orderPrice = calculateRentPrice(calculateParams);
-        }
         return (
           <ListContentLayout
             title="Редактирование"
@@ -110,7 +92,6 @@ function OrderEdit() {
                 dateTo={dateTo}
                 city={city}
                 car={car}
-                price={orderPrice}
               />
             )}
             footer={<Footer />}

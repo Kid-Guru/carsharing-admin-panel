@@ -1,5 +1,3 @@
-import beautify from './beautify';
-
 const mapConversionFactor = {
   сутки: 86400000,
   '7 дней': 604800000,
@@ -19,7 +17,7 @@ const calculateRentPrice = ({
   if (isFullTank) price += costOptions.fullTank;
   if (isNeedChildChair) price += costOptions.childChair;
   if (isRightWheel) price += costOptions.rightWheel;
-  return beautify.currency(Math.floor(price));
+  return Math.floor(price);
 };
 
 export default calculateRentPrice;

@@ -1,8 +1,12 @@
-import { Form } from 'formik';
+import { Form, useFormikContext } from 'formik';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import beautify from '../../../helpers/beautify';
+import calculateRentPrice from '../../../helpers/priceHelper';
 import { colorOptionsSelectorCarry } from '../../../redux/cars/selectors';
 import { fieldsOptionsSelector } from '../../../redux/orderEdit/selectors';
 import { pointOptionsSelectorCarry } from '../../../redux/points/selectors';
+import { ratesUnitsSelectorCarry } from '../../../redux/rates/selectors';
 import CheckboxBtnGroup from '../../Form/CheckboxBtnGroup/CheckboxBtnGroup';
 import DateField from '../../Form/DateField/DateField';
 import RadioBtnGroup from '../../Form/RadioBtnGroup/RadioBtnGroup';
@@ -15,8 +19,36 @@ const extraOptions = [
   { text: 'Правый руль', name: 'isRightWheel' },
 ];
 
+function OrderPrice() {
+  const {
+    values: {
+      dateFrom, dateTo, price, isFullTank, isNeedChildChair, isRightWheel, rate,
+    },
+    setFieldValue,
+  } = useFormikContext();
+  const getRateUnits = useSelector(ratesUnitsSelectorCarry);
+
+  useEffect(() => {
+    const calculateParams = {
+      rate: getRateUnits(rate),
+      dateFrom,
+      dateTo,
+      isFullTank,
+      isNeedChildChair,
+      isRightWheel,
+    };
+    const newPrice = calculateRentPrice(calculateParams);
+    setFieldValue('price', newPrice);
+  }, [dateFrom, dateTo, isFullTank, isNeedChildChair, isRightWheel, rate]);
+  return (
+    <p className={s.edit__price}>
+      {`Цена: ${beautify.currency(price)}`}
+    </p>
+  );
+}
+
 function OrderEditForm({
-  dateFrom, dateTo, city, car, price,
+  dateFrom, dateTo, city, car,
 }) {
   const {
     cityOptions, statusOptions, rateOptions, carOptions,
@@ -48,9 +80,7 @@ function OrderEditForm({
           <CheckboxBtnGroup title="Дополнительно" items={extraOptions} />
         </div>
       </Form>
-      <p className={s.edit__price}>
-        {`Цена: ${price}`}
-      </p>
+      <OrderPrice />
     </div>
   );
 }
