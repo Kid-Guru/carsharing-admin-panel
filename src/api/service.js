@@ -15,12 +15,12 @@ const authService = {
 const apiService = {
   getOrders(filters) {
     const params = {
-      limit: filters.limit,
-      page: filters.page,
-      cityId: filters.city,
-      orderStatusId: filters.status,
-      carId: filters.car,
-      id: filters.id,
+      limit: filters?.limit,
+      page: filters?.page,
+      cityId: filters?.city,
+      orderStatusId: filters?.status,
+      carId: filters?.car,
+      id: filters?.id,
     };
     const stringified = queryString.stringify(params, stringifyConfig);
     return mainInstance.get(`${routes.ORDER}?${stringified}`);
@@ -39,15 +39,19 @@ const apiService = {
   getRates() {
     return mainInstance.get(`${routes.RATE}`);
   },
-  getCars() {
-    return mainInstance.get(`${routes.CAR}`);
+  getCars(filters) {
+    const params = {
+      categoryId: filters?.categoryId,
+    };
+    const stringified = queryString.stringify(params, stringifyConfig);
+    return mainInstance.get(`${routes.CAR}?${stringified}`);
   },
   getStatuses() {
     return mainInstance.get(`${routes.STATUS}`);
   },
-  // getCategories() {
-  //   return APIInstance.get('db/category/');
-  // },
+  getCategories() {
+    return mainInstance.get(`${routes.CATEGORY}`);
+  },
   // getRates() {
   //   return APIInstance.get('db/rate');
   // },
