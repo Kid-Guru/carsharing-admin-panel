@@ -3,6 +3,7 @@ import authReducer from './auth/reducer';
 import ordersReducer from './orders/reducer';
 import orderEditReducer from './orderEdit/reducer';
 import carsReducer from './cars/reducer';
+import categoriesReducer from './categories/reducer';
 import citiesReducer from './cities/reducer';
 import pointsReducer from './points/reducer';
 import statusesReducer from './statuses/reducer';
@@ -13,6 +14,7 @@ export default combineReducers({
   orders: ordersReducer,
   order: orderEditReducer,
   cars: carsReducer,
+  categories: categoriesReducer,
   cities: citiesReducer,
   points: pointsReducer,
   statuses: statusesReducer,

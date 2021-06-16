@@ -1,4 +1,5 @@
 import beautify from '../../helpers/beautify';
+import { categoryOptionsFilterSelector } from '../categories/selectors';
 import { getImageURL } from '../../helpers/imageHelpers';
 
 const carsTableSelector = (state) => state.cars.data.map((c) => ({
@@ -30,7 +31,18 @@ const colorOptionsSelectorCarry = (state) => (carId) => {
   return findedCar ? findedCar.colors.map((c) => c.toLowerCase()) : [];
 };
 
-const isFetchingSelector = (state) => state.cars.status === 'fetching';
+const optionsFiltersSelector = (state) => {
+  const categoryOptions = categoryOptionsFilterSelector(state);
+  return { categoryOptions };
+};
+
+const isFetchingSelector = (state) => {
+  const { status, statusExtraData } = state.cars;
+  if (status === 'fetching' || statusExtraData === 'fetching') {
+    return true;
+  }
+  return false;
+};
 
 export {
   carsTableSelector,
@@ -38,5 +50,6 @@ export {
   carsOptionsFilterSelector,
   carsOptionsSelector,
   colorOptionsSelectorCarry,
+  optionsFiltersSelector,
   isFetchingSelector,
 };
