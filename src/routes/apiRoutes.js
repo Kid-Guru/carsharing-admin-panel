@@ -8,6 +8,7 @@ const routes = {
   POINT: 'db/point',
   RATE: 'db/rate',
   CAR: 'db/car',
+  CATEGORY: 'db/category',
   STATUS: 'db/orderStatus',
 };
 
