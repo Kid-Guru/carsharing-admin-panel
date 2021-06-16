@@ -25,7 +25,7 @@ import s from './OrdersList.module.scss';
 
 const Filters = (props) => {
   const { onSubmitHandle } = props;
-  const { modelOption, cityOption, statusOption } = useSelector(optionsFiltersSelector);
+  const { modelOptions, cityOptions, statusOptions } = useSelector(optionsFiltersSelector);
   const { model, city, status } = useSelector(currentFiltersSelector);
   return (
     <Formik
@@ -38,13 +38,13 @@ const Filters = (props) => {
     >
       <Form className={s.filters} action="submit">
         <div className={s.filters__col}>
-          <Field name="model" component={SelectFilter} options={modelOption} placeholder="Модель" />
+          <Field name="model" component={SelectFilter} options={modelOptions} placeholder="Модель" />
         </div>
         <div className={s.filters__col}>
-          <Field name="city" component={SelectFilter} options={cityOption} placeholder="Город" />
+          <Field name="city" component={SelectFilter} options={cityOptions} placeholder="Город" />
         </div>
         <div className={s.filters__col}>
-          <Field name="status" component={SelectFilter} options={statusOption} placeholder="Статус" />
+          <Field name="status" component={SelectFilter} options={statusOptions} placeholder="Статус" />
         </div>
         <div className={s.filters__col}>
           <ButtonSubmit text="Применить" />

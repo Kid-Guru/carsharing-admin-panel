@@ -45,10 +45,10 @@ const totalOrdersSelector = (state) => {
 const initialPageSelector = (state) => state.orders.page;
 
 const optionsFiltersSelector = (state) => {
-  const modelOption = carsOptionsFilterSelector(state);
-  const cityOption = cityOptionsFilterSelector(state);
-  const statusOption = statusesOptionsFilterSelector(state);
-  return { modelOption, cityOption, statusOption };
+  const modelOptions = carsOptionsFilterSelector(state);
+  const cityOptions = cityOptionsFilterSelector(state);
+  const statusOptions = statusesOptionsFilterSelector(state);
+  return { modelOptions, cityOptions, statusOptions };
 };
 
 const currentFiltersSelector = (state) => {
