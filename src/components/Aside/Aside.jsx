@@ -33,7 +33,7 @@ function Aside(props) {
               <span className={s.navigation__linkText}>Машины</span>
             </NavLink>
           </li>
-          <li className={s.navigation__listItem}>
+          {/* <li className={s.navigation__listItem}>
             <NavLink
               to="/etxtfef"
               activeClassName={s.active}
@@ -42,7 +42,7 @@ function Aside(props) {
               <span className={s.navigation__icon}><ListAuto /></span>
               <span className={s.navigation__linkText}>Города</span>
             </NavLink>
-          </li>
+          </li> */}
 
         </ul>
       </nav>
