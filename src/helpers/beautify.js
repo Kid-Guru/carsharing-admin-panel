@@ -28,6 +28,7 @@ const date = (timeStamp) => {
     hour: '2-digit',
     minute: '2-digit',
   };
+  if (!timeStamp) return '';
   return new Date(timeStamp).toLocaleString('ru-RU', options);
 };
 

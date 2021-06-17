@@ -4,7 +4,6 @@ import { carsOptionsFilterSelector } from '../cars/selectors';
 import { cityOptionsFilterSelector } from '../cities/selectors';
 import { statusesOptionsFilterSelector } from '../statuses/selectors';
 
-// Костыль для невылидных данных с сервера
 const carStub = {
   name: '',
   colors: [''],
@@ -51,10 +50,10 @@ const optionsFiltersSelector = (state) => {
   return { modelOptions, cityOptions, statusOptions };
 };
 
-const currentFiltersSelector = (state) => {
-  const { car, city, status } = state.orders.filters;
-  return { model: car, city, status };
-};
+// const currentFiltersSelector = (state) => {
+//   const { car, city, status } = state.orders.filters;
+//   return { model: car, city, status };
+// };
 
 const isFetchingSelector = (state) => state.orders.status === 'fetching';
 
@@ -63,6 +62,6 @@ export {
   totalOrdersSelector,
   initialPageSelector,
   optionsFiltersSelector,
-  currentFiltersSelector,
+  // currentFiltersSelector,
   isFetchingSelector,
 };

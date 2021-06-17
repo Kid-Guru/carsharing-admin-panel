@@ -3,27 +3,19 @@ import { cityOptionsSelector } from '../cities/selectors';
 import { statusOptionsSelector } from '../statuses/selectors';
 import { rateOptionsSelector } from '../rates/selectors';
 
-const initCitySelector = (state) => {
-  const { cityId } = state.order.data;
-  return cityId && cityId.id;
-};
-const initPointSelector = (state) => {
-  const { pointId } = state.order.data;
-  return pointId && pointId.id;
-};
-const initStatusSelector = (state) => {
-  const { orderStatusId } = state.order.data;
-  return orderStatusId && orderStatusId.id;
-};
-const initRateSelector = (state) => {
-  const { rateId } = state.order.data;
-  return rateId && rateId.id;
-};
-const initCarSelector = (state) => {
-  const { carId } = state.order.data;
-  return carId && carId.id;
-};
-const initColorSelector = (state) => state.order.data?.color?.toLowerCase();
+const initCitySelector = (state) => state.order.data.cityId?.id || state.order.data.cityId;
+
+const initPointSelector = (state) => state.order.data.pointId?.id || state.order.data.pointId;
+
+const initStatusSelector = (state) => state.order.data.orderStatusId?.id
+  || state.order.data.orderStatusId;
+
+const initRateSelector = (state) => state.order.data.rateId?.id || state.order.data.rateId;
+
+const initCarSelector = (state) => state.order.data.carId?.id || state.order.data.carId;
+
+const initColorSelector = (state) => state.order.data.color?.toLowerCase();
+
 const initDateSelector = (state) => {
   const { dateFrom, dateTo } = state.order.data;
   return [dateFrom, dateTo];

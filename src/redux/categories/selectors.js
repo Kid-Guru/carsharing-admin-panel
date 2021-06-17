@@ -22,7 +22,8 @@
 
 const categoryOptionsFilterSelector = (state) => {
   const { data } = state.categories;
-  return data.map((c) => ({ label: c.name, value: c.id }));
+  const options = data.map((c) => ({ label: c.name, value: c.id }));
+  return [{ label: 'Все', value: null }, ...options];
 };
 
 // const colorOptionsSelectorCarry = (state) => (carId) => {

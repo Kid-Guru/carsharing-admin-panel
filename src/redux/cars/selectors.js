@@ -36,13 +36,15 @@ const optionsFiltersSelector = (state) => {
   return { categoryOptions };
 };
 
-const isFetchingSelector = (state) => {
-  const { status, statusExtraData } = state.cars;
-  if (status === 'fetching' || statusExtraData === 'fetching') {
-    return true;
-  }
-  return false;
-};
+// const isFetchingSelector = (state) => {
+//   const { status } = state.cars;
+//   if (status === 'fetching') {
+//     return true;
+//   }
+//   return false;
+// };
+
+const isInitialSelector = (state) => state.cars.status === 'initial';
 
 export {
   carsTableSelector,
@@ -51,5 +53,6 @@ export {
   carsOptionsSelector,
   colorOptionsSelectorCarry,
   optionsFiltersSelector,
-  isFetchingSelector,
+  // isFetchingSelector,
+  isInitialSelector,
 };

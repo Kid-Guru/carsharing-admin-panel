@@ -1,6 +1,7 @@
 import { HOST_URL } from '../routes/apiRoutes';
 
 const getImageURL = (path) => {
+  if (typeof path !== 'string') return '';
   if (path.includes('base64')) {
     return path;
   }
