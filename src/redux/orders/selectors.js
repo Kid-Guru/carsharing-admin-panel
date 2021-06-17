@@ -19,8 +19,8 @@ const ordersSelector = (state) => {
       mainInfo: {
         carModel: carData.name,
         carColor: order.color,
-        cityName: order.cityId.name,
-        adress: order.pointId?.name,
+        cityName: order.cityId?.name || order.cityId,
+        adress: order.pointId?.name || order.pointId,
         dateFrom: beautify.date(order.dateFrom),
         dateTo: beautify.date(order.dateTo),
         picture: getImageURL(carData.thumbnail.path),

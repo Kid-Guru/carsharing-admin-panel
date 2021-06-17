@@ -17,6 +17,7 @@ const currency = (price) => {
     currency: 'RUB',
     maximumFractionDigits: 0,
   };
+  if (typeof price !== 'number') return '';
   return new Intl.NumberFormat('ru-RU', options).format(price);
 };
 
