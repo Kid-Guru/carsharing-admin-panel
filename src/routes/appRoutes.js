@@ -5,4 +5,5 @@ export default {
   dashboardOrders: () => '/dashboard/orders',
   dashboardOrder: (id) => `/dashboard/order/${id}`,
   dashboardCars: () => '/dashboard/cars',
+  dashboardCar: (id) => `/dashboard/car/${id}`,
 };
