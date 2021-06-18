@@ -12,3 +12,7 @@
 .secondaryStyle {
   @include buttonSecondaryStyle;
 }
+
+.alertStyle {
+  @include buttonAlertStyle;
+}

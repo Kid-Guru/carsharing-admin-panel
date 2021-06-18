@@ -3,6 +3,7 @@ import s from './Button.module.scss';
 const colorMap = {
   primary: s.primaryStyle,
   secondary: s.secondaryStyle,
+  alert: s.alertStyle,
 };
 
 function Button(props) {
