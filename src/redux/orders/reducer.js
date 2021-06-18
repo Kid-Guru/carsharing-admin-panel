@@ -11,15 +11,16 @@ const defaultState = {
   page: 0,
   limit: 10,
   total: null,
-  status: 'fetching',
+  status: 'initial',
   errors: [],
 };
 
 const handlers = {
-  [actions.setOrders]: (state, { payload: { data, total } }) => ({
+  [actions.setOrders]: (state, { payload: { data, total, status } }) => ({
     ...state,
     data,
     total,
+    status,
   }),
   [actions.setStatus]: (state, { payload: { status } }) => ({ ...state, status }),
   [actions.setPage]: (state, { payload: { page } }) => ({ ...state, page }),
@@ -33,7 +34,7 @@ const handlers = {
     },
     page: 0,
     total: null,
-    status: 'fetching',
+    status: 'initial',
   }),
 };
 

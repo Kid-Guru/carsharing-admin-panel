@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 import { apiService } from '../../api/service';
-import { getAllCars } from '../cars/actions';
+import { externalAllCarsRequest } from '../cars/actions';
 import { getAllCities } from '../cities/actions';
 import { getAllStatuses } from '../statuses/actions';
 
@@ -12,7 +12,11 @@ export const cleanupOrders = createAction('CLEANUP_ORDERS');
 
 // Запрос заказов
 const getOrders = () => async (dispatch, getState) => {
-  const { limit, page, filters: { city, status, car } } = getState().orders;
+  const {
+    limit,
+    page,
+    filters: { city, status, car },
+  } = getState().orders;
   const params = {
     limit,
     page,
@@ -24,45 +28,39 @@ const getOrders = () => async (dispatch, getState) => {
   try {
     const responseOrders = await apiService.getOrders(params);
     const orders = responseOrders.data.data;
-    dispatch(setOrders({ data: orders, total: responseOrders.data.count }));
+    dispatch(setOrders({ data: orders, total: responseOrders.data.count, status: 'received' }));
   } catch (e) {
+    dispatch(setStatus({ status: 'error' }));
     throw new Error('Ошибка получения данных');
   }
 };
 
 export const initialOrdersRequest = () => async (dispatch) => {
-  dispatch(setStatus({ status: 'fetching' }));
+  dispatch(setStatus({ status: 'initial' }));
   const responses = [
     dispatch(getOrders()),
-    dispatch(getAllCars()),
+    dispatch(externalAllCarsRequest()),
     dispatch(getAllCities()),
     dispatch(getAllStatuses()),
   ];
 
   Promise.all(responses)
-    .then(() => dispatch(setStatus({ status: 'received' })))
+    .then()
     .catch((e) => {
       console.log(e);
-      dispatch(setStatus({ status: 'error' }));
     });
-};
-
-const getOrdersRequest = () => async (dispatch) => {
-  dispatch(setStatus({ status: 'updating' }));
-  try {
-    await dispatch(getOrders());
-    dispatch(setStatus({ status: 'received' }));
-  } catch (e) {
-    console.log(e);
-    dispatch(setStatus({ status: 'error' }));
-  }
 };
 
 export const setPageOrders = (pageNumber) => async (dispatch, getState) => {
   const currentPage = getState().orders.page;
   if (currentPage === pageNumber) return;
   dispatch(setPage({ page: pageNumber }));
-  dispatch(getOrdersRequest());
+  dispatch(setStatus({ status: 'fetching' }));
+  try {
+    dispatch(getOrders());
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const setFilterOrders = (newFilter) => async (dispatch) => {
@@ -72,5 +70,10 @@ export const setFilterOrders = (newFilter) => async (dispatch) => {
     status: newFilter.status,
   };
   dispatch(setFilter({ filters }));
-  dispatch(getOrdersRequest());
+  dispatch(setStatus({ status: 'fetching' }));
+  try {
+    dispatch(getOrders());
+  } catch (e) {
+    console.log(e);
+  }
 };

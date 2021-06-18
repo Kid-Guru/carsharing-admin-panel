@@ -6,22 +6,27 @@ const defaultState = {
   filters: {
     category: null,
   },
-  status: 'fetching',
-  statusExtraData: 'fetching',
+  // dataFiltred: false,
+  status: 'initial',
   errors: [],
 };
 
 const handlers = {
-  [actions.setCars]: (state, { payload: { data } }) => ({ ...state, data }),
-  [actions.setStatus]: (state, { payload: { status } }) => ({ ...state, status }),
-  [actions.setStatusExtraData]: (state, { payload: { statusExtraData } }) => ({
+  [actions.setCars]: (state, { payload: { data, dataFiltred, status } }) => ({
     ...state,
-    statusExtraData,
+    data,
+    dataFiltred,
+    status,
   }),
   [actions.setFilter]: (state, { payload: { filters } }) => ({ ...state, filters }),
+  [actions.setStatus]: (state, { payload: { status } }) => ({ ...state, status }),
   [actions.cleanupCars]: (state) => ({
     ...state,
-    statusExtraData: 'fetching',
+    data: [],
+    filters: {
+      category: null,
+    },
+    status: 'initial',
   }),
 };
 

@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 import { apiService } from '../../api/service';
-import { getAllCars } from '../cars/actions';
+import { externalAllCarsRequest } from '../cars/actions';
 import { carByIdSelector } from '../cars/selectors';
 import { getAllCities } from '../cities/actions';
 import { cityByIdSelector } from '../cities/selectors';
@@ -27,7 +27,7 @@ export const orderRequest = (id) => async (dispatch) => {
   dispatch(setStatus({ status: 'fetching' }));
   const responses = [
     dispatch(getOrder(id)),
-    dispatch(getAllCars()),
+    dispatch(externalAllCarsRequest()),
     dispatch(getAllCities()),
     dispatch(getAllStatuses()),
     dispatch(getAllPoints()),

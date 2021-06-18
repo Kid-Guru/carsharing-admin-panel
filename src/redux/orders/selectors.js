@@ -55,7 +55,7 @@ const optionsFiltersSelector = (state) => {
 //   return { model: car, city, status };
 // };
 
-const isFetchingSelector = (state) => state.orders.status === 'fetching';
+const isInitialSelector = (state) => state.orders.status === 'initial';
 
 export {
   ordersSelector,
@@ -63,5 +63,5 @@ export {
   initialPageSelector,
   optionsFiltersSelector,
   // currentFiltersSelector,
-  isFetchingSelector,
+  isInitialSelector,
 };

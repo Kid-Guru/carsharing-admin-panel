@@ -6,9 +6,8 @@ import {
   cleanupOrders, initialOrdersRequest, setFilterOrders, setPageOrders,
 } from '../../redux/orders/actions';
 import {
-  currentFiltersSelector,
   initialPageSelector,
-  isFetchingSelector,
+  isInitialSelector,
   optionsFiltersSelector,
   ordersSelector,
   totalOrdersSelector,
@@ -23,34 +22,23 @@ import SidePortal from '../common/SidePortal/SidePortal';
 import Loader from '../common/Loader/Loader';
 import s from './OrdersList.module.scss';
 
-const Filters = (props) => {
-  const { onSubmitHandle } = props;
+const Filters = () => {
   const { modelOptions, cityOptions, statusOptions } = useSelector(optionsFiltersSelector);
-  const { model, city, status } = useSelector(currentFiltersSelector);
   return (
-    <Formik
-      initialValues={{
-        model,
-        city,
-        status,
-      }}
-      onSubmit={onSubmitHandle}
-    >
-      <Form className={s.filters} action="submit">
-        <div className={s.filters__col}>
-          <Field name="model" component={SelectFilter} options={modelOptions} placeholder="Модель" />
-        </div>
-        <div className={s.filters__col}>
-          <Field name="city" component={SelectFilter} options={cityOptions} placeholder="Город" />
-        </div>
-        <div className={s.filters__col}>
-          <Field name="status" component={SelectFilter} options={statusOptions} placeholder="Статус" />
-        </div>
-        <div className={s.filters__col}>
-          <ButtonSubmit text="Применить" />
-        </div>
-      </Form>
-    </Formik>
+    <Form className={s.filters} action="submit">
+      <div className={s.filters__col}>
+        <Field name="model" component={SelectFilter} options={modelOptions} placeholder="Модель" />
+      </div>
+      <div className={s.filters__col}>
+        <Field name="city" component={SelectFilter} options={cityOptions} placeholder="Город" />
+      </div>
+      <div className={s.filters__col}>
+        <Field name="status" component={SelectFilter} options={statusOptions} placeholder="Статус" />
+      </div>
+      <div className={s.filters__col}>
+        <ButtonSubmit text="Применить" />
+      </div>
+    </Form>
   );
 };
 
@@ -62,23 +50,38 @@ const FiltersWithPortal = () => {
     dispatch(setFilterOrders(data));
     toggleSideFilters(false);
   };
-  if (width < 1023.98) {
-    return (
-      <>
-        <SidePortal isOpen={isSideFiltersOpen} closePortalCallback={() => toggleSideFilters(false)}>
-          <div className={s.sidePortal}>
-            <Filters onSubmitHandle={onSubmitHandle} />
-          </div>
-        </SidePortal>
-        <div className={s.showFiltersBtn}>
-          <Button text="Фильтры" onClick={() => toggleSideFilters(true)} />
-        </div>
-      </>
-    );
-  }
-  if (isSideFiltersOpen) toggleSideFilters(false);
   return (
-    <Filters onSubmitHandle={onSubmitHandle} />
+    <Formik
+      initialValues={{
+        model: null,
+        city: null,
+        status: null,
+      }}
+      onSubmit={onSubmitHandle}
+    >
+      {() => {
+        if (width < 1023.98) {
+          return (
+            <>
+              <SidePortal
+                isOpen={isSideFiltersOpen}
+                closePortalCallback={() => toggleSideFilters(false)}
+              >
+                <div className={s.sidePortal}>
+                  <Filters onSubmitHandle={onSubmitHandle} />
+                </div>
+              </SidePortal>
+              <div className={s.showFiltersBtn}>
+                <Button text="Фильтры" onClick={() => toggleSideFilters(true)} />
+              </div>
+            </>
+          );
+        }
+        return (
+          <Filters onSubmitHandle={onSubmitHandle} />
+        );
+      }}
+    </Formik>
   );
 };
 
@@ -92,9 +95,9 @@ function OrdersList() {
   const ordersList = useSelector(ordersSelector);
   const totalPages = useSelector(totalOrdersSelector);
   const initialPage = useSelector(initialPageSelector);
-  const isFetching = useSelector(isFetchingSelector);
+  const isInitial = useSelector(isInitialSelector);
 
-  if (isFetching) return <Loader />;
+  if (isInitial) return <Loader />;
 
   return (
     <ListContentLayout

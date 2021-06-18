@@ -2,8 +2,8 @@ import { Field, Form, Formik } from 'formik';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useWindowSize } from 'react-use';
-import { cleanupCars, initialCarsRequest, getFiltredCars } from '../../redux/cars/actions';
-import { carsTableSelector, isFetchingSelector, optionsFiltersSelector } from '../../redux/cars/selectors';
+import { cleanupCars, initialAllCarsRequest, setFilterCars } from '../../redux/cars/actions';
+import { carsTableSelector, isInitialSelector, optionsFiltersSelector } from '../../redux/cars/selectors';
 import Button from '../common/Buttons/Button';
 import ButtonSubmit from '../common/Buttons/ButtonSubmit';
 import ListContentLayout from '../common/ListContentLayout/ListContentLayout';
@@ -30,7 +30,7 @@ const FiltersWithPortal = () => {
   const { width } = useWindowSize();
   const dispatch = useDispatch();
   const onSubmitHandle = (data) => {
-    dispatch(getFiltredCars(data));
+    dispatch(setFilterCars(data));
     toggleSidePortal(false);
   };
   return (
@@ -53,7 +53,7 @@ const FiltersWithPortal = () => {
             </>
           );
         }
-        console.log(isSidePortalOpen);
+        // console.log(isSidePortalOpen);
         // useEffect(() => {
         // if (isSidePortalOpen) toggleSidePortal(false);
         // }, []);
@@ -66,11 +66,11 @@ const FiltersWithPortal = () => {
 function CarsList() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(initialCarsRequest());
+    dispatch(initialAllCarsRequest());
     return () => dispatch(cleanupCars());
   }, [dispatch]);
   const carsList = useSelector(carsTableSelector);
-  const isFetching = useSelector(isFetchingSelector);
+  const isFetching = useSelector(isInitialSelector);
 
   if (isFetching) return <Loader />;
 

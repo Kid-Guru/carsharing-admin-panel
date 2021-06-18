@@ -4,60 +4,62 @@ import { getAllCategories } from '../categories/actions';
 
 export const setCars = createAction('SET_CARS');
 export const setStatus = createAction('SET_CARS_STATUS');
-export const setStatusExtraData = createAction('SET_CARS_STATUS_EXTRA_DATA');
 export const setFilter = createAction('SET_CARS_FILTER');
 export const cleanupCars = createAction('CLEANUP_CARS');
 
-// Добавить обработку ошибки!!!
-export const getAllCars = () => async (dispatch, getState) => {
-  const statusCars = getState().cars.status;
-  if (statusCars === 'receivedAll') return;
+// const getAllCars = () => async (dispatch) => {
+//   try {
+//     const responseCars = await apiService.getCars();
+//     const cars = responseCars.data.data;
+//     dispatch(
+//       setCars({
+//         data: cars,
+//         status: 'received',
+//       }),
+//     );
+//   } catch (e) {
+//     dispatch(setStatus({ status: 'error' }));
+//     throw new Error('Ошибка получения данных');
+//   }
+// };
 
-  dispatch(setStatus({ status: 'fetching' }));
+const getCars = () => async (dispatch, getState) => {
+  const { category } = getState().cars.filters;
+  const filters = { categoryId: category };
   try {
-    const responseCars = await apiService.getCars();
+    const responseCars = await apiService.getCars(filters);
     const cars = responseCars.data.data;
-    dispatch(setCars({ data: cars }));
-    dispatch(setStatus({ status: 'receivedAll' }));
+    dispatch(setCars({ data: cars, status: 'received' }));
   } catch (e) {
     dispatch(setStatus({ status: 'error' }));
     throw new Error('Ошибка получения данных');
   }
 };
 
-export const getFiltredCars = (filters) => async (dispatch) => {
-  const params = { categoryId: filters.category };
-  // dispatch(setStatus({ status: 'fetching' }));
-  try {
-    const responseCars = await apiService.getCars(params);
-    const cars = responseCars.data.data;
-    dispatch(setCars({ data: cars }));
-    dispatch(setStatus({ status: 'receivedWithFilter' }));
-  } catch (e) {
-    console.log(e);
-    dispatch(setStatus({ status: 'error' }));
-    // throw new Error('Ошибка получения данных');
-  }
+export const externalAllCarsRequest = () => async (dispatch) => {
+  dispatch(setStatus({ status: 'initial' }));
+  // dispatch(setFilter({ filters: { category: null } }));
+  dispatch(getCars());
 };
 
-export const initialCarsRequest = () => async (dispatch) => {
-  dispatch(setStatusExtraData({ status: 'fetching' }));
-  const responses = [
-    dispatch(getAllCars()),
-    dispatch(getAllCategories()),
-  ];
+export const initialAllCarsRequest = () => async (dispatch) => {
+  dispatch(setStatus({ status: 'initial' }));
+  // dispatch(setFilter({ filters: { category: null } }));
+  const responses = [dispatch(getCars()), dispatch(getAllCategories())];
 
   Promise.all(responses)
-    .then(() => dispatch(setStatusExtraData({ status: 'received' })))
+    .then()
     .catch((e) => {
       console.log(e);
-      dispatch(setStatusExtraData({ status: 'error' }));
     });
 };
 
-export const cleanupIfNeed = () => async (dispatch, getState) => {
-  const statusCars = getState().cars.status;
-  if (statusCars === 'receivedWithFilter') {
-    dispatch(setStatus({ status: 'fetching' }));
+export const setFilterCars = (filters) => async (dispatch) => {
+  dispatch(setStatus({ status: 'fetching' }));
+  dispatch(setFilter({ filters: { ...filters } }));
+  try {
+    dispatch(getCars());
+  } catch (e) {
+    console.log(e);
   }
 };
