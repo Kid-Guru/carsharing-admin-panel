@@ -1,0 +1,143 @@
+@import '../../styles/variables.scss';
+@import '../../styles/_mixins.scss';
+
+.carEdit {
+  padding: 28px;
+  &__title {
+    margin: 0;
+    margin-bottom: 28px;
+    font-weight: normal;
+    font-size: 29px;
+    line-height: 33px;
+    color: $main-accent;
+  }
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    @media (max-width: $tablet) {
+      flex-direction: column;
+    }
+    // display: grid;
+    // grid-template-columns: 1fr 2fr;
+    // grid-gap: 20px;
+  }
+
+  &__customization {
+    flex: 1 1 auto;
+    margin-left: 20px;
+  }
+
+  &__preview {
+    flex: 0 1 330px;
+  }
+}
+
+.preview {
+  @include whiteBox;
+  &__section {
+    padding: 20px 15px;
+    border-bottom: $borderDelimetr;
+    &:first-child {
+      padding: 20px 45px;
+    }
+    &:last-child {
+      border: none;
+    }
+  }
+  &__image {
+    aspect-ratio: 16/9;
+    object-fit: contain;
+  }
+  &__carName {
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 24.5px;
+    line-height: 28px;
+    text-align: center;
+  }
+  &__carCategory {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 12.5px;
+    line-height: 14px;
+    text-align: center;
+    color: $gray;
+  }
+  &__title {
+    margin: 0;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15px;
+    color: $gray;
+  }
+  &__discription {
+    margin: 0;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13.5px;
+    line-height: 19px;
+    color: $main-gray;
+  }
+}
+
+.progress {
+  &__text {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+  &__bar {
+    height: 7px;
+    border-radius: 7px;
+    box-shadow: inset 0px 0.5px 4px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+  }
+  &__fill {
+    height: 7px;
+    width: 100%;
+    transform: translateX(-100%);
+    background: $primary;
+    border-radius: 4px;
+    transition: all ease 0.2s;
+  }
+}
+
+.customization {
+  @include whiteBox;
+  padding: 20px 15px;
+  &__subtitle {
+    margin: 0;
+    margin-bottom: 10px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17.5px;
+    line-height: 21px;
+    color: $main-accent;
+  }
+  &__layout {
+    display: flex;
+    margin: 0 -15px;
+  }
+  &__col {
+    flex-basis: 50%;
+    margin: 0 15px;
+  }
+}
+
+.btnBar {
+  display: flex;
+  &__col {
+    margin-right: 10px;
+    &:last-child {
+      margin-left: auto;
+      margin-right: 10px;
+    }
+  }
+}

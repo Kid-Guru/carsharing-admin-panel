@@ -1,0 +1,48 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/_mixins.scss';
+
+.root {
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 30px;
+}
+
+.input {
+  @include visually-hidden;
+}
+
+.text {
+  // display: inline-block;
+  flex: 1 1 auto;
+  padding: 0 10px;
+  height: 30px;
+  vertical-align: top;
+  border: $borderDelimetr;
+  border-right: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.button {
+  // display: inline-block;
+  padding: 0 10px;
+  height: 30px;
+  @include buttonSecondaryStyle;
+  border: $borderDelimetr;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  transition: all ease 0.2s;
+  &:active {
+    box-shadow: -6px -10px 29px -5px rgba(43, 48, 52, 0.92) inset;
+  }
+}
