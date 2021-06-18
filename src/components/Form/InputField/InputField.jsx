@@ -5,7 +5,6 @@ function InputField(props) {
   const {
     label = 'label',
     placeholder,
-    type = 'text',
     name,
     isError,
     errorText = '',
@@ -19,7 +18,7 @@ function InputField(props) {
           name={name}
           id={label}
           placeholder={placeholder}
-          type={type}
+          type="text"
           autoCorrect="off"
           autoComplete="off"
         />
