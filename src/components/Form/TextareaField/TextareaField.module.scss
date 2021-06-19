@@ -9,7 +9,7 @@
 .title {
   display: block;
   margin-bottom: 8px;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 12px;
 }
 
@@ -17,7 +17,7 @@
   display: block;
   width: 100%;
   padding: 11px 8px;
-  font-size: 11px;
+  font-size: 12px;
   // height: 30px;
   resize: none;
   line-height: 1.2;
@@ -37,7 +37,7 @@
 .errorMessage {
   position: absolute;
   bottom: 5px;
-  font-size: 10px;
+  font-size: 11px;
   line-height: 11px;
   color: $alert;
   opacity: 0;
