@@ -1,4 +1,4 @@
-import { Field } from 'formik';
+import { Field, useField } from 'formik';
 import Select, { components } from 'react-select';
 import { ReactComponent as Dropdown } from '../../../assets/images/dropdownSearchField.svg';
 import s from './SelectField.module.scss';
@@ -13,10 +13,17 @@ const customStyles = {
     width: '100%',
     marginRight: '10px',
   }),
-  control: (provided) => ({
+  control: (provided, state) => ({
     ...provided,
     minHeight: '30px',
     height: '30px',
+    boxShadow: 'none',
+    // eslint-disable-next-line no-nested-ternary
+    border: state.selectProps.isError ? '1px solid #C4183C'
+      : state.isFocused ? '1px solid #BECAD6' : '1px solid #BECAD6',
+    '&: hover': {
+      border: '1px solid #121212',
+    },
   }),
   indicators: (provided) => ({
     ...provided,
@@ -76,6 +83,7 @@ function SelectComponent(props) {
   const {
     options, form, field, placeholder,
   } = props;
+  const isError = !!(form.touched[field.name] && form.errors[field.name]);
   return (
     <Select
       classNamePrefix="react-select"
@@ -91,6 +99,7 @@ function SelectComponent(props) {
         form.setFieldTouched(field.name, true);
         form.setFieldValue(field.name, option && option.value);
       }}
+      isError={isError}
     />
   );
 }
@@ -101,25 +110,23 @@ function SelectField(props) {
     placeholder,
     options,
     name,
-    isError,
-    errorText = '',
   } = props;
+  // eslint-disable-next-line no-unused-vars
+  const [_, meta] = useField({ name });
+  const isError = meta.touched && meta.error;
   return (
     <div className={s.root}>
       <label className={s.label} htmlFor={label}>
         <span className={s.title}>{label}</span>
         <Field
-          className={`${s.input} ${isError && s.input_error}`}
           name={name}
           id={label}
           placeholder={placeholder}
           component={SelectComponent}
           options={options}
-          autoCorrect="off"
-          autoComplete="off"
         />
       </label>
-      <span className={`${s.errorMessage} ${isError && s.errorMessage_active}`}>{errorText}</span>
+      <span className={`${s.errorMessage} ${isError && s.errorMessage_active}`}>{meta.error}</span>
     </div>
   );
 }
