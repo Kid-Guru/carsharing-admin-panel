@@ -15,10 +15,6 @@ export const checkTokens = () => (dispatch) => {
 };
 
 export const login = (formData, setErrorsForm, setSubmitting) => async (dispatch) => {
-  const formErrors = {
-    login: 'Неверный логин или пароль',
-    password: 'Неверный логин или пароль',
-  };
   const authData = {
     username: formData.login,
     password: formData.password,
@@ -30,12 +26,13 @@ export const login = (formData, setErrorsForm, setSubmitting) => async (dispatch
     cookieHelper.setAccessRefreshTokens(access_token, refresh_token, expires_in);
     dispatch(setAuthStatus({ status: 'authorized' }));
   } catch (e) {
-    if (e.response.status === 401) {
-      setErrorsForm(formErrors);
-      setSubmitting(false);
-    } else {
-      throw e;
+    if (e.response?.status === 401) {
+      setErrorsForm({
+        login: 'Неверный логин или пароль',
+        password: 'Неверный логин или пароль',
+      });
     }
+    setSubmitting(false);
   }
 };
 

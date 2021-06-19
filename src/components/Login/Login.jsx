@@ -25,11 +25,11 @@ function Login(props) {
             validationSchema={validationSchema}
             onSubmit={onSubmitHandle}
           >
-            {({ touched, errors, isSubmitting }) => (
+            {({ isSubmitting }) => (
               <Form className={s.login__form} action="submit">
                 <h2 className={s.login__title}>Вход</h2>
-                <FormInputText label="Почта" placeholder="Введите почту" type="text" name="login" isError={touched.login && errors.login} errorText={errors.login} />
-                <FormInputText label="Пароль" placeholder="Введите пароль" type="password" name="password" isError={touched.password && errors.password} errorText={errors.password} />
+                <FormInputText label="Почта" placeholder="Введите почту" type="text" name="login" />
+                <FormInputText label="Пароль" placeholder="Введите пароль" type="password" name="password" />
                 <p className={s.login__footer}>
                   <Link text="Запросить доступ" href="https://gist.github.com/internship-simbirsoft/3d634f32072b1e8514fc9fb19f88acdd" sizeSmall />
                   <ButtonSubmit text="Войти" disabled={isSubmitting} />
