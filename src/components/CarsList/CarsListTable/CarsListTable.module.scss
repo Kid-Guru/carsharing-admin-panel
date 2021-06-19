@@ -3,22 +3,50 @@
 
 @mixin tableColumnWidth() {
   &:nth-child(1) {
+    width: 40px;
+  }
+  &:nth-child(2) {
     width: 160px;
   }
-  &:nth-child(2),
-  &:nth-child(7) {
+  &:nth-child(3),
+  &:nth-child(8) {
     width: 120px;
   }
-  &:nth-child(3),
-  &:nth-child(4) {
+  &:nth-child(4),
+  &:nth-child(5) {
     width: 90px;
   }
-  &:nth-child(5) {
+  &:nth-child(6) {
     width: 100px;
   }
-  &:nth-child(6) {
+  &:nth-child(7) {
     width: 220px;
   }
+}
+
+.btnLink {
+  position: relative;
+  @include buttonBase;
+  &:visited {
+    color: $white;
+    background-color: $primary;
+  }
+  @include buttonStyle($primary, $white);
+  &:before {
+    content: '';
+    display: block;
+    position: relative;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  &__edit:before { background-image: url(../../../assets/images/edit-solid.svg);}
+  &__new:before { background-image: url(../../../assets/images/plus.svg);}
 }
 
 .carTable {

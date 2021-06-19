@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import appRoutes from '../../../routes/appRoutes';
 import s from './CarsListTable.module.scss';
 
 function CarsListTable(props) {
@@ -7,6 +9,9 @@ function CarsListTable(props) {
       <table className={s.carTable__root}>
         <thead className={s.carTable__head}>
           <tr className={s.carTable__head_row}>
+            <th className={s.carTable__head_cell}>
+              <Link className={`${s.btnLink} ${s.btnLink__new}`} to={appRoutes.dashboardCar('new')} />
+            </th>
             <th className={s.carTable__head_cell}>Модель</th>
             <th className={s.carTable__head_cell}>Изображение</th>
             <th className={s.carTable__head_cell}>Мин. цена</th>
@@ -19,6 +24,9 @@ function CarsListTable(props) {
         <tbody className={s.carTable__body}>
           {carsList.map((c) => (
             <tr key={c.id} className={s.carTable__body_row}>
+              <td className={s.carTable__body_cell}>
+                <Link className={`${s.btnLink} ${s.btnLink__edit}`} to={appRoutes.dashboardCar(c.id)} />
+              </td>
               <td className={s.carTable__body_cell}>{c.model}</td>
               <td className={s.carTable__body_cell}>
                 <div className={s.carTable__pic} style={{ backgroundImage: `url(${c.pic})` }} />
