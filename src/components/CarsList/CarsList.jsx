@@ -29,6 +29,7 @@ const FiltersWithPortal = () => {
   const [isSidePortalOpen, toggleSidePortal, Portal] = useSidePortal();
   const { width } = useWindowSize();
   const dispatch = useDispatch();
+  if (isSidePortalOpen && width >= 1023.98) toggleSidePortal(false);
   const onSubmitHandle = (data) => {
     dispatch(setFilterCars(data));
     toggleSidePortal(false);
@@ -53,10 +54,6 @@ const FiltersWithPortal = () => {
             </>
           );
         }
-        // console.log(isSidePortalOpen);
-        // useEffect(() => {
-        // if (isSidePortalOpen) toggleSidePortal(false);
-        // }, []);
         return <Filters categoryOptions={categoryOptions} />;
       }}
     </Formik>
