@@ -1,16 +1,16 @@
 @import './variables.scss';
 
-@mixin buttonAction($bg-color: $primary, $color: $white) {
-  min-width: 110px;
+@mixin buttonBase() {
+  display: inline-block;
+  min-width: 30px;
   height: 30px;
   margin: 0;
-  padding: 0 10px;
   font-size: 12px;
-  line-height: 12px;
+  line-height: 30px;
   vertical-align: middle;
+  text-decoration: none;
   border: none;
   border-radius: 4px;
-
   transition: all ease 0.2s;
   &:active {
     box-shadow: -6px -10px 29px -5px rgba(43, 48, 52, 0.92) inset;
@@ -32,18 +32,6 @@
   &:disabled {
     background: $gray;
   }
-}
-
-@mixin buttonPrimaryStyle {
-  @include buttonStyle($primary, $white)
-}
-
-@mixin buttonSecondaryStyle {
-  @include buttonStyle($secondary, $main-gray)
-}
-
-@mixin buttonAlertStyle {
-  @include buttonStyle($alert, $white)
 }
 
 @mixin menuElementHover() {

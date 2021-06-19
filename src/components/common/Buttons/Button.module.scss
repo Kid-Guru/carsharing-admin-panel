@@ -2,17 +2,19 @@
 @import '../../../styles/_mixins.scss';
 
 .button {
-  @include buttonAction;
+  @include buttonBase;
+  min-width: 110px;
+  padding: 0 10px;
 }
 
 .primaryStyle {
-  @include buttonPrimaryStyle;
+  @include buttonStyle($primary, $white)
 }
 
 .secondaryStyle {
-  @include buttonSecondaryStyle;
+  @include buttonStyle($secondary, $main-gray)
 }
 
 .alertStyle {
-  @include buttonAlertStyle;
+  @include buttonStyle($alert, $white)
 }
