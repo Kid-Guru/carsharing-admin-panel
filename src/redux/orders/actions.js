@@ -28,9 +28,8 @@ const getOrders = () => async (dispatch, getState) => {
   try {
     const responseOrders = await apiService.getOrders(params);
     const orders = responseOrders.data.data;
-    dispatch(setOrders({ data: orders, total: responseOrders.data.count, status: 'received' }));
+    dispatch(setOrders({ data: orders, total: responseOrders.data.count }));
   } catch (e) {
-    dispatch(setStatus({ status: 'error' }));
     throw new Error('Ошибка получения данных');
   }
 };
@@ -45,8 +44,11 @@ export const initialOrdersRequest = () => async (dispatch) => {
   ];
 
   Promise.all(responses)
-    .then()
+    .then(() => {
+      dispatch(setStatus({ status: 'received' }));
+    })
     .catch((e) => {
+      dispatch(setStatus({ status: 'error' }));
       console.log(e);
     });
 };
@@ -57,8 +59,10 @@ export const setPageOrders = (pageNumber) => async (dispatch, getState) => {
   dispatch(setPage({ page: pageNumber }));
   dispatch(setStatus({ status: 'fetching' }));
   try {
-    dispatch(getOrders());
+    await dispatch(getOrders());
+    dispatch(setStatus({ status: 'received' }));
   } catch (e) {
+    dispatch(setStatus({ status: 'error' }));
     console.log(e);
   }
 };
@@ -72,8 +76,10 @@ export const setFilterOrders = (newFilter) => async (dispatch) => {
   dispatch(setFilter({ filters }));
   dispatch(setStatus({ status: 'fetching' }));
   try {
-    dispatch(getOrders());
+    await dispatch(getOrders());
+    dispatch(setStatus({ status: 'received' }));
   } catch (e) {
+    dispatch(setStatus({ status: 'error' }));
     console.log(e);
   }
 };

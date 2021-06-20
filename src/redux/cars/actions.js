@@ -39,7 +39,7 @@ const getCars = () => async (dispatch, getState) => {
 export const externalAllCarsRequest = () => async (dispatch) => {
   dispatch(setStatus({ status: 'initial' }));
   // dispatch(setFilter({ filters: { category: null } }));
-  dispatch(getCars());
+  return dispatch(getCars());
 };
 
 export const initialAllCarsRequest = () => async (dispatch) => {

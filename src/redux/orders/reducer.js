@@ -16,11 +16,10 @@ const defaultState = {
 };
 
 const handlers = {
-  [actions.setOrders]: (state, { payload: { data, total, status } }) => ({
+  [actions.setOrders]: (state, { payload: { data, total } }) => ({
     ...state,
     data,
     total,
-    status,
   }),
   [actions.setStatus]: (state, { payload: { status } }) => ({ ...state, status }),
   [actions.setPage]: (state, { payload: { page } }) => ({ ...state, page }),
