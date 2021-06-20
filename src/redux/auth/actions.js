@@ -2,9 +2,7 @@ import { createAction } from 'redux-actions';
 import { authService } from '../../api/service';
 import cookieHelper from '../../helpers/cookieHelper';
 
-export const setAuthFlag = createAction('SET_AUTH_FLAG');
 export const setAuthStatus = createAction('SET_AUTH_STATUS');
-// export const setAuthErrors = createAction('SET_AUTH_ERRORS');
 
 export const checkTokens = () => (dispatch) => {
   if (cookieHelper.getAccessToken() || cookieHelper.getRefreshToken()) {
@@ -15,12 +13,11 @@ export const checkTokens = () => (dispatch) => {
 };
 
 export const login = (formData, setErrorsForm, setSubmitting) => async (dispatch) => {
-  const authData = {
-    username: formData.login,
-    password: formData.password,
-  };
   try {
-    const response = await authService.login(authData);
+    const response = await authService.login({
+      username: formData.login,
+      password: formData.password,
+    });
     // eslint-disable-next-line camelcase
     const { access_token, refresh_token, expires_in } = response.data;
     cookieHelper.setAccessRefreshTokens(access_token, refresh_token, expires_in);
