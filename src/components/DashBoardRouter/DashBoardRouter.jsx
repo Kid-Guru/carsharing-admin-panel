@@ -14,7 +14,7 @@ function DashBoardRouter() {
         render={() => <Redirect to={appRoutes.dashboardOrders()} />}
       />
       <Route path={appRoutes.dashboardOrders()} render={() => <OrdersList />} />
-      <Route path={appRoutes.dashboardOrder(':id')} render={() => <OrderEdit />} />
+      <Route path={appRoutes.dashboardOrder(':id')} render={({ match: { params } }) => <OrderEdit {...params} />} />
       <Route path={appRoutes.dashboardCars()} render={() => <CarsList />} />
       <Route path={appRoutes.dashboardCar(':id')} render={() => <CarEdit />} />
       <Route path={`${appRoutes.dashboard()}/*`} render={() => <Redirect to={appRoutes.dashboardOrders()} />} />
