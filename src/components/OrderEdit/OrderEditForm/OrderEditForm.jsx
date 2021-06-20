@@ -1,16 +1,13 @@
-import { Form, useFormikContext } from 'formik';
-import { useEffect } from 'react';
+import { Form } from 'formik';
 import { useSelector } from 'react-redux';
-import beautify from '../../../helpers/beautify';
-import calculateRentPrice from '../../../helpers/priceHelper';
 import { colorOptionsSelectorCarry } from '../../../redux/cars/selectors';
 import { fieldsOptionsSelector } from '../../../redux/orderEdit/selectors';
 import { pointOptionsSelectorCarry } from '../../../redux/points/selectors';
-import { ratesUnitsSelectorCarry } from '../../../redux/rates/selectors';
 import CheckboxBtnGroup from '../../Form/CheckboxBtnGroup/CheckboxBtnGroup';
 import DateField from '../../Form/DateField/DateField';
 import RadioBtnGroup from '../../Form/RadioBtnGroup/RadioBtnGroup';
 import SelectField from '../../Form/SelectField/SelectField';
+import OrderPrice from './OrderPrice';
 import s from './OrderEditForm.module.scss';
 
 const extraOptions = [
@@ -18,34 +15,6 @@ const extraOptions = [
   { text: 'Детское кресло', name: 'isNeedChildChair' },
   { text: 'Правый руль', name: 'isRightWheel' },
 ];
-
-function OrderPrice() {
-  const {
-    values: {
-      dateFrom, dateTo, price, isFullTank, isNeedChildChair, isRightWheel, rate,
-    },
-    setFieldValue,
-  } = useFormikContext();
-  const getRateUnits = useSelector(ratesUnitsSelectorCarry);
-
-  useEffect(() => {
-    const calculateParams = {
-      rate: getRateUnits(rate),
-      dateFrom,
-      dateTo,
-      isFullTank,
-      isNeedChildChair,
-      isRightWheel,
-    };
-    const newPrice = calculateRentPrice(calculateParams);
-    setFieldValue('price', newPrice);
-  }, [dateFrom, dateTo, isFullTank, isNeedChildChair, isRightWheel, rate]);
-  return (
-    <p className={s.edit__price}>
-      {`Цена: ${beautify.currency(price)}`}
-    </p>
-  );
-}
 
 function OrderEditForm({
   dateFrom, dateTo, city, car,
