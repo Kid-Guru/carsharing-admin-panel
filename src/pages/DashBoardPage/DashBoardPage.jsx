@@ -1,30 +1,27 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import Aside from '../../components/Aside/Aside';
-import DashBoardLayout from '../../components/DashBoardLayout/DashBoardLayout';
 import DashBoardRouter from '../../components/DashBoardRouter/DashBoardRouter';
 import Footer from '../../components/Footer/Footer';
 import TopBar from '../../components/TopBar/TopBar';
-import { isAuthSelector } from '../../redux/auth/selectors';
-import appRoutes from '../../routes/appRoutes';
+import s from './DashBoardPage.module.scss';
 
-const MemoDashBoardPage = React.memo(
-  // eslint-disable-next-line prefer-arrow-callback
-  function DashBoardPage() {
-    const isAuth = useSelector(isAuthSelector);
-    if (!isAuth) {
-      return <Redirect to={appRoutes.login()} />;
-    }
-    return (
-      <DashBoardLayout
-        topbar={<TopBar />}
-        content={<DashBoardRouter />}
-        aside={<Aside />}
-        footer={<Footer />}
-      />
-    );
-  },
-);
+function DashBoardPage() {
+  return (
+    <div className={s.layout__container}>
+      <div className={s.layout__aside}>
+        <Aside />
+      </div>
+      <div className={s.layout__topbar}>
+        <TopBar />
+      </div>
+      <div className={s.layout__article}>
+        <DashBoardRouter />
+      </div>
+      <div className={s.layout__footer}>
+        <Footer />
+      </div>
+    </div>
+  );
+}
 
-export default MemoDashBoardPage;
+export default DashBoardPage;
