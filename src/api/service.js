@@ -42,9 +42,20 @@ const apiService = {
   getCars(filters) {
     const params = {
       categoryId: filters?.categoryId,
+      id: filters?.id,
     };
     const stringified = queryString.stringify(params, stringifyConfig);
     return mainInstance.get(`${routes.CAR}?${stringified}`);
+  },
+  putCars(id, body) {
+    const params = {};
+    const stringified = queryString.stringify(params, stringifyConfig);
+    return mainInstance.put(`${routes.CAR}/${id}?${stringified}`, body);
+  },
+  deleteCars(id) {
+    const params = {};
+    const stringified = queryString.stringify(params, stringifyConfig);
+    return mainInstance.delete(`${routes.CAR}/${id}?${stringified}`);
   },
   getStatuses() {
     return mainInstance.get(`${routes.STATUS}`);
