@@ -10,7 +10,7 @@ function CarsListTable(props) {
         <thead className={s.carTable__head}>
           <tr className={s.carTable__head_row}>
             <th className={s.carTable__head_cell}>
-              <Link className={`${s.btnLink} ${s.btnLink__new}`} to={appRoutes.dashboardCar('new')} />
+              <Link className={`${s.btnLink} ${s.btnLink__new}`} to={appRoutes.dashboardCarNew()} />
             </th>
             <th className={s.carTable__head_cell}>Модель</th>
             <th className={s.carTable__head_cell}>Изображение</th>
@@ -25,7 +25,7 @@ function CarsListTable(props) {
           {carsList.map((c) => (
             <tr key={c.id} className={s.carTable__body_row}>
               <td className={s.carTable__body_cell}>
-                <Link className={`${s.btnLink} ${s.btnLink__edit}`} to={appRoutes.dashboardCar(c.id)} />
+                <Link className={`${s.btnLink} ${s.btnLink__edit}`} to={appRoutes.dashboardCarEdit(c.id)} />
               </td>
               <td className={s.carTable__body_cell}>{c.model}</td>
               <td className={s.carTable__body_cell}>
