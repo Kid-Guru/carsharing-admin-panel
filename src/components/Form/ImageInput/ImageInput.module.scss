@@ -3,13 +3,6 @@
 
 .root {
   display: flex;
-  justify-content: space-around;
-}
-
-
-.wrapper {
-  display: flex;
-  width: 100%;
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -21,12 +14,20 @@
   @include visually-hidden;
 }
 
-.text {
-  // display: inline-block;
+.textWrapper {
   flex: 1 1 auto;
+}
+
+.text {
+  flex: 1 1 0;
+  width: 100%;
+  height: 100%;
   padding: 0 10px;
   height: 30px;
   vertical-align: top;
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   border: $borderDelimetr;
   border-right: none;
   border-top-left-radius: 5px;
@@ -34,10 +35,9 @@
 }
 
 .button {
-  // display: inline-block;
   padding: 0 10px;
   height: 30px;
-  @include buttonSecondaryStyle;
+  @include buttonStyle($secondary, $main-gray);
   border: $borderDelimetr;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;

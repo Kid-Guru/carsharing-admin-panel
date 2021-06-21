@@ -1,33 +1,40 @@
+import { useField } from 'formik';
 import { useRef } from 'react';
 import s from './ImageInput.module.scss';
 
 function ImageInput(props) {
   const {
     label = 'label',
-    placeholder,
+    // placeholder,
     name,
-    isError,
-    errorText = '',
   } = props;
-  const reader = new FileReader();
-  reader.onload = () => {
-    console.log(reader.result);
-  };
+  // eslint-disable-next-line no-unused-vars
+  const [field, meta, helpers] = useField({ name });
   const inputRef = useRef(null);
   const addHandler = () => inputRef.current?.click();
   const onLoadHandler = (e) => {
-    console.log(e.target.files)
-    reader.readAsDataURL(e.target.files[0]);
-  }
+    const thumbnail = {
+      size: 0,
+      originalname: '',
+      mimetype: '',
+      path: '',
+    };
+    const reader = new FileReader();
+    reader.onload = () => {
+      helpers.setValue({ ...thumbnail, path: reader.result });
+    };
+    const fileImage = e.target.files?.[0];
+    if (!fileImage) return;
+    thumbnail.size = fileImage.size;
+    thumbnail.originalname = fileImage.name;
+    thumbnail.mimetype = fileImage.type;
+    reader.readAsDataURL(fileImage);
+  };
   return (
     <div className={s.root}>
-
-      <span className={s.wrapper} htmlFor={label}>
-        <input onChange={onLoadHandler} className={s.input} ref={inputRef} id={label} type="file" accept="image/jpeg,image/png" />
-        <span className={s.text}>Выберете файл...</span>
-        <button onClick={addHandler} className={s.button} type="button">Обзор</button>
-      </span>
-
+      <input onChange={onLoadHandler} className={s.input} ref={inputRef} id={label} type="file" accept="image/jpeg,image/png" />
+      <div className={s.text}>{field.value?.originalname}</div>
+      <button onClick={addHandler} className={s.button} type="button">Обзор</button>
     </div>
   );
 }
