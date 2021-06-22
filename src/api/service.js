@@ -47,6 +47,11 @@ const apiService = {
     const stringified = queryString.stringify(params, stringifyConfig);
     return mainInstance.get(`${routes.CAR}?${stringified}`);
   },
+  postCars(body) {
+    const params = {};
+    const stringified = queryString.stringify(params, stringifyConfig);
+    return mainInstance.post(`${routes.CAR}?${stringified}`, body);
+  },
   putCars(id, body) {
     const params = {};
     const stringified = queryString.stringify(params, stringifyConfig);
