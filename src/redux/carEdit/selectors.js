@@ -4,15 +4,15 @@ const initValuesSelector = (state) => {
   const { data } = state.car;
 
   return {
-    model: data?.name,
-    number: data?.number,
-    minPrice: data?.priceMin,
-    maxPrice: data?.priceMax,
-    fuelLevel: data?.tank,
+    model: data?.name || '',
+    number: data?.number || '',
+    minPrice: data?.priceMin || '',
+    maxPrice: data?.priceMax || '',
+    fuelLevel: data?.tank || '',
     category: data?.categoryId?.id || null,
-    description: data?.description,
-    availableColors: data?.colors,
-    thumbnail: data?.thumbnail,
+    description: data?.description || '',
+    availableColors: data?.colors || [],
+    thumbnail: data?.thumbnail || {},
   };
 };
 

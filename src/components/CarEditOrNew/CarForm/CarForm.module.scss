@@ -78,8 +78,22 @@
     }
   }
   &__image {
+    position: relative;
     aspect-ratio: 16/9;
     object-fit: contain;
+    // &:after {
+    //   content: 'опа!!';
+    //   display: block;
+    //   position: absolute;
+    //   top: 0;
+    //   bottom: 0;
+    //   left: 0;
+    //   right: 0;
+    //   border: 1px solid peachpuff;
+    //   // height: 50px;
+    //   // width: 50px;
+    //   // background-image: url(ishere.jpg);
+    // }
   }
   &__carName {
     margin: 0;
@@ -87,6 +101,9 @@
     font-size: 24.5px;
     line-height: 28px;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &__carCategory {
     margin: 0;
@@ -114,6 +131,9 @@
     font-size: 13.5px;
     line-height: 19px;
     color: $main-gray;
+    &_placeholder {
+      opacity: 0.5;
+    }
   }
 }
 

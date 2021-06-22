@@ -1,6 +1,5 @@
 import { Form, Formik } from 'formik';
 import { useHistory } from 'react-router-dom';
-import * as yup from 'yup';
 import { getImageURL } from '../../../helpers/imageHelpers';
 import Button from '../../common/Buttons/Button';
 import ButtonSubmit from '../../common/Buttons/ButtonSubmit';
@@ -11,12 +10,13 @@ import SelectField from '../../Form/SelectField/SelectField';
 import TextareaField from '../../Form/TextareaField/TextareaField';
 import appRoutes from '../../../routes/appRoutes';
 import s from './CarForm.module.scss';
+import { validationSchema } from './validationSchema';
 
 const countFillPercentage = (fields) => {
   const entries = Object.entries(fields);
   const fillCount = entries.reduce((acc, [key, val]) => {
     if (key === 'thumbnail') {
-      return val?.size !== 0 ? acc + 1 : acc;
+      return val?.size ? acc + 1 : acc;
     }
     if (key === 'availableColors') {
       return val?.length !== 0 ? acc + 1 : acc;
@@ -25,27 +25,6 @@ const countFillPercentage = (fields) => {
   }, 0);
   return Math.round((100 * fillCount) / entries.length);
 };
-
-// Сделать валидацию картинки
-const validationSchema = yup.object().shape({
-  model: yup.string('Введите модель')
-    .required('Поле обязательно')
-    .max(100, 'Максимум 100 символов'),
-  minPrice: yup.number('Введите число')
-    .required('Поле обязательно')
-    .min(0, 'Не может быть отрицательной')
-    .when('maxPrice', (maxPrice, schemaInstance) => schemaInstance.max(maxPrice, `Не может быть больше ${maxPrice}`)),
-  maxPrice: yup.number('Введите число')
-    .required('Поле обязательно')
-    .min(0, 'Не может быть отрицательной')
-    .when('minPrice', (minPrice, schemaInstance) => schemaInstance.min(minPrice, `Не может быть меньше ${minPrice}`)),
-  fuelLevel: yup.number('Введите число')
-    .min(0, 'Минимум 0%')
-    .max(100, 'Максимум 100%'),
-  category: yup.string().required('Поле обязательно'),
-  description: yup.string('Введите описание').max(200, 'Максимум 200 символов'),
-  thumbnail: yup.object().required(),
-}, [['minPrice', 'maxPrice']]);
 
 function CarForm({
   initValues, categoryOptions, submitHandle, deleteHandle,
@@ -103,7 +82,14 @@ function CarForm({
                   </div>
                   <div className={s.preview__section}>
                     <p className={s.preview__title}>Описание</p>
-                    <p className={s.preview__discription}>{description}</p>
+                    <p className={s.preview__discription}>
+                      {description
+                        || (
+                          <span className={s.preview__discription_placeholder}>
+                            Введите описание
+                          </span>
+                        )}
+                    </p>
                   </div>
                 </div>
               </section>

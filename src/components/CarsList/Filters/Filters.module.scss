@@ -2,9 +2,10 @@
 @import '../../../styles/_mixins.scss';
 
 .filters {
+  position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: top;
+  z-index: 2;
   &__col {
     width: 150px;
     margin-right: 10px;

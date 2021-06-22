@@ -5,11 +5,11 @@ import s from './ImageInput.module.scss';
 function ImageInput(props) {
   const {
     label = 'label',
-    // placeholder,
+    placeholder = 'Загрузите изображение',
     name,
   } = props;
-  // eslint-disable-next-line no-unused-vars
   const [field, meta, helpers] = useField({ name });
+  const isError = meta.touched && meta.error;
   const inputRef = useRef(null);
   const addHandler = () => inputRef.current?.click();
   const onLoadHandler = (e) => {
@@ -32,9 +32,18 @@ function ImageInput(props) {
   };
   return (
     <div className={s.root}>
-      <input onChange={onLoadHandler} className={s.input} ref={inputRef} id={label} type="file" accept="image/jpeg,image/png" />
-      <div className={s.text}>{field.value?.originalname}</div>
-      <button onClick={addHandler} className={s.button} type="button">Обзор</button>
+      <input
+        onChange={onLoadHandler}
+        className={s.input}
+        ref={inputRef}
+        id={label}
+        type="file"
+        accept="image/jpeg,image/png"
+      />
+      <div className={`${s.text} ${isError && s.text_error}`}>
+        {field.value?.originalname || placeholder}
+      </div>
+      <button onClick={addHandler} className={`${s.button} ${isError && s.button_error}`} type="button">Обзор</button>
     </div>
   );
 }
