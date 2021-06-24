@@ -24,10 +24,8 @@ function DateField(props) {
           className="dpStyles__input"
           clearButtonClassName="dpStyles__clear"
           placeholderText={placeholder}
-          // locale="ru"
           minDate={minDate}
           maxDate={maxDate}
-          // filterTime={filterTimeFrom}
           showTimeSelect
           isClearable
           dateFormat="dd.MM.yyyy HH:mm "
