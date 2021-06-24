@@ -1,0 +1,24 @@
+@import '../../styles/variables.scss';
+
+.root {
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 15px;
+  transform: translateY(0%);
+  color: $white;
+  transition: all ease 0.2s;
+  &_showing {
+    transform: translateY(100%);
+  }
+}
+
+.success {
+  background-color: $seccess;
+}
+
+.alert {
+  background-color: $alert;
+}

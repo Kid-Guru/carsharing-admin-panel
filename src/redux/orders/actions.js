@@ -2,6 +2,7 @@ import { createAction } from 'redux-actions';
 import { apiService } from '../../api/service';
 import { externalAllCarsRequest } from '../cars/actions';
 import { getAllCities } from '../cities/actions';
+import { showMessage } from '../messageBar/actions';
 import { getAllStatuses } from '../statuses/actions';
 
 export const setStatus = createAction('SET_ORDERS_STATUS');
@@ -30,7 +31,7 @@ const getOrders = () => async (dispatch, getState) => {
     const orders = responseOrders.data.data;
     dispatch(setOrders({ data: orders, total: responseOrders.data.count }));
   } catch (e) {
-    throw new Error('Ошибка получения данных');
+    throw new Error('Произошла ошибка получения данных. Попробуйте еще');
   }
 };
 
@@ -48,8 +49,7 @@ export const initialOrdersRequest = () => async (dispatch) => {
       dispatch(setStatus({ status: 'received' }));
     })
     .catch((e) => {
-      dispatch(setStatus({ status: 'error' }));
-      console.log(e);
+      dispatch(showMessage(e.message, 'alert'));
     });
 };
 
@@ -62,8 +62,7 @@ export const setPageOrders = (pageNumber) => async (dispatch, getState) => {
     await dispatch(getOrders());
     dispatch(setStatus({ status: 'received' }));
   } catch (e) {
-    dispatch(setStatus({ status: 'error' }));
-    console.log(e);
+    dispatch(showMessage(e.message, 'alert'));
   }
 };
 
@@ -79,7 +78,6 @@ export const setFilterOrders = (newFilter) => async (dispatch) => {
     await dispatch(getOrders());
     dispatch(setStatus({ status: 'received' }));
   } catch (e) {
-    dispatch(setStatus({ status: 'error' }));
-    console.log(e);
+    dispatch(showMessage(e.message, 'alert'));
   }
 };

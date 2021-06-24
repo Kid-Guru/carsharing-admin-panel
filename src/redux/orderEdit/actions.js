@@ -4,6 +4,7 @@ import { externalAllCarsRequest } from '../cars/actions';
 import { carByIdSelector } from '../cars/selectors';
 import { getAllCities } from '../cities/actions';
 import { cityByIdSelector } from '../cities/selectors';
+import { showMessage } from '../messageBar/actions';
 import { getAllPoints } from '../points/actions';
 import { pointByIdSelector } from '../points/selectors';
 import { getAllRates } from '../rates/actions';
@@ -15,12 +16,21 @@ export const setStatus = createAction('SET_ORDER_STATUS');
 export const setOrder = createAction('SET_ORDER');
 export const cleanupOrder = createAction('CLEANUP_ORDER');
 
-// Добавить обработку ошибки
 const getOrder = (id) => async (dispatch) => {
   const params = { id };
-  const responseOrder = await apiService.getOrders(params);
-  const order = responseOrder.data.data?.[0];
-  dispatch(setOrder({ data: order }));
+  try {
+    const responseOrder = await apiService.getOrders(params);
+    const orders = responseOrder.data.data;
+    if (orders.length === 0) {
+      throw new Error(`Заказ с id ${id} не найден`);
+    }
+    dispatch(setOrder({ data: orders[0] }));
+  } catch (e) {
+    if (e.response || e.request) {
+      throw new Error('Произошла ошибка получения данных. Попробуйте еще');
+    }
+    throw e;
+  }
 };
 
 export const orderRequest = (id) => async (dispatch) => {
@@ -37,8 +47,7 @@ export const orderRequest = (id) => async (dispatch) => {
   Promise.all(responses)
     .then(() => dispatch(setStatus({ status: 'received' })))
     .catch((e) => {
-      console.log(e);
-      dispatch(setStatus({ status: 'error' }));
+      dispatch(showMessage(e.message, 'alert'));
     });
 };
 
@@ -63,11 +72,8 @@ export const orderUpdate = (orderData) => async (dispatch, getState) => {
   try {
     await apiService.putOrders(id, requestBody);
     dispatch(setStatus({ status: 'transferSeccuess' }));
+    dispatch(showMessage('Заказ успешно изменен!!', 'success'));
   } catch (e) {
-    if (e.response.status >= 200) {
-      dispatch(setStatus({ status: 'transferError' }));
-    } else {
-      throw e;
-    }
+    dispatch(showMessage(e.message, 'alert'));
   }
 };

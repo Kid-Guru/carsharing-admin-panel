@@ -13,9 +13,13 @@
   }
   &__aside {
     grid-area: aside;
+    position: relative;
+    z-index: 50;
   }
-  &__header {
+  &__topbar {
     grid-area: topbar;
+    position: relative;
+    z-index: 30;
   }
   &__article {
     grid-area: article;

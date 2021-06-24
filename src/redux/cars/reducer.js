@@ -6,17 +6,14 @@ const defaultState = {
   filters: {
     category: null,
   },
-  // dataFiltred: false,
   status: 'initial',
   errors: [],
 };
 
 const handlers = {
-  [actions.setCars]: (state, { payload: { data, dataFiltred, status } }) => ({
+  [actions.setCars]: (state, { payload: { data } }) => ({
     ...state,
     data,
-    dataFiltred,
-    status,
   }),
   [actions.setFilter]: (state, { payload: { filters } }) => ({ ...state, filters }),
   [actions.setStatus]: (state, { payload: { status } }) => ({ ...state, status }),

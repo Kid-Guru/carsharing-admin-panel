@@ -25,6 +25,7 @@ function OrderPrice() {
     };
     const newPrice = calculateRentPrice(calculateParams);
     setFieldValue('price', newPrice);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dateFrom, dateTo, isFullTank, isNeedChildChair, isRightWheel, rate]);
   return (
     <p className={s.edit__price}>
