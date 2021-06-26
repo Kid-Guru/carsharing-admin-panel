@@ -4,6 +4,13 @@ import { ReactComponent as ListOrders } from '../../assets/images/listOrders.svg
 import appRoutes from '../../routes/appRoutes';
 import s from './Aside.module.scss';
 
+const mapAside = [
+  { title: 'Заказы', link: appRoutes.dashboardOrders(), icon: <ListOrders /> },
+  { title: 'Машины', link: appRoutes.dashboardCars(), icon: <ListAuto /> },
+  { title: 'Города', link: appRoutes.dashboardCities(), icon: <ListAuto /> },
+  { title: 'Точки выдачи', link: appRoutes.dashboardPoints(), icon: <ListAuto /> },
+];
+
 function Aside(props) {
   const { closePortalCallback = () => null } = props;
   return (
@@ -13,46 +20,19 @@ function Aside(props) {
       </header>
       <nav className={s.navigation}>
         <ul className={s.navigation__list}>
-          <li className={s.navigation__listItem}>
-            <NavLink
-              to={appRoutes.dashboardOrders()}
-              activeClassName={s.active}
-              onClick={closePortalCallback}
-            >
-              <span className={s.navigation__icon}><ListOrders /></span>
-              <span className={s.navigation__linkText}>Заказы</span>
-            </NavLink>
-          </li>
-          <li className={s.navigation__listItem}>
-            <NavLink
-              to={appRoutes.dashboardCars()}
-              activeClassName={s.active}
-              onClick={closePortalCallback}
-            >
-              <span className={s.navigation__icon}><ListAuto /></span>
-              <span className={s.navigation__linkText}>Машины</span>
-            </NavLink>
-          </li>
-          <li className={s.navigation__listItem}>
-            <NavLink
-              to={appRoutes.dashboardCities()}
-              activeClassName={s.active}
-              onClick={closePortalCallback}
-            >
-              <span className={s.navigation__icon}><ListAuto /></span>
-              <span className={s.navigation__linkText}>Города</span>
-            </NavLink>
-          </li>
-          <li className={s.navigation__listItem}>
-            <NavLink
-              to={appRoutes.dashboardPoints()}
-              activeClassName={s.active}
-              onClick={closePortalCallback}
-            >
-              <span className={s.navigation__icon}><ListAuto /></span>
-              <span className={s.navigation__linkText}>Точки выдачи</span>
-            </NavLink>
-          </li>
+
+          {mapAside.map((item) => (
+            <li className={s.navigation__listItem}>
+              <NavLink
+                to={item.link}
+                activeClassName={s.active}
+                onClick={closePortalCallback}
+              >
+                <span className={s.navigation__icon}>{item.icon}</span>
+                <span className={s.navigation__linkText}>{item.title}</span>
+              </NavLink>
+            </li>
+          ))}
 
         </ul>
       </nav>
