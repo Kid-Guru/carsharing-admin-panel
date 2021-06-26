@@ -1,6 +1,5 @@
 import * as yup from 'yup';
 
-// Сделать валидацию картинки
 export const validationSchema = yup.object().shape({
   model: yup.string()
     .required('Поле обязательно')
