@@ -20,6 +20,7 @@ function CarsList() {
 
   return (
     <ListContentLayout
+      title="Машины"
       header={<Filters />}
       content={<CarsListTable carsList={carsList} />}
       noIndentContent
