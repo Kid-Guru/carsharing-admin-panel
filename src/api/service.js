@@ -34,19 +34,13 @@ const apiService = {
     return mainInstance.get(`${routes.CITY}`);
   },
   putCities(id, body) {
-    const params = {};
-    const stringified = queryString.stringify(params, stringifyConfig);
-    return mainInstance.put(`${routes.CITY}/${id}${stringified}`, body);
+    return mainInstance.put(`${routes.CITY}/${id}`, body);
   },
   postCities(body) {
-    const params = {};
-    const stringified = queryString.stringify(params, stringifyConfig);
-    return mainInstance.post(`${routes.CITY}?${stringified}`, body);
+    return mainInstance.post(`${routes.CITY}`, body);
   },
   deleteCities(id) {
-    const params = {};
-    const stringified = queryString.stringify(params, stringifyConfig);
-    return mainInstance.delete(`${routes.CITY}/${id}?${stringified}`);
+    return mainInstance.delete(`${routes.CITY}/${id}`);
   },
   getPoints() {
     return mainInstance.get(`${routes.POINT}`);
