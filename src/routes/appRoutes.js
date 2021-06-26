@@ -7,4 +7,5 @@ export default {
   dashboardCars: () => '/dashboard/cars',
   dashboardCarEdit: (id) => `/dashboard/car/${id}`,
   dashboardCarNew: () => '/dashboard/carNew/',
+  dashboardCities: () => '/dashboard/cities',
 };
