@@ -9,6 +9,7 @@ import citiesReducer from './cities/reducer';
 import pointsReducer from './points/reducer';
 import statusesReducer from './statuses/reducer';
 import ratesReducer from './rates/reducer';
+import rateTypesReducer from './rates/rateTypes';
 import messageBarReducer from './messageBar/reducer';
 
 export default combineReducers({
@@ -22,5 +23,6 @@ export default combineReducers({
   points: pointsReducer,
   statuses: statusesReducer,
   rates: ratesReducer,
+  rateTypes: rateTypesReducer,
   messageBar: messageBarReducer,
 });
