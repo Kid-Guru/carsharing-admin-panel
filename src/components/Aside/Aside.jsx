@@ -43,6 +43,16 @@ function Aside(props) {
               <span className={s.navigation__linkText}>Города</span>
             </NavLink>
           </li>
+          <li className={s.navigation__listItem}>
+            <NavLink
+              to={appRoutes.dashboardPoints()}
+              activeClassName={s.active}
+              onClick={closePortalCallback}
+            >
+              <span className={s.navigation__icon}><ListAuto /></span>
+              <span className={s.navigation__linkText}>Точки выдачи</span>
+            </NavLink>
+          </li>
 
         </ul>
       </nav>

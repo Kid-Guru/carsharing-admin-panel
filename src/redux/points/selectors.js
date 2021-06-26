@@ -1,5 +1,13 @@
 const pointByIdSelector = (state, id) => state.points.data.find((p) => p.id === id);
 
+const pointsTableSelector = (state) => state.points.data.map((c) => ({
+  id: c.id,
+  name: c.name,
+  address: c.address,
+  cityName: c.cityId?.name || 'город не назначен',
+  cityId: c.cityId?.id || null,
+}));
+
 const pointOptionsSelector = (state) => {
   const { data } = state.points;
   const { id: selectedCity } = state.order.data?.cityId;
@@ -15,11 +23,12 @@ const pointOptionsSelectorCarry = (state) => (cityId) => {
     .map((p) => ({ label: p.name, value: p.id }));
 };
 
-const isFetchingSelector = (state) => state.points.status === 'fetching';
+const isInitialSelector = (state) => state.points.status === 'initial';
 
 export {
   pointByIdSelector,
+  pointsTableSelector,
   pointOptionsSelectorCarry,
   pointOptionsSelector,
-  isFetchingSelector,
+  isInitialSelector,
 };

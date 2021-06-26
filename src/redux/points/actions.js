@@ -1,5 +1,6 @@
 import { createAction } from 'redux-actions';
 import { showMessage } from '../messageBar/actions';
+import { externalAllCitiesRequest } from '../cities/actions';
 import { apiService } from '../../api/service';
 
 export const setPoints = createAction('SET_POINTS');
@@ -23,7 +24,10 @@ export const externalAllPointsRequest = () => async (dispatch) => {
 
 export const initialAllPointsRequest = () => async (dispatch) => {
   dispatch(setStatus({ status: 'initial' }));
-  dispatch(getPoints())
+
+  const responses = [dispatch(getPoints()), dispatch(externalAllCitiesRequest())];
+
+  Promise.all(responses)
     .then(() => {
       dispatch(setStatus({ status: 'received' }));
     })
@@ -32,11 +36,18 @@ export const initialAllPointsRequest = () => async (dispatch) => {
     });
 };
 
-export const pointUpdate = (pointData, closeModalCallback) => async (dispatch) => {
+export const pointUpdate = (pointData, closeModalCallback) => async (dispatch, getState) => {
   dispatch(setStatus({ status: 'transfering' }));
+  const { data: cities } = getState().cities;
+  const selectedCity = cities.find((c) => c.id === pointData.city);
   const requestBody = {
     id: pointData.id,
     name: pointData.pointName,
+    address: pointData.pointAddress,
+    cityId: {
+      name: selectedCity.name,
+      id: selectedCity.id,
+    },
   };
   try {
     await apiService.putPoints(pointData.id, requestBody);
@@ -60,9 +71,19 @@ export const pointDelete = (id, closeModalCallback) => async (dispatch) => {
   }
 };
 
-export const pointPost = (pointData, closeCallback) => async (dispatch) => {
+export const pointPost = (pointData, closeCallback) => async (dispatch, getState) => {
   dispatch(setStatus({ status: 'transfering' }));
-  const requestBody = { name: pointData.pointName };
+  const { data: cities } = getState().cities;
+  const selectedCity = cities.find((c) => c.id === pointData.city);
+  const requestBody = {
+    id: pointData.id,
+    name: pointData.pointName,
+    address: pointData.pointAddress,
+    cityId: {
+      name: selectedCity.name,
+      id: selectedCity.id,
+    },
+  };
   try {
     await apiService.postPoints(requestBody);
     await dispatch(getPoints());
