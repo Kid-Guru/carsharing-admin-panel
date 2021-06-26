@@ -6,6 +6,8 @@
   flex-direction: column;
   height: 100%;
   padding: 28px;
+  overflow: hidden;
+  &__leftAlignment { align-items: baseline; }
 
   &__title {
     margin: 0;

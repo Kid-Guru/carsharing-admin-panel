@@ -2,10 +2,10 @@ import s from './ListContentLayout.module.scss';
 
 function ListContentLayout(props) {
   const {
-    title, content, header, footer, noIndentContent = false,
+    title, content, header, footer, noIndentContent = false, leftAlignment = false,
   } = props;
   return (
-    <article className={s.listContentLayout}>
+    <article className={`${s.listContentLayout} ${leftAlignment && s.listContentLayout__leftAlignment}`}>
       <h2 className={s.listContentLayout__title}>{title}</h2>
       <div className={s.listContentLayout__wrapper}>
         {header && (
