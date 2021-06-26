@@ -45,6 +45,15 @@ const apiService = {
   getPoints() {
     return mainInstance.get(`${routes.POINT}`);
   },
+  putPoints(id, body) {
+    return mainInstance.put(`${routes.POINT}/${id}`, body);
+  },
+  postPoints(body) {
+    return mainInstance.post(`${routes.POINT}`, body);
+  },
+  deletePoints(id) {
+    return mainInstance.delete(`${routes.POINT}/${id}`);
+  },
   getRates() {
     return mainInstance.get(`${routes.RATE}`);
   },
