@@ -3,12 +3,6 @@ const cityByIdSelector = (state, id) => state.cities.data.find((c) => c.id === i
 const citiesTableSelector = (state) => state.cities.data.map((c) => ({
   id: c.id,
   name: c.name,
-  // pic: getImageURL(c.thumbnail.path),
-  // minPrice: beautify.currency(c.priceMin),
-  // maxPrice: beautify.currency(c.priceMax),
-  // number: beautify.carNumber(c.number),
-  // description: c.description,
-  // category: c.categoryId?.name || '',
 }));
 
 const cityOptionsFilterSelector = (state) => {
