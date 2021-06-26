@@ -4,14 +4,14 @@ const pointOptionsSelector = (state) => {
   const { data } = state.points;
   const { id: selectedCity } = state.order.data?.cityId;
   return data
-    .filter((p) => p.cityId.id === selectedCity)
+    .filter((p) => p.cityId?.id === selectedCity)
     .map((p) => ({ label: p.name, value: p.id }));
 };
 
 const pointOptionsSelectorCarry = (state) => (cityId) => {
   const { data } = state.points;
   return data
-    .filter((p) => p.cityId.id === cityId)
+    .filter((p) => p.cityId?.id === cityId)
     .map((p) => ({ label: p.name, value: p.id }));
 };
 
