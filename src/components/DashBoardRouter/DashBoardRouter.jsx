@@ -3,6 +3,7 @@ import appRoutes from '../../routes/appRoutes';
 import CarEdit from '../CarEditOrNew/CarEdit';
 import CarNew from '../CarEditOrNew/CarNew';
 import CarsList from '../CarsList/CarsList';
+import CitiesList from '../Cities/CitiesList';
 import OrderEdit from '../OrderEdit/OrderEdit';
 import OrdersList from '../OrdersList/OrdersList';
 
@@ -19,6 +20,7 @@ function DashBoardRouter() {
       <Route path={appRoutes.dashboardCars()} render={() => <CarsList />} />
       <Route path={appRoutes.dashboardCarEdit(':id')} render={({ match: { params } }) => <CarEdit {...params} />} />
       <Route path={appRoutes.dashboardCarNew()} render={() => <CarNew />} />
+      <Route path={appRoutes.dashboardCities()} render={() => <CitiesList />} />
       <Route path={`${appRoutes.dashboard()}/*`} render={() => <Redirect to={appRoutes.dashboardOrders()} />} />
     </Switch>
   );

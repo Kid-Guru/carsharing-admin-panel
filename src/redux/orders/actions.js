@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions';
 import { apiService } from '../../api/service';
 import { externalAllCarsRequest } from '../cars/actions';
-import { getAllCities } from '../cities/actions';
+import { externalAllCitiesRequest } from '../cities/actions';
 import { showMessage } from '../messageBar/actions';
 import { getAllStatuses } from '../statuses/actions';
 
@@ -40,7 +40,7 @@ export const initialOrdersRequest = () => async (dispatch) => {
   const responses = [
     dispatch(getOrders()),
     dispatch(externalAllCarsRequest()),
-    dispatch(getAllCities()),
+    dispatch(externalAllCitiesRequest()),
     dispatch(getAllStatuses()),
   ];
 

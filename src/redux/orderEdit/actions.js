@@ -2,7 +2,7 @@ import { createAction } from 'redux-actions';
 import { apiService } from '../../api/service';
 import { externalAllCarsRequest } from '../cars/actions';
 import { carByIdSelector } from '../cars/selectors';
-import { getAllCities } from '../cities/actions';
+import { externalAllCitiesRequest } from '../cities/actions';
 import { cityByIdSelector } from '../cities/selectors';
 import { showMessage } from '../messageBar/actions';
 import { getAllPoints } from '../points/actions';
@@ -38,7 +38,7 @@ export const orderRequest = (id) => async (dispatch) => {
   const responses = [
     dispatch(getOrder(id)),
     dispatch(externalAllCarsRequest()),
-    dispatch(getAllCities()),
+    dispatch(externalAllCitiesRequest()),
     dispatch(getAllStatuses()),
     dispatch(getAllPoints()),
     dispatch(getAllRates()),

@@ -1,0 +1,40 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/_mixins.scss';
+
+.portal {
+  &__overlay {
+    padding: 20px 17px;
+    position: fixed;
+    z-index: 500;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.315);
+  }
+  &__content {
+    min-width: 500px;
+    padding: 20px 17px;
+    @include whiteBox;
+    position: fixed;
+    z-index: 500;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    @media (max-width: $mobile) {
+      min-width: 280px;
+    }
+  }
+  &__title {
+    margin: 0 0 20px 0;
+    padding: 0;
+    font-size: 17.5px;
+    line-height: 20px;
+    font-weight: normal;
+    text-align: center;
+    color: $main-accent;
+  }
+}

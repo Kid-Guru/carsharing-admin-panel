@@ -20,9 +20,7 @@ const getCars = () => async (dispatch, getState) => {
   }
 };
 
-/// fixme
 export const externalAllCarsRequest = () => async (dispatch) => {
-  dispatch(setStatus({ status: 'initial' }));
   dispatch(setFilter({ filters: { category: null } }));
   return dispatch(getCars());
 };
