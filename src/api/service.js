@@ -54,6 +54,18 @@ const apiService = {
   deletePoints(id) {
     return mainInstance.delete(`${routes.POINT}/${id}`);
   },
+  getRateTypes() {
+    return mainInstance.get(`${routes.RATETYPE}`);
+  },
+  putRateTypes(id, body) {
+    return mainInstance.put(`${routes.RATETYPE}/${id}`, body);
+  },
+  postRateTypes(body) {
+    return mainInstance.post(`${routes.RATETYPE}`, body);
+  },
+  deleteRateTypes(id) {
+    return mainInstance.delete(`${routes.RATETYPE}/${id}`);
+  },
   getRates() {
     return mainInstance.get(`${routes.RATE}`);
   },

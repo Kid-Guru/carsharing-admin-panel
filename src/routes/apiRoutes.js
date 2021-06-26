@@ -7,6 +7,7 @@ const routes = {
   CITY: 'db/city',
   POINT: 'db/point',
   RATE: 'db/rate',
+  RATETYPE: 'db/rateType',
   CAR: 'db/car',
   CATEGORY: 'db/category',
   STATUS: 'db/orderStatus',
