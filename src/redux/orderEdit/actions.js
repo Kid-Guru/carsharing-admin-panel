@@ -5,7 +5,7 @@ import { carByIdSelector } from '../cars/selectors';
 import { externalAllCitiesRequest } from '../cities/actions';
 import { cityByIdSelector } from '../cities/selectors';
 import { showMessage } from '../messageBar/actions';
-import { getAllPoints } from '../points/actions';
+import { externalAllPointsRequest } from '../points/actions';
 import { pointByIdSelector } from '../points/selectors';
 import { getAllRates } from '../rates/actions';
 import { rateByIdSelector } from '../rates/selectors';
@@ -40,7 +40,7 @@ export const orderRequest = (id) => async (dispatch) => {
     dispatch(externalAllCarsRequest()),
     dispatch(externalAllCitiesRequest()),
     dispatch(getAllStatuses()),
-    dispatch(getAllPoints()),
+    dispatch(externalAllPointsRequest()),
     dispatch(getAllRates()),
   ];
 
