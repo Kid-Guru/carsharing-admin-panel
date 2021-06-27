@@ -9,6 +9,7 @@ const mapAside = [
   { title: 'Машины', link: appRoutes.dashboardCars(), icon: <ListAuto /> },
   { title: 'Города', link: appRoutes.dashboardCities(), icon: <ListAuto /> },
   { title: 'Точки выдачи', link: appRoutes.dashboardPoints(), icon: <ListAuto /> },
+  { title: 'Типы тарифов', link: appRoutes.dashboardRateTypes(), icon: <ListAuto /> },
 ];
 
 function Aside(props) {
@@ -22,7 +23,7 @@ function Aside(props) {
         <ul className={s.navigation__list}>
 
           {mapAside.map((item) => (
-            <li className={s.navigation__listItem}>
+            <li key={item.title} className={s.navigation__listItem}>
               <NavLink
                 to={item.link}
                 activeClassName={s.active}

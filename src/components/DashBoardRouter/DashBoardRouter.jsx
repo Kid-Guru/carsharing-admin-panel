@@ -7,6 +7,7 @@ import CitiesList from '../Cities/CitiesList';
 import OrderEdit from '../OrderEdit/OrderEdit';
 import OrdersList from '../OrdersList/OrdersList';
 import PointsList from '../Points/PointsList';
+import RateTypesList from '../RateTypes/RateTypesList';
 
 function DashBoardRouter() {
   return (
@@ -23,6 +24,7 @@ function DashBoardRouter() {
       <Route path={appRoutes.dashboardCarNew()} render={() => <CarNew />} />
       <Route path={appRoutes.dashboardCities()} render={() => <CitiesList />} />
       <Route path={appRoutes.dashboardPoints()} render={() => <PointsList />} />
+      <Route path={appRoutes.dashboardRateTypes()} render={() => <RateTypesList />} />
       <Route path={`${appRoutes.dashboard()}/*`} render={() => <Redirect to={appRoutes.dashboardOrders()} />} />
     </Switch>
   );

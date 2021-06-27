@@ -35,13 +35,14 @@ export const initialAllRateTypesRequest = () => async (dispatch) => {
 export const rateTypeUpdate = (rateTypeData, closeModalCallback) => async (dispatch) => {
   dispatch(setStatus({ status: 'transfering' }));
   const requestBody = {
-    id: rateTypeData.id,
     name: rateTypeData.rateTypeName,
+    unit: rateTypeData.unit,
+    id: rateTypeData.id,
   };
   try {
     await apiService.putRateTypes(rateTypeData.id, requestBody);
     await dispatch(getRateTypes());
-    dispatch(showMessage('Город успешно сохранен!!', 'success'));
+    dispatch(showMessage('Тариф успешно сохранен!!', 'success'));
     closeModalCallback();
   } catch (e) {
     dispatch(showMessage('Произошла ошибка, попробуйте еще', 'alert'));
@@ -53,7 +54,7 @@ export const rateTypeDelete = (id, closeModalCallback) => async (dispatch) => {
   try {
     await apiService.deleteRateTypes(id);
     await dispatch(getRateTypes());
-    dispatch(showMessage('Город успешно удален!!', 'success'));
+    dispatch(showMessage('Тариф успешно удален!!', 'success'));
     closeModalCallback();
   } catch (e) {
     dispatch(showMessage('Произошла ошибка, попробуйте еще', 'alert'));
@@ -62,11 +63,14 @@ export const rateTypeDelete = (id, closeModalCallback) => async (dispatch) => {
 
 export const rateTypePost = (rateTypeData, closeCallback) => async (dispatch) => {
   dispatch(setStatus({ status: 'transfering' }));
-  const requestBody = { name: rateTypeData.rateTypeName };
+  const requestBody = {
+    name: rateTypeData.rateTypeName,
+    unit: rateTypeData.unit,
+  };
   try {
     await apiService.postRateTypes(requestBody);
     await dispatch(getRateTypes());
-    dispatch(showMessage('Город успешно сохранен!!', 'success'));
+    dispatch(showMessage('Тариф успешно сохранен!!', 'success'));
     closeCallback();
   } catch (e) {
     dispatch(showMessage('Произошла ошибка, попробуйте еще', 'alert'));

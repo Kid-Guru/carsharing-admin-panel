@@ -9,4 +9,5 @@ export default {
   dashboardCarNew: () => '/dashboard/carNew/',
   dashboardCities: () => '/dashboard/cities',
   dashboardPoints: () => '/dashboard/points',
+  dashboardRateTypes: () => '/dashboard/rateTypes',
 };
