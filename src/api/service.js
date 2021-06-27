@@ -54,6 +54,18 @@ const apiService = {
   deletePoints(id) {
     return mainInstance.delete(`${routes.POINT}/${id}`);
   },
+  getRates() {
+    return mainInstance.get(`${routes.RATE}`);
+  },
+  putRates(id, body) {
+    return mainInstance.put(`${routes.RATE}/${id}`, body);
+  },
+  postRates(body) {
+    return mainInstance.post(`${routes.RATE}`, body);
+  },
+  deleteRates(id) {
+    return mainInstance.delete(`${routes.RATE}/${id}`);
+  },
   getRateTypes() {
     return mainInstance.get(`${routes.RATETYPE}`);
   },
@@ -65,9 +77,6 @@ const apiService = {
   },
   deleteRateTypes(id) {
     return mainInstance.delete(`${routes.RATETYPE}/${id}`);
-  },
-  getRates() {
-    return mainInstance.get(`${routes.RATE}`);
   },
   getCars(filters) {
     const params = {
@@ -98,18 +107,6 @@ const apiService = {
   getCategories() {
     return mainInstance.get(`${routes.CATEGORY}`);
   },
-  // getRates() {
-  //   return APIInstance.get('db/rate');
-  // },
-  // postOrder(requestBody) {
-  //   return APIInstance.post('db/order', requestBody);
-  // },
-  // getOrder(id) {
-  //   return APIInstance.get(`db/order/${id}`);
-  // },
-  // updateOrder(id, requestBody) {
-  //   return APIInstance.put(`db/order/${id}`, requestBody);
-  // },
 };
 
 export { authService, apiService };
