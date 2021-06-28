@@ -9,6 +9,7 @@ const mapAside = [
   { title: 'Машины', link: appRoutes.dashboardCars(), icon: <ListAuto /> },
   { title: 'Города', link: appRoutes.dashboardCities(), icon: <ListAuto /> },
   { title: 'Точки выдачи', link: appRoutes.dashboardPoints(), icon: <ListAuto /> },
+  { title: 'Тарифы', link: appRoutes.dashboardRates(), icon: <ListAuto /> },
   { title: 'Типы тарифов', link: appRoutes.dashboardRateTypes(), icon: <ListAuto /> },
 ];
 

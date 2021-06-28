@@ -1,5 +1,12 @@
 const rateByIdSelector = (state, id) => state.rates.data.find((r) => r.id === id);
 
+const ratesTableSelector = (state) => state.rates.data.map((c) => ({
+  id: c.id,
+  price: c.price,
+  rateType: c.rateTypeId?.name || 'Не назначен',
+  rateTypeId: c.rateTypeId?.id || null,
+}));
+
 const rateOptionsSelector = (state) => {
   const { data } = state.rates;
   return data
@@ -17,11 +24,12 @@ const ratesUnitsSelectorCarry = (state) => (rateId) => {
   };
 };
 
-const isFetchingSelector = (state) => state.points.status === 'fetching';
+const isInitialSelector = (state) => state.rates.status === 'initial';
 
 export {
   rateByIdSelector,
+  ratesTableSelector,
   rateOptionsSelector,
-  isFetchingSelector,
+  isInitialSelector,
   ratesUnitsSelectorCarry,
 };

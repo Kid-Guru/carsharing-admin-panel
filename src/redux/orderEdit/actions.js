@@ -7,7 +7,7 @@ import { cityByIdSelector } from '../cities/selectors';
 import { showMessage } from '../messageBar/actions';
 import { externalAllPointsRequest } from '../points/actions';
 import { pointByIdSelector } from '../points/selectors';
-import { getAllRates } from '../rates/actions';
+import { externalAllRatesRequest } from '../rates/actions';
 import { rateByIdSelector } from '../rates/selectors';
 import { getAllStatuses } from '../statuses/actions';
 import { statusByIdSelector } from '../statuses/selectors';
@@ -41,7 +41,7 @@ export const orderRequest = (id) => async (dispatch) => {
     dispatch(externalAllCitiesRequest()),
     dispatch(getAllStatuses()),
     dispatch(externalAllPointsRequest()),
-    dispatch(getAllRates()),
+    dispatch(externalAllRatesRequest()),
   ];
 
   Promise.all(responses)

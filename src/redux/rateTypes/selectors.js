@@ -4,9 +4,15 @@ const rateTypesTableSelector = (state) => state.rateTypes.data.map((c) => ({
   unit: c.unit,
 }));
 
+const rateTypesOptionsSelector = (state) => {
+  const { data } = state.rateTypes;
+  return data.map((c) => ({ label: c.name, value: c.id }));
+};
+
 const isInitialSelector = (state) => state.rateTypes.status === 'initial';
 
 export {
   rateTypesTableSelector,
+  rateTypesOptionsSelector,
   isInitialSelector,
 };
