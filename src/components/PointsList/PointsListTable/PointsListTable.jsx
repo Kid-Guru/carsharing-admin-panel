@@ -16,16 +16,21 @@ function PointsListTable(props) {
           </tr>
         </thead>
         <tbody className={s.pointsTable__body}>
-          {pointsList.map((c) => (
-            <tr key={c.id} className={s.pointsTable__body_row}>
-              <td className={s.pointsTable__body_cell}>
-                <button className={`${s.btn} ${s.btn__edit}`} onClick={editPointHandle({ pointName: c.name, pointAddress: c.address, city: c.cityId, id: c.id })} type="button" aria-label="Edit point" />
-              </td>
-              <td className={s.pointsTable__body_cell}>{c.name}</td>
-              <td className={s.pointsTable__body_cell}>{c.cityName}</td>
-              <td className={s.pointsTable__body_cell}>{c.address}</td>
-            </tr>
-          ))}
+          {pointsList.map((c) => {
+            const editPointHandleWithData = editPointHandle({
+              pointName: c.name, pointAddress: c.address, city: c.cityId, id: c.id,
+            });
+            return (
+              <tr key={c.id} className={s.pointsTable__body_row}>
+                <td className={s.pointsTable__body_cell}>
+                  <button className={`${s.btn} ${s.btn__edit}`} onClick={editPointHandleWithData} type="button" aria-label="Edit point" />
+                </td>
+                <td className={s.pointsTable__body_cell}>{c.name}</td>
+                <td className={s.pointsTable__body_cell}>{c.cityName}</td>
+                <td className={s.pointsTable__body_cell}>{c.address}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
