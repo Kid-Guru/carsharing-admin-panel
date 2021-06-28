@@ -6,7 +6,7 @@ import RateModal from './RateModal';
 const useEditRateModal = () => {
   const dispatch = useDispatch();
   const [editRate, setEditRate] = useState({
-    isOpen: false, price: '', rateType: '', id: '',
+    isOpen: false, price: '', rateType: null, id: '',
   });
   const editRateHandle = ({ price, rateType, id }) => () => {
     setEditRate({
@@ -14,7 +14,7 @@ const useEditRateModal = () => {
     });
   };
   const closeCallback = () => setEditRate({
-    isOpen: false, price: '', rateType: '', id: '',
+    isOpen: false, price: '', rateType: null, id: '',
   });
 
   const RateModalMemo = useCallback(
