@@ -7,7 +7,12 @@
   height: 100%;
   padding: 28px;
   overflow: hidden;
-  &__leftAlignment { align-items: baseline; }
+  &__leftAlignment {
+    align-items: baseline;
+    @media (max-width: $mobile) {
+      align-items: stretch;
+    }
+  }
 
   &__title {
     margin: 0;

@@ -24,6 +24,26 @@
   }
 }
 
+.carTable {
+  &__wrapper {
+    height: 100%;
+    overflow-y: auto;
+  }
+  &__pic {
+    padding-top: #{'max(40%, 50px)'};
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  &__root {
+    width: 100%;
+    @include tableStyle;
+    th {
+      @include tableColumnWidth;
+    }
+  }
+}
+
 .btnLink {
   position: relative;
   @include buttonBase;
@@ -47,46 +67,4 @@
   }
   &__edit:before { background-image: url(../../../assets/images/edit-solid.svg);}
   &__new:before { background-image: url(../../../assets/images/plus.svg);}
-}
-
-.carTable {
-  &__wrapper {
-    height: 100%;
-    overflow-y: auto;
-  }
-  &__pic {
-    padding-top: #{'max(40%, 50px)'};
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-  &__root {
-    border-collapse: collapse;
-    table-layout: fixed;
-    width: 100%;
-    thead {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      background-color: $white;
-      box-shadow: inset 0 -1px 0 $border;
-      th {
-        padding: 5px;
-        @include tableColumnWidth;
-      }
-    }
-
-    tbody {
-      tr {
-        height: 60px;
-        @include menuElementHover;
-        transition: all ease 0.1s;
-      }
-      td {
-        font-size: 15px;
-        padding: 3px;
-        text-align: center;
-      }
-    }
-  }
 }
