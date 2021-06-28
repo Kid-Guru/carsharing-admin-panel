@@ -24,7 +24,7 @@ function CategoriesList() {
   return (
     <>
       <ListContentLayout
-        title="Тарифы"
+        title="Категории"
         content={(
           <CategoriesListTable
             categoriesList={categoriesList}

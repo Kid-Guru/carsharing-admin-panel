@@ -10,6 +10,7 @@ import OrdersList from '../OrdersList/OrdersList';
 import PointsList from '../Points/PointsList';
 import RatesList from '../Rates/Rates';
 import RateTypesList from '../RateTypes/RateTypesList';
+import StatusesList from '../StatusesList/StatusesList';
 
 function DashBoardRouter() {
   return (
@@ -29,6 +30,7 @@ function DashBoardRouter() {
       <Route path={appRoutes.dashboardRates()} render={() => <RatesList />} />
       <Route path={appRoutes.dashboardRateTypes()} render={() => <RateTypesList />} />
       <Route path={appRoutes.dashboardCategories()} render={() => <CategoriesList />} />
+      <Route path={appRoutes.dashboardStatuses()} render={() => <StatusesList />} />
       <Route path={`${appRoutes.dashboard()}/*`} render={() => <Redirect to={appRoutes.dashboardOrders()} />} />
     </Switch>
   );

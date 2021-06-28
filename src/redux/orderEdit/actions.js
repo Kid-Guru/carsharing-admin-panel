@@ -9,7 +9,7 @@ import { externalAllPointsRequest } from '../points/actions';
 import { pointByIdSelector } from '../points/selectors';
 import { externalAllRatesRequest } from '../rates/actions';
 import { rateByIdSelector } from '../rates/selectors';
-import { getAllStatuses } from '../statuses/actions';
+import { externalAllStatusesRequest } from '../statuses/actions';
 import { statusByIdSelector } from '../statuses/selectors';
 
 export const setStatus = createAction('SET_ORDER_STATUS');
@@ -39,7 +39,7 @@ export const orderRequest = (id) => async (dispatch) => {
     dispatch(getOrder(id)),
     dispatch(externalAllCarsRequest()),
     dispatch(externalAllCitiesRequest()),
-    dispatch(getAllStatuses()),
+    dispatch(externalAllStatusesRequest()),
     dispatch(externalAllPointsRequest()),
     dispatch(externalAllRatesRequest()),
   ];

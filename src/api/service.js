@@ -101,9 +101,6 @@ const apiService = {
     const stringified = queryString.stringify(params, stringifyConfig);
     return mainInstance.delete(`${routes.CAR}/${id}?${stringified}`);
   },
-  getStatuses() {
-    return mainInstance.get(`${routes.STATUS}`);
-  },
   getCategories() {
     return mainInstance.get(`${routes.CATEGORY}`);
   },
@@ -115,6 +112,18 @@ const apiService = {
   },
   deleteCategories(id) {
     return mainInstance.delete(`${routes.CATEGORY}/${id}`);
+  },
+  getStatuses() {
+    return mainInstance.get(`${routes.STATUS}`);
+  },
+  putStatuses(id, body) {
+    return mainInstance.put(`${routes.STATUS}/${id}`, body);
+  },
+  postStatuses(body) {
+    return mainInstance.post(`${routes.STATUS}`, body);
+  },
+  deleteStatuses(id) {
+    return mainInstance.delete(`${routes.STATUS}/${id}`);
   },
 };
 

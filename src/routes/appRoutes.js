@@ -12,4 +12,5 @@ export default {
   dashboardRates: () => '/dashboard/rates',
   dashboardRateTypes: () => '/dashboard/rateTypes',
   dashboardCategories: () => '/dashboard/categories',
+  dashboardStatuses: () => '/dashboard/statuses',
 };

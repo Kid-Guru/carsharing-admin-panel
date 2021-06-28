@@ -3,7 +3,7 @@ import { apiService } from '../../api/service';
 import { externalAllCarsRequest } from '../cars/actions';
 import { externalAllCitiesRequest } from '../cities/actions';
 import { showMessage } from '../messageBar/actions';
-import { getAllStatuses } from '../statuses/actions';
+import { externalAllStatusesRequest } from '../statuses/actions';
 
 export const setStatus = createAction('SET_ORDERS_STATUS');
 export const setOrders = createAction('SET_ORDERS');
@@ -41,7 +41,7 @@ export const initialOrdersRequest = () => async (dispatch) => {
     dispatch(getOrders()),
     dispatch(externalAllCarsRequest()),
     dispatch(externalAllCitiesRequest()),
-    dispatch(getAllStatuses()),
+    dispatch(externalAllStatusesRequest()),
   ];
 
   Promise.all(responses)
