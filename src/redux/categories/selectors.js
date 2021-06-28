@@ -4,6 +4,12 @@ const categoryOptionsFilterSelector = (state) => {
   return [{ label: 'Все', value: null }, ...options];
 };
 
+const categoriesTableSelector = (state) => state.categories.data.map((c) => ({
+  id: c.id,
+  name: c.name,
+  description: c.description,
+}));
+
 const categoryOptionsSelector = (state) => {
   const { data } = state.categories;
   return data.map((c) => ({ label: c.name, value: c.id }));
@@ -11,11 +17,12 @@ const categoryOptionsSelector = (state) => {
 
 const categoryByIdSelector = (state, id) => state.categories.data.find((c) => c.id === id);
 
-// const isFetchingSelector = (state) => state.cars.status === 'fetching';
+const isInitialSelector = (state) => state.categories.status === 'initial';
 
 export {
   categoryOptionsFilterSelector,
+  categoriesTableSelector,
   categoryOptionsSelector,
   categoryByIdSelector,
-  // isFetchingSelector,
+  isInitialSelector,
 };

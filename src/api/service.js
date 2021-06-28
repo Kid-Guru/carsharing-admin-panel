@@ -107,6 +107,15 @@ const apiService = {
   getCategories() {
     return mainInstance.get(`${routes.CATEGORY}`);
   },
+  putCategories(id, body) {
+    return mainInstance.put(`${routes.CATEGORY}/${id}`, body);
+  },
+  postCategories(body) {
+    return mainInstance.post(`${routes.CATEGORY}`, body);
+  },
+  deleteCategories(id) {
+    return mainInstance.delete(`${routes.CATEGORY}/${id}`);
+  },
 };
 
 export { authService, apiService };

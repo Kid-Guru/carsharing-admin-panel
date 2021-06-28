@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 import { apiService } from '../../api/service';
-import { getAllCategories } from '../categories/actions';
+import { externalAllCategoriesRequest } from '../categories/actions';
 import { showMessage } from '../messageBar/actions';
 
 export const setCars = createAction('SET_CARS');
@@ -28,7 +28,7 @@ export const externalAllCarsRequest = () => async (dispatch) => {
 export const initialAllCarsRequest = () => async (dispatch) => {
   dispatch(setStatus({ status: 'initial' }));
   dispatch(setFilter({ filters: { category: null } }));
-  const responses = [dispatch(getCars()), dispatch(getAllCategories())];
+  const responses = [dispatch(getCars()), dispatch(externalAllCategoriesRequest())];
 
   Promise.all(responses)
     .then(() => {

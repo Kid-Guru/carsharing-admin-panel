@@ -1,38 +1,78 @@
 import { createAction } from 'redux-actions';
 import { apiService } from '../../api/service';
+import { showMessage } from '../messageBar/actions';
 
 export const setCategories = createAction('SET_CATEGORIES');
 export const setStatus = createAction('SET_CATEGORIES_STATUS');
-// export const setStatusExtraData = createAction('SET_CATEGORIES_STATUS_EXTRA_DATA');
-// export const cleanupCategories = createAction('CLEANUP_CATEGORIES');
+export const cleanupCategories = createAction('CLEANUP_CATEGORIES');
 
-// Добавить обработку ошибки!!!
-export const getAllCategories = () => async (dispatch, getState) => {
-  const statusCategories = getState().categories.status;
-  if (statusCategories === 'received') return;
-
-  dispatch(setStatus({ status: 'fetching' }));
+const getCategories = () => async (dispatch) => {
   try {
     const responseCategories = await apiService.getCategories();
     const categories = responseCategories.data.data;
     dispatch(setCategories({ data: categories }));
-    dispatch(setStatus({ status: 'received' }));
   } catch (e) {
-    dispatch(setStatus({ status: 'error' }));
-    throw new Error('Ошибка получения данных');
+    throw new Error('Произошла ошибка получения данных. Попробуйте еще');
   }
 };
 
-// export const initialCategoriesRequest = () => async (dispatch) => {
-//   dispatch(setStatusExtraData({ status: 'fetching' }));
-//   const responses = [
-//     dispatch(getAllCategories()),
-//   ];
+// eslint-disable-next-line arrow-body-style
+export const externalAllCategoriesRequest = () => async (dispatch) => {
+  return dispatch(getCategories());
+};
 
-//   Promise.all(responses)
-//     .then(() => dispatch(setStatusExtraData({ status: 'received' })))
-//     .catch((e) => {
-//       console.log(e);
-//       dispatch(setStatusExtraData({ status: 'error' }));
-//     });
-// };
+export const initialAllCategoriesRequest = () => async (dispatch) => {
+  dispatch(setStatus({ status: 'initial' }));
+  dispatch(getCategories())
+    .then(() => {
+      dispatch(setStatus({ status: 'received' }));
+    })
+    .catch((e) => {
+      dispatch(showMessage(e.message, 'alert'));
+    });
+};
+
+export const categoryUpdate = (categoryData, closeModalCallback) => async (dispatch) => {
+  dispatch(setStatus({ status: 'transfering' }));
+  const requestBody = {
+    name: categoryData.name,
+    description: categoryData.description,
+    id: categoryData.id,
+  };
+  try {
+    await apiService.putCategories(categoryData.id, requestBody);
+    await dispatch(getCategories());
+    dispatch(showMessage('Категория успешно сохранена!!', 'success'));
+    closeModalCallback();
+  } catch (e) {
+    dispatch(showMessage('Произошла ошибка, попробуйте еще', 'alert'));
+  }
+};
+
+export const categoryDelete = (id, closeModalCallback) => async (dispatch) => {
+  dispatch(setStatus({ status: 'transfering' }));
+  try {
+    await apiService.deleteCategories(id);
+    await dispatch(getCategories());
+    dispatch(showMessage('Категория успешно удалена!!', 'success'));
+    closeModalCallback();
+  } catch (e) {
+    dispatch(showMessage('Произошла ошибка, попробуйте еще', 'alert'));
+  }
+};
+
+export const categoryPost = (categoryData, closeCallback) => async (dispatch) => {
+  dispatch(setStatus({ status: 'transfering' }));
+  const requestBody = {
+    name: categoryData.name,
+    description: categoryData.description,
+  };
+  try {
+    await apiService.postCategories(requestBody);
+    await dispatch(getCategories());
+    dispatch(showMessage('Категория успешно сохранена!!', 'success'));
+    closeCallback();
+  } catch (e) {
+    dispatch(showMessage('Произошла ошибка, попробуйте еще', 'alert'));
+  }
+};

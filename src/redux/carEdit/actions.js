@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 import { apiService } from '../../api/service';
-import { getAllCategories } from '../categories/actions';
+import { externalAllCategoriesRequest } from '../categories/actions';
 import { categoryByIdSelector } from '../categories/selectors';
 import { showMessage } from '../messageBar/actions';
 
@@ -29,7 +29,7 @@ export const carRequest = (id) => async (dispatch) => {
   dispatch(setStatus({ status: 'fetching' }));
   const responses = [
     dispatch(getCar(id)),
-    dispatch(getAllCategories()),
+    dispatch(externalAllCategoriesRequest()),
   ];
 
   Promise.all(responses)
@@ -42,7 +42,7 @@ export const carRequest = (id) => async (dispatch) => {
 export const prepareData = () => async (dispatch) => {
   dispatch(setStatus({ status: 'fetching' }));
 
-  dispatch(getAllCategories())
+  dispatch(externalAllCategoriesRequest())
     .then(() => dispatch(setStatus({ status: 'received' })))
     .catch((e) => {
       dispatch(showMessage(e.message, 'alert'));

@@ -11,6 +11,7 @@ const mapAside = [
   { title: 'Точки выдачи', link: appRoutes.dashboardPoints(), icon: <ListAuto /> },
   { title: 'Тарифы', link: appRoutes.dashboardRates(), icon: <ListAuto /> },
   { title: 'Типы тарифов', link: appRoutes.dashboardRateTypes(), icon: <ListAuto /> },
+  { title: 'Категории машин', link: appRoutes.dashboardCategories(), icon: <ListAuto /> },
 ];
 
 function Aside(props) {
