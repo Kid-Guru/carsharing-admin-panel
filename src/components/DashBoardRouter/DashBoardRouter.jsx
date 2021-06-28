@@ -7,8 +7,8 @@ import CategoriesList from '../Categories/Categories';
 import CitiesList from '../Cities/CitiesList';
 import OrderEdit from '../OrderEdit/OrderEdit';
 import OrdersList from '../OrdersList/OrdersList';
-import PointsList from '../Points/PointsList';
-import RatesList from '../Rates/Rates';
+import PointsList from '../PointsList/PointsList';
+import RatesList from '../RatesList/RatesList';
 import RateTypesList from '../RateTypes/RateTypesList';
 import StatusesList from '../StatusesList/StatusesList';
 
