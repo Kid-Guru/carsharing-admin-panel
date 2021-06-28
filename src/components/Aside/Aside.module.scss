@@ -2,8 +2,10 @@
 @import '../../styles/_mixins.scss';
 
 .aside {
-  position: relative;
+  // position: relative;
   height: 100%;
+  display: flex;
+  flex-direction: column;
   min-width: 285px;
   z-index: 10;
   background-color: $white;
@@ -37,6 +39,8 @@
 
 .navigation {
   $heigth_listItem: 58px;
+  flex-grow: 1;
+  overflow-y: auto;
   &__list {
     margin: 0;
     padding: 0;
