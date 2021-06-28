@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { cleanupOrder, orderRequest, orderUpdate } from '../../redux/orderEdit/actions';
 import {
-  initValuesSelector, isFetchingSelector, isTrasferSeccuessSelector,
+  initValuesSelector, isFetchingSelector, isNotFoundSelector, isTrasferSeccuessSelector,
 } from '../../redux/orderEdit/selectors';
 import appRoutes from '../../routes/appRoutes';
+import ErrorScreen from '../common/ErrorScreen/ErrorScreen';
 import ListContentLayout from '../common/ListContentLayout/ListContentLayout';
 import Loader from '../common/Loader/Loader';
 import Footer from './Footer/Footer';
@@ -20,6 +21,7 @@ function OrderEdit({ id }) {
   }, [id, dispatch]);
   const isFetching = useSelector(isFetchingSelector);
   const isTrasferSeccuess = useSelector(isTrasferSeccuessSelector);
+  const isNotFound = useSelector(isNotFoundSelector);
   const {
     initCity,
     initPoint,
@@ -37,6 +39,7 @@ function OrderEdit({ id }) {
 
   if (isFetching) return <Loader />;
   if (isTrasferSeccuess) return <Redirect to={appRoutes.dashboardOrders()} />;
+  if (isNotFound) return <ErrorScreen text="Заказ не найден" />;
 
   const onSubmitHandle = (data) => dispatch(orderUpdate({ ...data }));
   return (

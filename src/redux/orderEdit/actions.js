@@ -22,6 +22,7 @@ const getOrder = (id) => async (dispatch) => {
     const responseOrder = await apiService.getOrders(params);
     const orders = responseOrder.data.data;
     if (orders.length === 0) {
+      dispatch(setStatus({ status: 'notFound' }));
       throw new Error(`Заказ с id ${id} не найден`);
     }
     dispatch(setOrder({ data: orders[0] }));

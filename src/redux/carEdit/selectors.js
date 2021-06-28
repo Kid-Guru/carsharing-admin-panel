@@ -22,11 +22,13 @@ const fieldsOptionsSelector = (state) => {
 };
 
 const isFetchingSelector = (state) => state.car.status === 'fetching';
+const isNotFoundSelector = (state) => state.car.status === 'notFound';
 const isTrasferSeccuessSelector = (state) => state.car.status === 'transferSeccuess';
 
 export {
   fieldsOptionsSelector,
   initValuesSelector,
   isFetchingSelector,
+  isNotFoundSelector,
   isTrasferSeccuessSelector,
 };

@@ -14,6 +14,7 @@ const getCar = (id) => async (dispatch) => {
     const responseCar = await apiService.getCars(params);
     const cars = responseCar.data.data;
     if (cars.length === 0) {
+      dispatch(setStatus({ status: 'notFound' }));
       throw new Error(`Машина с id ${id} не найдена`);
     }
     dispatch(setCar({ data: cars[0] }));

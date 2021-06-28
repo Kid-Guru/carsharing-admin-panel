@@ -64,10 +64,12 @@ const fieldsOptionsSelector = (state) => {
 
 const isFetchingSelector = (state) => state.order.status === 'fetching';
 const isTrasferSeccuessSelector = (state) => state.order.status === 'transferSeccuess';
+const isNotFoundSelector = (state) => state.order.status === 'notFound';
 
 export {
   fieldsOptionsSelector,
   initValuesSelector,
   isFetchingSelector,
   isTrasferSeccuessSelector,
+  isNotFoundSelector,
 };
