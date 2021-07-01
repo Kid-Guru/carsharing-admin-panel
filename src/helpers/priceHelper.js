@@ -12,6 +12,7 @@ const costOptions = {
 const calculateRentPrice = ({
   rate, dateFrom, dateTo, isFullTank, isNeedChildChair, isRightWheel,
 }) => {
+  if (!rate || !!rate.unit) return '';
   const conversionFactor = mapConversionFactor[rate.unit];
   let price = rate.price * ((dateTo - dateFrom) / conversionFactor);
   if (isFullTank) price += costOptions.fullTank;
