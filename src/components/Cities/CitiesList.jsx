@@ -33,7 +33,6 @@ function CitiesList() {
           />
         )}
         noIndentContent
-        leftAlignment
       />
       <EditCityModal />
       <NewCityModal />

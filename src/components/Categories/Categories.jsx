@@ -33,7 +33,6 @@ function CategoriesList() {
           />
         )}
         noIndentContent
-        leftAlignment
       />
       <EditCategoryModal />
       <NewCategoryModal />

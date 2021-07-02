@@ -46,12 +46,10 @@
     background-size: contain;
   }
   &__root {
+    width: 100%;
     @include tableStyle;
     th {
       @include tableColumnWidth;
-    }
-    @media (max-width: $mobile) {
-      width: 100%;
     }
   }
 }

@@ -33,7 +33,6 @@ function PointsList() {
           />
         )}
         noIndentContent
-        leftAlignment
       />
       <EditPointModal />
       <NewPointModal />

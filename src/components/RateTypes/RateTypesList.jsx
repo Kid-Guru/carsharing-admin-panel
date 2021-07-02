@@ -33,7 +33,6 @@ function RateTypesList() {
           />
         )}
         noIndentContent
-        leftAlignment
       />
       <EditRateTypeModal />
       <NewRateTypeModal />
