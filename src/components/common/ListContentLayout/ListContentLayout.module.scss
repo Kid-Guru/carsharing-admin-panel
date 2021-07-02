@@ -29,6 +29,7 @@
     flex-grow: 1;
     @include whiteBox;
     min-height: 360px;
+    overflow: hidden;
   }
 
   &__filters {
