@@ -79,6 +79,8 @@ const apiService = {
   },
   getCars(filters) {
     const params = {
+      limit: filters?.limit,
+      page: filters?.page,
       categoryId: filters?.categoryId,
       id: filters?.id,
     };

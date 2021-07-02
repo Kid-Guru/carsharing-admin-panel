@@ -36,6 +36,13 @@ const optionsFiltersSelector = (state) => {
   return { categoryOptions };
 };
 
+const totalCarsSelector = (state) => {
+  const { total, limit } = state.cars;
+  return Math.ceil(total / limit);
+};
+
+const pageSelector = (state) => state.cars.page;
+
 const isInitialSelector = (state) => state.cars.status === 'initial';
 
 export {
@@ -45,5 +52,7 @@ export {
   carsOptionsSelector,
   colorOptionsSelectorCarry,
   optionsFiltersSelector,
+  totalCarsSelector,
+  pageSelector,
   isInitialSelector,
 };
