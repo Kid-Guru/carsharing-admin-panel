@@ -19,7 +19,6 @@ const apiService = {
       page: filters?.page,
       cityId: filters?.city,
       orderStatusId: filters?.status,
-      carId: filters?.car,
       id: filters?.id,
     };
     const stringified = queryString.stringify(params, stringifyConfig);

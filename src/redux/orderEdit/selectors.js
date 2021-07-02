@@ -1,4 +1,3 @@
-import { carsOptionsSelector } from '../cars/selectors';
 import { cityOptionsSelector } from '../cities/selectors';
 import { statusOptionsSelector } from '../statuses/selectors';
 import { rateOptionsSelector } from '../rates/selectors';
@@ -56,9 +55,8 @@ const fieldsOptionsSelector = (state) => {
   const cityOptions = cityOptionsSelector(state);
   const statusOptions = statusOptionsSelector(state);
   const rateOptions = rateOptionsSelector(state);
-  const carOptions = carsOptionsSelector(state);
   return {
-    cityOptions, statusOptions, rateOptions, carOptions,
+    cityOptions, statusOptions, rateOptions,
   };
 };
 

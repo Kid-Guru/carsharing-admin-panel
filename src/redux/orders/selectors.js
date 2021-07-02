@@ -1,6 +1,5 @@
 import beautify from '../../helpers/beautify';
 import { getImageURL } from '../../helpers/imageHelpers';
-import { carsOptionsFilterSelector } from '../cars/selectors';
 import { cityOptionsFilterSelector } from '../cities/selectors';
 import { statusesOptionsFilterSelector } from '../statuses/selectors';
 
@@ -44,16 +43,10 @@ const totalOrdersSelector = (state) => {
 const initialPageSelector = (state) => state.orders.page;
 
 const optionsFiltersSelector = (state) => {
-  const modelOptions = carsOptionsFilterSelector(state);
   const cityOptions = cityOptionsFilterSelector(state);
   const statusOptions = statusesOptionsFilterSelector(state);
-  return { modelOptions, cityOptions, statusOptions };
+  return { cityOptions, statusOptions };
 };
-
-// const currentFiltersSelector = (state) => {
-//   const { car, city, status } = state.orders.filters;
-//   return { model: car, city, status };
-// };
 
 const isInitialSelector = (state) => state.orders.status === 'initial';
 
@@ -62,6 +55,5 @@ export {
   totalOrdersSelector,
   initialPageSelector,
   optionsFiltersSelector,
-  // currentFiltersSelector,
   isInitialSelector,
 };

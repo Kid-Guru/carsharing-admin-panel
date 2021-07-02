@@ -1,6 +1,5 @@
 import { createAction } from 'redux-actions';
 import { apiService } from '../../api/service';
-import { externalAllCarsRequest } from '../cars/actions';
 import { externalAllCitiesRequest } from '../cities/actions';
 import { showMessage } from '../messageBar/actions';
 import { externalAllStatusesRequest } from '../statuses/actions';
@@ -16,14 +15,13 @@ const getOrders = () => async (dispatch, getState) => {
   const {
     limit,
     page,
-    filters: { city, status, car },
+    filters: { city, status },
   } = getState().orders;
   const params = {
     limit,
     page,
     city,
     status,
-    car,
   };
 
   try {
@@ -39,7 +37,6 @@ export const initialOrdersRequest = () => async (dispatch) => {
   dispatch(setStatus({ status: 'initial' }));
   const responses = [
     dispatch(getOrders()),
-    dispatch(externalAllCarsRequest()),
     dispatch(externalAllCitiesRequest()),
     dispatch(externalAllStatusesRequest()),
   ];
@@ -68,7 +65,6 @@ export const setPageOrders = (pageNumber) => async (dispatch, getState) => {
 
 export const setFilterOrders = (newFilter) => async (dispatch) => {
   const filters = {
-    car: newFilter.model,
     city: newFilter.city,
     status: newFilter.status,
   };

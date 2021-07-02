@@ -11,12 +11,9 @@ import SidePortal from '../../common/SidePortal/SidePortal';
 import s from './Filters.module.scss';
 
 const Filters = () => {
-  const { modelOptions, cityOptions, statusOptions } = useSelector(optionsFiltersSelector);
+  const { cityOptions, statusOptions } = useSelector(optionsFiltersSelector);
   return (
     <Form className={s.filters} action="submit">
-      <div className={s.filters__col}>
-        <Field name="model" component={SelectFilter} options={modelOptions} placeholder="Модель" />
-      </div>
       <div className={s.filters__col}>
         <Field name="city" component={SelectFilter} options={cityOptions} placeholder="Город" />
       </div>
@@ -41,7 +38,6 @@ const FiltersWithPortal = () => {
   return (
     <Formik
       initialValues={{
-        model: null,
         city: null,
         status: null,
       }}

@@ -4,7 +4,6 @@ import * as actions from './actions';
 const defaultState = {
   data: [],
   filters: {
-    car: null,
     city: null,
     status: null,
   },

@@ -1,7 +1,5 @@
 import { createAction } from 'redux-actions';
 import { apiService } from '../../api/service';
-import { externalAllCarsRequest } from '../cars/actions';
-import { carByIdSelector } from '../cars/selectors';
 import { externalAllCitiesRequest } from '../cities/actions';
 import { cityByIdSelector } from '../cities/selectors';
 import { showMessage } from '../messageBar/actions';
@@ -38,7 +36,6 @@ export const orderRequest = (id) => async (dispatch) => {
   dispatch(setStatus({ status: 'fetching' }));
   const responses = [
     dispatch(getOrder(id)),
-    dispatch(externalAllCarsRequest()),
     dispatch(externalAllCitiesRequest()),
     dispatch(externalAllStatusesRequest()),
     dispatch(externalAllPointsRequest()),
@@ -54,9 +51,9 @@ export const orderRequest = (id) => async (dispatch) => {
 
 export const orderUpdate = (orderData) => async (dispatch, getState) => {
   dispatch(setStatus({ status: 'transfering' }));
-  const { id } = getState().order.data;
+  const { id, carId } = getState().order.data;
   const requestBody = {
-    carId: carByIdSelector(getState(), orderData.car),
+    carId,
     cityId: cityByIdSelector(getState(), orderData.city),
     pointId: pointByIdSelector(getState(), orderData.point),
     rateId: rateByIdSelector(getState(), orderData.rate),

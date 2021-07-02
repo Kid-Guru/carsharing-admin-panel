@@ -20,7 +20,7 @@ function OrderEditForm({
   dateFrom, dateTo, city, car,
 }) {
   const {
-    cityOptions, statusOptions, rateOptions, carOptions,
+    cityOptions, statusOptions, rateOptions,
   } = useSelector(fieldsOptionsSelector);
 
   const pointOptionsSelector = useSelector(pointOptionsSelectorCarry);
@@ -55,7 +55,6 @@ function OrderEditForm({
           <DateField label="Конец аренды" placeholder="Выберете дату и время" name="dateTo" maxDate={maxDateTo} minDate={minDateTo} filterTime={filterTimeTo} />
         </div>
         <div className={s.form__col}>
-          <SelectField label="Машина" placeholder="Выберете машину" name="car" options={carOptions} />
           <RadioBtnGroup name="color" title="Цвет машины" items={colorOptionsSelector(car)} />
           <CheckboxBtnGroup title="Дополнительно" items={extraOptions} />
         </div>
