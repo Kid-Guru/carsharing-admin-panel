@@ -1,14 +1,24 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/_mixins.scss';
+
 .errorScreen {
   height: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   text-align: center;
+  &__wrapper {
+    padding: 15px 10px;
+  }
   &__title {
     font-size: 50px;
     line-height: 57px;
     margin: 0;
     margin-bottom: 15px;
+    @media (max-width: $mobile) {
+      font-size: 32px;
+      line-height: 35px;
+    }
   }
   &__text {
     font-size: 20px;

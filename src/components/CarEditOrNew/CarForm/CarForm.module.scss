@@ -11,6 +11,10 @@
     font-size: 29px;
     line-height: 33px;
     color: $main-accent;
+    @media (max-width: $mobile) {
+      margin: 14px;
+      font-size: 24px;
+    }
   }
   &__form {
     display: flex;
@@ -22,6 +26,9 @@
       align-items:stretch;
       flex-grow: 1;
       overflow-y: auto;
+    }
+    @media (max-width: $mobile) {
+      padding: 0 14px 14px 14px;
     }
   }
 
