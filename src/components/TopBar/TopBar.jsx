@@ -68,6 +68,10 @@ const customSelectStyles = {
   menu: (provided) => ({
     ...provided,
     width: '220px',
+    '@media (max-width: 768px)': {
+      ...provided['@media (max-width: 768px)'],
+      width: '120px',
+    },
     marginTop: '0',
     borderRadius: '0',
   }),
