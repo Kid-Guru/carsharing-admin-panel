@@ -27,9 +27,20 @@ function OrderEditForm({
   const colorOptionsSelector = useSelector(colorOptionsSelectorCarry);
 
   const maxDateFrom = dateTo && new Date(dateTo);
-  const minDateFrom = new Date();
+  // const minDateFrom = new Date();
+  const minDateFrom = null;
   const maxDateTo = null;
   const minDateTo = dateFrom && new Date(dateFrom);
+  const filterTimeFrom = (time) => {
+    const selectedDate = new Date(time);
+    if (dateTo === null) return true;
+    return dateTo > selectedDate;
+  };
+  const filterTimeTo = (time) => {
+    const selectedDate = new Date(time);
+    if (dateFrom === null) return true;
+    return dateFrom < selectedDate;
+  };
   return (
     <div className={s.edit__wrapper}>
       <Form className={s.form} action="submit">
@@ -40,8 +51,8 @@ function OrderEditForm({
         </div>
         <div className={s.form__col}>
           <SelectField label="Тариф" placeholder="Выберете тариф" name="rate" options={rateOptions} />
-          <DateField label="Начало аренды" placeholder="Выберете дату и время" name="dateFrom" maxDate={maxDateFrom} minDate={minDateFrom} />
-          <DateField label="Конец аренды" placeholder="Выберете дату и время" name="dateTo" maxDate={maxDateTo} minDate={minDateTo} />
+          <DateField label="Начало аренды" placeholder="Выберете дату и время" name="dateFrom" maxDate={maxDateFrom} minDate={minDateFrom} filterTime={filterTimeFrom} />
+          <DateField label="Конец аренды" placeholder="Выберете дату и время" name="dateTo" maxDate={maxDateTo} minDate={minDateTo} filterTime={filterTimeTo} />
         </div>
         <div className={s.form__col}>
           <SelectField label="Машина" placeholder="Выберете машину" name="car" options={carOptions} />

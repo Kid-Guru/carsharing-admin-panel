@@ -7,7 +7,7 @@ import './DataPickerStyles.scss';
 
 function DateField(props) {
   const {
-    label, placeholder, minDate, maxDate,
+    label, placeholder, minDate, maxDate, filterTime = (time) => time,
   } = props;
   const { setFieldValue } = useFormikContext();
   const [field] = useField(props);
@@ -26,6 +26,7 @@ function DateField(props) {
           placeholderText={placeholder}
           minDate={minDate}
           maxDate={maxDate}
+          filterTime={filterTime}
           showTimeSelect
           isClearable
           dateFormat="dd.MM.yyyy HH:mm "
