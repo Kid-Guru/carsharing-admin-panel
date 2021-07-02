@@ -4,7 +4,7 @@ import {
   cleanupOrders, initialOrdersRequest, setPageOrders,
 } from '../../redux/orders/actions';
 import {
-  initialPageSelector,
+  pageSelector,
   isInitialSelector, ordersSelector,
   totalOrdersSelector,
 } from '../../redux/orders/selectors';
@@ -23,7 +23,7 @@ function OrdersList() {
   const onPageChange = ({ selected }) => dispatch(setPageOrders(selected));
   const ordersList = useSelector(ordersSelector);
   const totalPages = useSelector(totalOrdersSelector);
-  const initialPage = useSelector(initialPageSelector);
+  const page = useSelector(pageSelector);
   const isInitial = useSelector(isInitialSelector);
 
   if (isInitial) return <Loader />;
@@ -37,7 +37,7 @@ function OrdersList() {
         <Paginator
           onPageChange={onPageChange}
           pageCount={totalPages}
-          initialPage={initialPage}
+          forcePage={page}
           marginPagesDisplayed={2}
           pageRangeDisplayed={3}
         />

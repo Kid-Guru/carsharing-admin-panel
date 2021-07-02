@@ -40,7 +40,7 @@ const totalOrdersSelector = (state) => {
   return Math.ceil(total / limit);
 };
 
-const initialPageSelector = (state) => state.orders.page;
+const pageSelector = (state) => state.orders.page;
 
 const optionsFiltersSelector = (state) => {
   const cityOptions = cityOptionsFilterSelector(state);
@@ -53,7 +53,7 @@ const isInitialSelector = (state) => state.orders.status === 'initial';
 export {
   ordersSelector,
   totalOrdersSelector,
-  initialPageSelector,
+  pageSelector,
   optionsFiltersSelector,
   isInitialSelector,
 };

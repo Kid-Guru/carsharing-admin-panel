@@ -22,7 +22,7 @@ const handlers = {
   }),
   [actions.setStatus]: (state, { payload: { status } }) => ({ ...state, status }),
   [actions.setPage]: (state, { payload: { page } }) => ({ ...state, page }),
-  [actions.setFilter]: (state, { payload: { filters } }) => ({ ...state, filters }),
+  [actions.setFilter]: (state, { payload: { filters, page } }) => ({ ...state, page, filters }),
   [actions.cleanupOrders]: (state) => ({
     ...state,
     filters: {

@@ -68,7 +68,7 @@ export const setFilterOrders = (newFilter) => async (dispatch) => {
     city: newFilter.city,
     status: newFilter.status,
   };
-  dispatch(setFilter({ filters }));
+  dispatch(setFilter({ filters, page: 0 }));
   dispatch(setStatus({ status: 'fetching' }));
   try {
     await dispatch(getOrders());
