@@ -4,9 +4,14 @@ import { cleanupCategories, initialAllCategoriesRequest } from '../../redux/cate
 import { categoriesTableSelector, isInitialSelector } from '../../redux/categories/selectors';
 import ListContentLayout from '../common/ListContentLayout/ListContentLayout';
 import Loader from '../common/Loader/Loader';
-import CategoriesListTable from './CategoriesListTable/CategoriesListTable';
+import Table from '../common/Table/Table';
 import useEditCategoryModal from './Modals/useEditCategoryModal';
 import useNewCategoryModal from './Modals/useNewCategoryModal';
+
+const titles = [
+  { title: 'Название', width: '140px' },
+  { title: 'Описание', width: '200px' },
+];
 
 function CategoriesList() {
   const dispatch = useDispatch();
@@ -26,10 +31,11 @@ function CategoriesList() {
       <ListContentLayout
         title="Категории"
         content={(
-          <CategoriesListTable
-            categoriesList={categoriesList}
-            editCategoryHandle={openEditCategoryModal}
-            newCategoryHandle={openNewCategoryModal}
+          <Table
+            headers={titles}
+            content={categoriesList}
+            actionBtnNew={openNewCategoryModal}
+            actionBtnEdit={openEditCategoryModal}
           />
         )}
         noIndentContent

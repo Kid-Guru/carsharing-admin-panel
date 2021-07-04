@@ -1,16 +1,18 @@
 import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { categoryDelete, categoryUpdate } from '../../../redux/categories/actions';
+import { categoriesEditDataSelectorCarry } from '../../../redux/categories/selectors';
 import CategoryModal from './CategoryModal';
 
 const useEditCategoryModal = () => {
   const dispatch = useDispatch();
+  const categoryEditData = useSelector(categoriesEditDataSelectorCarry);
   const [editCategory, setEditCategory] = useState({
     isOpen: false, name: '', description: '', id: '',
   });
-  const editCategoryHandle = ({ name, description, id }) => () => {
+  const editCategoryHandle = (id) => {
     setEditCategory({
-      isOpen: true, name, description, id,
+      isOpen: true, id, ...categoryEditData(id),
     });
   };
   const closeCallback = () => setEditCategory({

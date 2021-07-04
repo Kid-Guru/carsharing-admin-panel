@@ -4,9 +4,14 @@ import { cleanupRates, initialAllRatesRequest } from '../../redux/rates/actions'
 import { ratesTableSelector, isInitialSelector } from '../../redux/rates/selectors';
 import ListContentLayout from '../common/ListContentLayout/ListContentLayout';
 import Loader from '../common/Loader/Loader';
-import RatesListTable from './RatesListTable/RatesListTable';
+import Table from '../common/Table/Table';
 import useEditRateModal from './Modals/useEditRateModal';
 import useNewRateModal from './Modals/useNewRateModal';
+
+const titles = [
+  { title: 'Тип тарифа', width: '160px' },
+  { title: 'Цена', width: '90px' },
+];
 
 function RatesList() {
   const dispatch = useDispatch();
@@ -26,10 +31,11 @@ function RatesList() {
       <ListContentLayout
         title="Тарифы"
         content={(
-          <RatesListTable
-            ratesList={ratesList}
-            editRateHandle={openEditRateModal}
-            newRateHandle={openNewRateModal}
+          <Table
+            headers={titles}
+            content={ratesList}
+            actionBtnNew={openNewRateModal}
+            actionBtnEdit={openEditRateModal}
           />
         )}
         noIndentContent

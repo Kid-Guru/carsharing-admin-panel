@@ -1,16 +1,18 @@
 import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { statusDelete, statusUpdate } from '../../../redux/statuses/actions';
+import { statusEditDataSelectorCarry } from '../../../redux/statuses/selectors';
 import StatusModal from './StatusModal';
 
 const useEditStatusModal = () => {
   const dispatch = useDispatch();
+  const statusEditData = useSelector(statusEditDataSelectorCarry);
   const [editStatus, setEditStatus] = useState({
     isOpen: false, name: '', id: '',
   });
-  const editStatusHandle = ({ name, id }) => () => {
+  const editStatusHandle = (id) => {
     setEditStatus({
-      isOpen: true, name, id,
+      isOpen: true, id, ...statusEditData(id),
     });
   };
   const closeCallback = () => setEditStatus({

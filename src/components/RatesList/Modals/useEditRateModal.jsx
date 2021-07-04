@@ -1,17 +1,17 @@
 import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { rateDelete, rateUpdate } from '../../../redux/rates/actions';
+import { rateEditDataSelectorCarry } from '../../../redux/rates/selectors';
 import RateModal from './RateModal';
 
 const useEditRateModal = () => {
   const dispatch = useDispatch();
+  const rateEditData = useSelector(rateEditDataSelectorCarry);
   const [editRate, setEditRate] = useState({
     isOpen: false, price: '', rateType: null, id: '',
   });
-  const editRateHandle = ({ price, rateType, id }) => () => {
-    setEditRate({
-      isOpen: true, price, rateType, id,
-    });
+  const editRateHandle = (id) => {
+    setEditRate({ isOpen: true, id, ...rateEditData(id) });
   };
   const closeCallback = () => setEditRate({
     isOpen: false, price: '', rateType: null, id: '',

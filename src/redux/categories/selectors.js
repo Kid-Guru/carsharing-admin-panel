@@ -6,9 +6,13 @@ const categoryOptionsFilterSelector = (state) => {
 
 const categoriesTableSelector = (state) => state.categories.data.map((c) => ({
   id: c.id,
-  name: c.name,
-  description: c.description,
+  row: [c.name, c.description],
 }));
+
+const categoriesEditDataSelectorCarry = (state) => (id) => {
+  const selectedcategory = state.categories.data.find((c) => c.id === id);
+  return { name: selectedcategory.name, description: selectedcategory.description };
+};
 
 const categoryOptionsSelector = (state) => {
   const { data } = state.categories;
@@ -21,6 +25,7 @@ const isInitialSelector = (state) => state.categories.status === 'initial';
 
 export {
   categoryOptionsFilterSelector,
+  categoriesEditDataSelectorCarry,
   categoriesTableSelector,
   categoryOptionsSelector,
   categoryByIdSelector,

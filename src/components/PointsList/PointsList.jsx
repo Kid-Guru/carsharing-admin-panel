@@ -4,9 +4,15 @@ import { cleanupPoints, initialAllPointsRequest } from '../../redux/points/actio
 import { pointsTableSelector, isInitialSelector } from '../../redux/points/selectors';
 import ListContentLayout from '../common/ListContentLayout/ListContentLayout';
 import Loader from '../common/Loader/Loader';
-import PointsListTable from './PointsListTable/PointsListTable';
+import Table from '../common/Table/Table';
 import useEditPointModal from './Modals/useEditPointModal';
 import useNewPointModal from './Modals/useNewPointModal';
+
+const titles = [
+  { title: 'Точка выдачи', width: '160px' },
+  { title: 'Город', width: '160px' },
+  { title: 'Адрес', width: '160px' },
+];
 
 function PointsList() {
   const dispatch = useDispatch();
@@ -26,10 +32,11 @@ function PointsList() {
       <ListContentLayout
         title="Точки выдачи"
         content={(
-          <PointsListTable
-            pointsList={pointsList}
-            editPointHandle={openEditPointModal}
-            newPointHandle={openNewPointModal}
+          <Table
+            headers={titles}
+            content={pointsList}
+            actionBtnNew={openNewPointModal}
+            actionBtnEdit={openEditPointModal}
           />
         )}
         noIndentContent

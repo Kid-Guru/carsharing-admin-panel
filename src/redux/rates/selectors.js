@@ -2,10 +2,16 @@ const rateByIdSelector = (state, id) => state.rates.data.find((r) => r.id === id
 
 const ratesTableSelector = (state) => state.rates.data.map((c) => ({
   id: c.id,
-  price: c.price,
-  rateType: c.rateTypeId?.name || 'Не назначен',
-  rateTypeId: c.rateTypeId?.id || null,
+  row: [c.rateTypeId?.name || 'Не назначен', c.price],
 }));
+
+const rateEditDataSelectorCarry = (state) => (id) => {
+  const selectedRate = state.rates.data.find((r) => r.id === id);
+  return {
+    price: selectedRate.price,
+    rateType: selectedRate.rateTypeId?.id || null,
+  };
+};
 
 const rateOptionsSelector = (state) => {
   const { data } = state.rates;
@@ -28,6 +34,7 @@ const isInitialSelector = (state) => state.rates.status === 'initial';
 
 export {
   rateByIdSelector,
+  rateEditDataSelectorCarry,
   ratesTableSelector,
   rateOptionsSelector,
   isInitialSelector,

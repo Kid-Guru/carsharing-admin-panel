@@ -2,11 +2,17 @@ const pointByIdSelector = (state, id) => state.points.data.find((p) => p.id === 
 
 const pointsTableSelector = (state) => state.points.data.map((c) => ({
   id: c.id,
-  name: c.name,
-  address: c.address,
-  cityName: c.cityId?.name || 'город не назначен',
-  cityId: c.cityId?.id || null,
+  row: [c.name, c.cityId?.name || 'город не назначен', c.address],
 }));
+
+const pointEditDataSelectorCarry = (state) => (id) => {
+  const selectedPoint = state.points.data.find((p) => p.id === id);
+  return {
+    pointName: selectedPoint.name,
+    pointAddress: selectedPoint.address,
+    city: selectedPoint.cityId?.id || null,
+  };
+};
 
 const pointOptionsSelector = (state) => {
   const { data } = state.points;
@@ -27,6 +33,7 @@ const isInitialSelector = (state) => state.points.status === 'initial';
 
 export {
   pointByIdSelector,
+  pointEditDataSelectorCarry,
   pointsTableSelector,
   pointOptionsSelectorCarry,
   pointOptionsSelector,

@@ -4,9 +4,13 @@ import { cleanupStatuses, initialAllStatusesRequest } from '../../redux/statuses
 import { statusesTableSelector, isInitialSelector } from '../../redux/statuses/selectors';
 import ListContentLayout from '../common/ListContentLayout/ListContentLayout';
 import Loader from '../common/Loader/Loader';
-import StatusesListTable from './StatusesListTable/StatusesListTable';
+import Table from '../common/Table/Table';
 import useEditStatusModal from './Modals/useEditStatusModal';
 import useNewStatusModal from './Modals/useNewStatusModal';
+
+const titles = [
+  { title: 'Название', width: '140px' },
+];
 
 function StatusesList() {
   const dispatch = useDispatch();
@@ -26,10 +30,11 @@ function StatusesList() {
       <ListContentLayout
         title="Статусы заказов"
         content={(
-          <StatusesListTable
-            statusesList={statusesList}
-            editStatusHandle={openEditStatusModal}
-            newStatusHandle={openNewStatusModal}
+          <Table
+            headers={titles}
+            content={statusesList}
+            actionBtnNew={openNewStatusModal}
+            actionBtnEdit={openEditStatusModal}
           />
         )}
         noIndentContent

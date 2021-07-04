@@ -10,8 +10,13 @@ const statusByIdSelector = (state, id) => state.statuses.data.find((s) => s.id =
 
 const statusesTableSelector = (state) => state.statuses.data.map((s) => ({
   id: s.id,
-  name: s.name,
+  row: [s.name],
 }));
+
+const statusEditDataSelectorCarry = (state) => (id) => {
+  const selectedStatus = state.statuses.data.find((s) => s.id === id);
+  return { name: selectedStatus.name };
+};
 
 const statusesOptionsFilterSelector = (state) => {
   const { data } = state.statuses;
@@ -29,6 +34,7 @@ const isInitialSelector = (state) => state.statuses.status === 'isInitialSelecto
 
 export {
   statusByIdSelector,
+  statusEditDataSelectorCarry,
   statusesTableSelector,
   statusesOptionsFilterSelector,
   statusOptionsSelector,

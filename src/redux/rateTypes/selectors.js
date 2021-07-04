@@ -1,8 +1,12 @@
 const rateTypesTableSelector = (state) => state.rateTypes.data.map((c) => ({
   id: c.id,
-  name: c.name,
-  unit: c.unit,
+  row: [c.name, c.unit],
 }));
+
+const rateTypeEditDataSelectorCarry = (state) => (id) => {
+  const selectedRateType = state.rateTypes.data.find((r) => r.id === id);
+  return { rateTypeName: selectedRateType.name, unit: selectedRateType.unit };
+};
 
 const rateTypesOptionsSelector = (state) => {
   const { data } = state.rateTypes;
@@ -13,6 +17,7 @@ const isInitialSelector = (state) => state.rateTypes.status === 'initial';
 
 export {
   rateTypesTableSelector,
+  rateTypeEditDataSelectorCarry,
   rateTypesOptionsSelector,
   isInitialSelector,
 };

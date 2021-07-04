@@ -1,10 +1,12 @@
 import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { pointDelete, pointUpdate } from '../../../redux/points/actions';
+import { pointEditDataSelectorCarry } from '../../../redux/points/selectors';
 import PointModal from './PointModal';
 
 const useEditPointModal = () => {
   const dispatch = useDispatch();
+  const pointEditData = useSelector(pointEditDataSelectorCarry);
   const [editPoint, setEditPoint] = useState({
     isOpen: false,
     pointName: '',
@@ -12,15 +14,11 @@ const useEditPointModal = () => {
     city: '',
     id: '',
   });
-  const editPointHandle = ({
-    pointName, pointAddress, city, id,
-  }) => () => {
+  const editPointHandle = (id) => {
     setEditPoint({
       isOpen: true,
-      pointName,
-      pointAddress,
-      city,
       id,
+      ...pointEditData(id),
     });
   };
   const closeCallback = () => setEditPoint({
