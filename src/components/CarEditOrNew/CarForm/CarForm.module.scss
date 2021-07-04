@@ -61,7 +61,8 @@
   &__col:first-child {
     border-bottom: $borderDelimetr;
     @media (max-width: $tablet) {
-      flex: 0 1 33.3%;
+      min-width: 0;
+      flex: 0 1 50%;
       border-bottom: none;
       border-right: $borderDelimetr;
     }
@@ -72,7 +73,7 @@
   }
   &__col:last-child {
     @media (max-width: $tablet) {
-      flex: 0 1 66.6%;
+      flex: 0 1 50%;
     }
   }
   &__section {
