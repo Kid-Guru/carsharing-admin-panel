@@ -1,14 +1,15 @@
 import { Form, Formik } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { getImageURL } from '../../../helpers/imageHelpers';
+import appRoutes from '../../../routes/appRoutes';
 import Button from '../../common/Buttons/Button';
 import ButtonSubmit from '../../common/Buttons/ButtonSubmit';
+import ImageCar from '../../common/ImageCar/ImageCar';
 import AvailableColors from '../../Form/AvailableColors/AvailableColors';
 import ImageInput from '../../Form/ImageInput/ImageInput';
 import InputField from '../../Form/InputField/InputField';
 import SelectField from '../../Form/SelectField/SelectField';
 import TextareaField from '../../Form/TextareaField/TextareaField';
-import appRoutes from '../../../routes/appRoutes';
 import s from './CarForm.module.scss';
 import { validationSchema } from './validationSchema';
 
@@ -62,7 +63,7 @@ function CarForm({
               <section className={`${s.carEdit__preview} ${s.preview}`}>
                 <div className={s.preview__col}>
                   <div className={s.preview__section}>
-                    <img className={s.preview__image} src={imagePath} alt="Car preview" />
+                    <ImageCar imagePath={imagePath} />
                     <p className={s.preview__carName}>{model}</p>
                     <p className={s.preview__carCategory}>
                       {categoryOptions.find((c) => c.value === category)?.label}

@@ -2,15 +2,17 @@ import beautify from '../../helpers/beautify';
 import { categoryOptionsFilterSelector } from '../categories/selectors';
 import { getImageURL } from '../../helpers/imageHelpers';
 
-const carsTableSelector = (state) => state.cars.data.map((c) => ({
+const carsListSelector = (state) => (imageComponent) => state.cars.data.map((c) => ({
   id: c.id,
-  model: c.name,
-  pic: getImageURL(c.thumbnail.path),
-  minPrice: beautify.currency(c.priceMin),
-  maxPrice: beautify.currency(c.priceMax),
-  number: beautify.carNumber(c.number),
-  description: c.description,
-  category: c.categoryId?.name || '',
+  row: [
+    c.name,
+    imageComponent(getImageURL(c.thumbnail.path)),
+    beautify.currency(c.priceMin),
+    beautify.currency(c.priceMax),
+    beautify.carNumber(c.number),
+    c.description,
+    c.categoryId?.name || '',
+  ],
 }));
 
 const carByIdSelector = (state, id) => state.cars.data.find((c) => c.id === id);
@@ -46,7 +48,7 @@ const pageSelector = (state) => state.cars.page;
 const isInitialSelector = (state) => state.cars.status === 'initial';
 
 export {
-  carsTableSelector,
+  carsListSelector,
   carByIdSelector,
   carsOptionsFilterSelector,
   carsOptionsSelector,

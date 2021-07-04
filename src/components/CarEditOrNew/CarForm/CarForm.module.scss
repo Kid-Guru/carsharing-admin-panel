@@ -84,24 +84,6 @@
       }
     }
   }
-  &__image {
-    position: relative;
-    aspect-ratio: 16/9;
-    object-fit: contain;
-    // &:after {
-    //   content: 'опа!!';
-    //   display: block;
-    //   position: absolute;
-    //   top: 0;
-    //   bottom: 0;
-    //   left: 0;
-    //   right: 0;
-    //   border: 1px solid peachpuff;
-    //   // height: 50px;
-    //   // width: 50px;
-    //   // background-image: url(ishere.jpg);
-    // }
-  }
   &__carName {
     margin: 0;
     margin-bottom: 5px;

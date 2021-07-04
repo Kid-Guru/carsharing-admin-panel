@@ -3,7 +3,7 @@
 
 @mixin tableColumnWidth() {
   &:nth-child(1) {
-    width: 80px;
+    width: 40px;
   }
   &:nth-child(2) {
     width: 160px;
