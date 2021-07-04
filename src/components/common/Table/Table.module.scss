@@ -15,10 +15,6 @@
 .btnLink {
   position: relative;
   @include buttonBase;
-  &:visited {
-    color: $white;
-    background-color: $primary;
-  }
   @include buttonStyle($primary, $white);
   &:before {
     content: '';

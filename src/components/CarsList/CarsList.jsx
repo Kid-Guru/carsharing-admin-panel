@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { cleanupCars, initialAllCarsRequest, setPageCars } from '../../redux/cars/actions';
 import {
   carsListSelector, isInitialSelector, pageSelector, totalCarsSelector,
@@ -25,6 +26,7 @@ const titles = [
 const imageComp = (img) => <ImageCar imagePath={img} />;
 
 function CarsList() {
+  const history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(initialAllCarsRequest());
@@ -36,6 +38,9 @@ function CarsList() {
   const carsList = useSelector(carsListSelector);
   const isFetching = useSelector(isInitialSelector);
 
+  const actionBtnNewHandler = () => history.push(appRoutes.dashboardCarNew());
+  const actionBtnEditHandler = (id) => history.push(appRoutes.dashboardCarEdit(id));
+
   if (isFetching) return <Loader />;
 
   return (
@@ -46,8 +51,8 @@ function CarsList() {
         <Table
           headers={titles}
           content={carsList(imageComp)}
-          linkBtnNew={appRoutes.dashboardCarNew}
-          linkBtnEdit={appRoutes.dashboardCarEdit}
+          actionBtnNew={actionBtnNewHandler}
+          actionBtnEdit={actionBtnEditHandler}
         />
       )}
       footer={(

@@ -2,8 +2,13 @@ const cityByIdSelector = (state, id) => state.cities.data.find((c) => c.id === i
 
 const citiesTableSelector = (state) => state.cities.data.map((c) => ({
   id: c.id,
-  name: c.name,
+  row: [c.name],
 }));
+
+const cityEditDataSelectorCarry = (state) => (id) => {
+  const selectedCity = state.cities.data.find((c) => c.id === id);
+  return { cityName: selectedCity.name };
+};
 
 const cityOptionsFilterSelector = (state) => {
   const { data } = state.cities;
@@ -21,6 +26,7 @@ const isInitialSelector = (state) => state.cities.status === 'initial';
 export {
   cityByIdSelector,
   citiesTableSelector,
+  cityEditDataSelectorCarry,
   cityOptionsFilterSelector,
   cityOptionsSelector,
   isInitialSelector,

@@ -1,14 +1,15 @@
 import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { cityDelete, cityUpdate } from '../../../redux/cities/actions';
+import { cityEditDataSelectorCarry } from '../../../redux/cities/selectors';
 import CityModal from './CityModal';
 
 const useEditCityModal = () => {
   const dispatch = useDispatch();
+  const cityEditData = useSelector(cityEditDataSelectorCarry);
   const [editCity, setEditCity] = useState({ isOpen: false, cityName: '', id: '' });
-  const editCityHandle = ({ cityName, id }) => () => {
-    setEditCity({ isOpen: true, cityName, id });
-  };
+
+  const editCityHandle = (id) => setEditCity({ isOpen: true, id, ...cityEditData(id) });
   const closeCallback = () => setEditCity({ isOpen: false, cityName: '', id: '' });
 
   const CityModalMemo = useCallback(

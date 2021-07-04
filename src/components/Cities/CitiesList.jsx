@@ -4,9 +4,13 @@ import { cleanupCities, initialAllCitiesRequest } from '../../redux/cities/actio
 import { citiesTableSelector, isInitialSelector } from '../../redux/cities/selectors';
 import ListContentLayout from '../common/ListContentLayout/ListContentLayout';
 import Loader from '../common/Loader/Loader';
-import CitiesListTable from './CitiesListTable/CitiesListTable';
+import Table from '../common/Table/Table';
 import useEditCityModal from './Modals/useEditCityModal';
 import useNewCityModal from './Modals/useNewCityModal';
+
+const titles = [
+  { title: 'Город', width: '160px' },
+];
 
 function CitiesList() {
   const dispatch = useDispatch();
@@ -26,10 +30,11 @@ function CitiesList() {
       <ListContentLayout
         title="Города"
         content={(
-          <CitiesListTable
-            citiesList={citiesList}
-            editCityHandle={openEditCityModal}
-            newCityHandle={openNewCityModal}
+          <Table
+            headers={titles}
+            content={citiesList}
+            actionBtnNew={openNewCityModal}
+            actionBtnEdit={openEditCityModal}
           />
         )}
         noIndentContent
