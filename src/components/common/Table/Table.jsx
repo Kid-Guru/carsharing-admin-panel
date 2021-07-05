@@ -9,7 +9,7 @@ function Table(props) {
       <table className={s.table__root}>
         <thead className={s.table__head}>
           <tr className={s.table__head_row}>
-            <th className={s.table__head_cell} style={{ width: '80px' }}>
+            <th className={s.table__head_cell}>
               <button type="button" className={`${s.btnLink} ${s.btnLink__new}`} onClick={actionBtnNew} aria-label="Create new" />
             </th>
 
